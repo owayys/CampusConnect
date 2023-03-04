@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "CampusConnect",
-    "slug": "CampusConnect",
+    "slug": "campusconnect",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "3087a710-a875-40f0-8398-1337cd78370e"
+      }
+    },
+    "owner": "shehryarkhan"
   }
 }
