@@ -28,7 +28,7 @@ The naming convention for screen files are strictly to be **[Name]Screen.js**
 
 For example **WelcomeScreen.js** for the Welcome Screen
 
-##### Writing Screen Code
+##### Writing Screen(s)) Code
 
 To begin writing a screens file, follow the starting skeleton code initilializer
 
@@ -44,3 +44,11 @@ and press **Enter**
 What does `rsf` do, you ask?
 
 `Creates a stateless React component as a named function without PropTypes (Reactjs code snippet) (React-Native/React/Redux snippets for es6/es7)`
+
+You can create an insta style sheet with
+
+```
+rnss
+```
+
+**Please sort the style sheet containers by alphabetical order**

@@ -8,6 +8,7 @@ import {
   Button, 
   Dimensions
 } from 'react-native'; 
+import WelcomeScreen from './app/screens/WelcomeScreen';
 
 export default function App() {
 
@@ -15,40 +16,7 @@ export default function App() {
 
   console.log(Dimensions.get('screen'))
 
-  return (
-    <View style={{
-      backgroundColor : 'white',
-      flex : 1,
-      flexDirection : 'row',
-      justifyContent : 'center',
-      alignItems : 'center',
-    }}
-    >
-      <View style={{
-        backgroundColor : 'darkblue',
-        height : 100,
-        width : 100,
-
-      }}/>
-
-      <View style={{
-        backgroundColor : 'gold',
-        height : 100,
-        width : 100,
-        flexBasis : 50,
-        top: 6,
-      }}/>
-       
-      <View style={{
-        backgroundColor : 'tomato',
-        height : 100,
-        width : 100,
-      }}/>
-
-
-    {/* <Text onPress={handlePress}> Hello Danish! </Text> */}
-    </View>
-  );
+  return <WelcomeScreen />
 }
 
 const styles = StyleSheet.create({
