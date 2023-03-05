@@ -1,24 +1,53 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView, Button } from 'react-native'; 
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  Image, 
+  SafeAreaView, 
+  Button, 
+  Dimensions
+} from 'react-native'; 
 
 export default function App() {
 
   const handlePress = () => console.log("Text Pressed")
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text numberOfLines={1} onPress={handlePress}>
-        TEXTY TEXT
-      </Text>
+  console.log(Dimensions.get('screen'))
 
-      <Image 
-      blurRadius={10}
-      source={{
-        width:200,
-        height:300,
-        uri: "https://picsum.photos/200/300"}}/>
-      <StatusBar style="auto" />
-    </SafeAreaView>
+  return (
+    <View style={{
+      backgroundColor : 'white',
+      flex : 1,
+      flexDirection : 'row',
+      justifyContent : 'center',
+      alignItems : 'center',
+    }}
+    >
+      <View style={{
+        backgroundColor : 'darkblue',
+        height : 100,
+        width : 100,
+
+      }}/>
+
+      <View style={{
+        backgroundColor : 'gold',
+        height : 100,
+        width : 100,
+        flexBasis : 50,
+        top: 6,
+      }}/>
+       
+      <View style={{
+        backgroundColor : 'tomato',
+        height : 100,
+        width : 100,
+      }}/>
+
+
+    {/* <Text onPress={handlePress}> Hello Danish! </Text> */}
+    </View>
   );
 }
 
