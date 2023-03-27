@@ -1,8 +1,19 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+  ImageBackground,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { FontSize, Color, FontFamily, Border } from "../GlobalStyles";
 
 const GroupDescription = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.groupDescription}>
       <Image
@@ -10,11 +21,24 @@ const GroupDescription = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <View style={styles.iconoutlinemessageCircle}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         style={styles.groupDescriptionChild}
         resizeMode="cover"
@@ -32,7 +56,10 @@ const GroupDescription = () => {
       <Text style={[styles.description, styles.daysTypo]}>Description:</Text>
       <Text style={[styles.location, styles.daysTypo]}>Location:</Text>
       <Text style={[styles.name, styles.daysTypo]}>Name:</Text>
-      <Text style={[styles.aGroupWhere, styles.aGroupWhereTypo]}>
+      <Text
+        style={[styles.aGroupWhere, styles.aGroupWhereTypo]}
+        numberOfLines={2}
+      >
         A group where we can collborate and study advanced programming
       </Text>
       <Text style={[styles.libraryLawn, styles.aGroupWhereTypo]}>
@@ -46,12 +73,12 @@ const GroupDescription = () => {
       <Text style={[styles.mondayWednesday, styles.pm600PmTypo]}>
         Monday, Wednesday
       </Text>
-      <Image
+      <ImageBackground
         style={styles.rectangleIcon}
         resizeMode="cover"
         source={require("../assets/rectangle.png")}
       />
-      <View
+      <Pressable
         style={[
           styles.editParent,
           styles.editGroupLayout,
@@ -60,8 +87,8 @@ const GroupDescription = () => {
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
-      <View
+      </Pressable>
+      <Pressable
         style={[
           styles.editGroup,
           styles.editGroupLayout,
@@ -70,8 +97,8 @@ const GroupDescription = () => {
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
-      <View
+      </Pressable>
+      <Pressable
         style={[
           styles.editContainer,
           styles.editGroupLayout,
@@ -80,18 +107,18 @@ const GroupDescription = () => {
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
-      <View
+      </Pressable>
+      <Pressable
         style={[
-          styles.groupView,
+          styles.groupPressable,
           styles.editGroupLayout,
           styles.editGroupLayout1,
         ]}
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
-      <View
+      </Pressable>
+      <Pressable
         style={[
           styles.editParent1,
           styles.editGroupLayout,
@@ -100,8 +127,8 @@ const GroupDescription = () => {
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
-      <View
+      </Pressable>
+      <Pressable
         style={[
           styles.editParent2,
           styles.editGroupLayout,
@@ -110,12 +137,21 @@ const GroupDescription = () => {
       >
         <Text style={[styles.edit, styles.editGroupLayout]}>Edit</Text>
         <View style={styles.rectangle} />
-      </View>
+      </Pressable>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   daysTypo: {
     fontSize: FontSize.size_mid,
     textAlign: "center",
@@ -165,6 +201,13 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     position: "absolute",
+  },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -244,11 +287,11 @@ const styles = StyleSheet.create({
     top: 464,
   },
   rectangleIcon: {
-    top: 182,
-    left: 114,
+    top: 192,
+    left: 128,
     borderRadius: Border.br_11xl,
-    width: 203,
-    height: 195,
+    width: 135,
+    height: 127,
     position: "absolute",
   },
   edit: {
@@ -286,7 +329,7 @@ const styles = StyleSheet.create({
   editContainer: {
     top: 493,
   },
-  groupView: {
+  groupPressable: {
     top: 554,
   },
   editParent1: {
@@ -296,7 +339,6 @@ const styles = StyleSheet.create({
     top: 695,
   },
   groupDescription: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -307,9 +349,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

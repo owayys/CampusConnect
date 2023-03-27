@@ -1,8 +1,18 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const EnterSchedule = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.enterSchedule}>
       <Image
@@ -10,11 +20,24 @@ const EnterSchedule = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <View style={styles.iconoutlinemessageCircle}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         style={styles.enterScheduleChild}
         resizeMode="cover"
@@ -40,10 +63,10 @@ const EnterSchedule = () => {
       <View style={[styles.rectangle3, styles.rectangleLayout1]} />
       <View style={[styles.rectangle4, styles.rectangleLayout]} />
       <View style={[styles.rectangle5, styles.rectangleLayout]} />
-      <View style={styles.addClassParent}>
+      <Pressable style={styles.addClassParent}>
         <Text style={[styles.addClass, styles.addClassClr]}>+Add Class</Text>
         <View style={styles.rectangle6} />
-      </View>
+      </Pressable>
       <Image
         style={styles.rectangle395Icon}
         resizeMode="cover"
@@ -57,6 +80,15 @@ const EnterSchedule = () => {
 };
 
 const styles = StyleSheet.create({
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   classTypo: {
     alignItems: "flex-end",
     textAlign: "left",
@@ -113,6 +145,13 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     position: "absolute",
+  },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -242,7 +281,6 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
   },
   enterSchedule: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -253,9 +291,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

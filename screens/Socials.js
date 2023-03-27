@@ -1,8 +1,19 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-import { Border, FontFamily, FontSize, Color } from "../GlobalStyles";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
 
 const Socials = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.socials}>
       <Image
@@ -10,11 +21,24 @@ const Socials = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <View style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         style={styles.socialsChild}
         resizeMode="cover"
@@ -25,11 +49,17 @@ const Socials = () => {
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
-      <View style={[styles.group, styles.groupLayout]}>
+      <Pressable style={[styles.group, styles.groupLayout]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
-        <Text style={[styles.addFriend, styles.addFriendTypo]}>Add Friend</Text>
-      </View>
-      <Text style={styles.socials1}>Socials</Text>
+        <Text style={[styles.addFriend, styles.socials1Position]}>
+          Add Friend
+        </Text>
+      </Pressable>
+      <Text
+        style={[styles.socials1, styles.socialTypo, styles.socials1Position]}
+      >
+        Socials
+      </Text>
       <Image
         style={styles.imageIcon1}
         resizeMode="cover"
@@ -63,10 +93,12 @@ const Socials = () => {
       >
         Interests: Anime, Coding
       </Text>
-      <View style={[styles.group1, styles.groupLayout]}>
+      <Pressable style={[styles.group1, styles.groupLayout]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
-        <Text style={[styles.addFriend, styles.addFriendTypo]}>Add Friend</Text>
-      </View>
+        <Text style={[styles.addFriend, styles.socials1Position]}>
+          Add Friend
+        </Text>
+      </Pressable>
       <Text
         style={[
           styles.asherJavaid,
@@ -85,10 +117,12 @@ const Socials = () => {
       >
         Interests: Cricket, Gym
       </Text>
-      <View style={[styles.group2, styles.groupPosition]}>
+      <Pressable style={[styles.group2, styles.groupPosition]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
-        <Text style={[styles.addFriend, styles.addFriendTypo]}>Add Friend</Text>
-      </View>
+        <Text style={[styles.addFriend, styles.socials1Position]}>
+          Add Friend
+        </Text>
+      </Pressable>
       <Text
         style={[
           styles.shehryarKhan,
@@ -103,7 +137,9 @@ const Socials = () => {
       </Text>
       <View style={[styles.group3, styles.groupPosition]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
-        <Text style={[styles.addFriend, styles.addFriendTypo]}>Add Friend</Text>
+        <Text style={[styles.addFriend, styles.socials1Position]}>
+          Add Friend
+        </Text>
       </View>
       <Text style={[styles.owaisAhsan, styles.owaisAhsanTypo]}>
         Owais Ahsan
@@ -128,7 +164,9 @@ const Socials = () => {
       />
       <View style={[styles.group4, styles.groupPosition]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
-        <Text style={[styles.addFriend, styles.addFriendTypo]}>Add Friend</Text>
+        <Text style={[styles.addFriend, styles.socials1Position]}>
+          Add Friend
+        </Text>
       </View>
       <Text style={[styles.mustafaAliMirza, styles.owaisAhsanTypo]}>
         Mustafa Ali Mirza
@@ -142,21 +180,133 @@ const Socials = () => {
         resizeMode="cover"
         source={require("../assets/image3.png")}
       />
-      <View
+      <TextInput
         style={[
           styles.rectangle,
           styles.suggestedPosition,
           styles.rectangleLayout,
         ]}
+        placeholder="Search for friends..."
+        keyboardType="default"
       />
-      <Text style={[styles.searchForFriends, styles.addFriendTypo]}>
-        Search for friends...
-      </Text>
+      <View style={styles.st}>
+        <View style={styles.iconsHead}>
+          <TouchableOpacity
+            style={[styles.home, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("ForumsTab")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/home03.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.forum1, styles.forum1Typo, styles.text4Typo]}
+              >
+                Forum
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Events")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/iconoutlinespeaker.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.forum1, styles.forum1Typo, styles.text4Typo]}
+              >
+                Events
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Socials")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/box.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.forum1Typo, styles.socialTypo]}>Social</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.homeFlexBox}>
+            <TouchableOpacity
+              style={styles.home03IconLayout}
+              activeOpacity={0.2}
+              onPress={() => navigation.navigate("StudyGroups")}
+            >
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={require("../assets/iconoutlinebookopen.png")}
+              />
+            </TouchableOpacity>
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.studyGroup, styles.forum1Typo]}>
+                <Text style={styles.study}>Study</Text>
+                <Text style={styles.text4Typo}>{` `}</Text>
+                <Text style={styles.study}>Group</Text>
+              </Text>
+            </View>
+            <Image
+              style={[styles.home03IconLayout, styles.mt2]}
+              resizeMode="cover"
+              source={require("../assets/piggybank02.png")}
+            />
+          </View>
+          <TouchableOpacity
+            style={[styles.more, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("UserProfile")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/morehorizontal.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.forum1, styles.forum1Typo, styles.text4Typo]}
+              >
+                Profile
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mt2: {
+    marginTop: 2,
+  },
+  home03IconLayout: {
+    height: 24,
+    width: 24,
+  },
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   groupLayout: {
     height: 40,
     width: 130,
@@ -167,20 +317,25 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     height: 40,
   },
-  addFriendTypo: {
-    fontFamily: FontFamily.robotoRegular,
+  socials1Position: {
     letterSpacing: 1,
     position: "absolute",
   },
+  socialTypo: {
+    color: Color.skyblue_100,
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
+  },
   suggestedTypo: {
+    textAlign: "left",
     letterSpacing: 0,
     fontSize: FontSize.size_base,
-    textAlign: "left",
     fontFamily: FontFamily.robotoMedium,
     fontWeight: "500",
   },
   jafferIqbalPosition: {
     left: 116,
+    letterSpacing: 0,
     fontSize: FontSize.size_base,
     position: "absolute",
   },
@@ -244,6 +399,22 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_11xl,
     position: "absolute",
   },
+  homeFlexBox: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: Padding.p_6xs,
+    paddingHorizontal: Padding.p_2xl,
+    width: 76,
+    backgroundColor: Color.gray_300,
+  },
+  forum1Typo: {
+    fontSize: FontSize.size_xs,
+    textAlign: "left",
+  },
+  text4Typo: {
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
+  },
   imageIcon: {
     top: 58,
     left: 27,
@@ -252,11 +423,16 @@ const styles = StyleSheet.create({
     height: 38,
     position: "absolute",
   },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
+  },
   iconoutlinemessageCircle: {
     top: 66,
     left: 340,
-    width: 24,
-    height: 24,
     position: "absolute",
   },
   socialsChild: {
@@ -287,10 +463,10 @@ const styles = StyleSheet.create({
   addFriend: {
     top: 11,
     left: 28,
+    fontFamily: FontFamily.robotoRegular,
     textAlign: "right",
     color: Color.white,
     fontSize: FontSize.size_mini,
-    fontFamily: FontFamily.robotoRegular,
     letterSpacing: 1,
   },
   group: {
@@ -301,12 +477,7 @@ const styles = StyleSheet.create({
     left: 26,
     fontSize: FontSize.size_3xl,
     textTransform: "capitalize",
-    color: Color.skyblue_100,
     textAlign: "center",
-    fontFamily: FontFamily.robotoMedium,
-    fontWeight: "500",
-    letterSpacing: 1,
-    position: "absolute",
   },
   imageIcon1: {
     top: 284,
@@ -324,11 +495,9 @@ const styles = StyleSheet.create({
   },
   jafferIqbal: {
     top: 298,
-    textAlign: "left",
   },
   suggested: {
     top: 237,
-    textAlign: "left",
     color: Color.white,
   },
   interestsAnimeCoding: {
@@ -339,7 +508,6 @@ const styles = StyleSheet.create({
   },
   asherJavaid: {
     top: 402,
-    textAlign: "left",
     color: Color.white,
   },
   interestsCricketGym: {
@@ -350,7 +518,6 @@ const styles = StyleSheet.create({
   },
   shehryarKhan: {
     top: 511,
-    textAlign: "left",
     color: Color.white,
   },
   interestsHazriCoding: {
@@ -394,19 +561,41 @@ const styles = StyleSheet.create({
     backgroundColor: Color.darkslategray_200,
     width: 340,
   },
-  searchForFriends: {
-    height: "1.91%",
-    width: "66.1%",
-    top: "22.67%",
-    left: "9.02%",
-    fontSize: FontSize.size_sm,
-    color: Color.gray_400,
-    display: "flex",
-    alignItems: "flex-end",
-    textAlign: "left",
+  forum1: {
+    color: Color.white,
+  },
+  forum: {
+    flexDirection: "row",
+  },
+  home: {
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
+  study: {
+    fontFamily: FontFamily.interMedium,
+    fontWeight: "500",
+  },
+  studyGroup: {
+    color: Color.white,
+  },
+  more: {
+    borderTopRightRadius: Border.br_11xs,
+  },
+  iconsHead: {
+    flexDirection: "row",
+    borderTopRightRadius: Border.br_11xs,
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  st: {
+    top: 777,
+    left: 14,
+    width: 380,
+    position: "absolute",
   },
   socials: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -417,9 +606,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

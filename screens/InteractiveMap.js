@@ -1,25 +1,46 @@
-import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import React, { useCallback } from "react";
+import {
+  Image,
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const InteractiveMap = () => {
+  const onGroupButtonClick = useCallback(() => {
+    Alert.alert("Key", "placeholder", [
+      {
+        text: "OK",
+        onPress: () => console.log("OK pressed"),
+      },
+    ]);
+  }, []);
+
   return (
-    <View style={[styles.interactiveMap, styles.heatmap5Layout]}>
+    <View style={styles.interactiveMap}>
       <Image
         style={styles.image4Icon}
         resizeMode="cover"
         source={require("../assets/image-4.png")}
       />
-      <View style={styles.heatmap} />
+      <View style={[styles.heatmap, styles.heatmapLayout]} />
       <View style={[styles.heatmap1, styles.heatmapPosition1]} />
       <View style={[styles.heatmap2, styles.heatmapPosition1]} />
       <View style={[styles.heatmap3, styles.heatmapPosition]} />
       <View style={[styles.heatmap4, styles.heatmapPosition]} />
-      <View style={[styles.heatmap5, styles.heatmap5Layout]} />
-      <View style={[styles.keyParent, styles.keyLayout]}>
+      <View style={[styles.heatmap5, styles.heatmapLayout]} />
+      <TouchableOpacity
+        style={[styles.keyParent, styles.keyLayout]}
+        activeOpacity={0.2}
+        onPress={onGroupButtonClick}
+      >
         <Text style={[styles.key, styles.keyLayout]}>Key</Text>
         <View style={styles.rectangle} />
-      </View>
+      </TouchableOpacity>
       <Image
         style={styles.goBackIcon}
         resizeMode="cover"
@@ -30,24 +51,25 @@ const InteractiveMap = () => {
 };
 
 const styles = StyleSheet.create({
-  heatmap5Layout: {
-    overflow: "hidden",
+  heatmapLayout: {
     borderRadius: Border.br_21xl,
+    position: "absolute",
+    overflow: "hidden",
   },
   heatmapPosition1: {
     left: 164,
+    borderRadius: Border.br_21xl,
     right: 166,
     position: "absolute",
     overflow: "hidden",
-    borderRadius: Border.br_21xl,
   },
   heatmapPosition: {
     bottom: 527,
     top: 231,
     backgroundColor: Color.red_100,
+    borderRadius: Border.br_21xl,
     position: "absolute",
     overflow: "hidden",
-    borderRadius: Border.br_21xl,
   },
   keyLayout: {
     height: 29,
@@ -66,8 +88,6 @@ const styles = StyleSheet.create({
     left: 174,
     backgroundColor: Color.red_100,
     right: 166,
-    position: "absolute",
-    overflow: "hidden",
     borderRadius: Border.br_21xl,
   },
   heatmap1: {
@@ -94,7 +114,6 @@ const styles = StyleSheet.create({
     bottom: 336,
     left: 260,
     backgroundColor: "#061aec",
-    position: "absolute",
   },
   key: {
     left: 26,
@@ -146,6 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     height: 838,
+    overflow: "hidden",
   },
 });
 

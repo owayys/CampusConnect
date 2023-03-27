@@ -1,8 +1,19 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { Color, FontFamily, Padding, FontSize, Border } from "../GlobalStyles";
+import {
+  Image,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Border, Padding, Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.homeScreen}>
       <Image
@@ -10,19 +21,24 @@ const HomeScreen = () => {
         resizeMode="cover"
         source={require("../assets/burger-menu.png")}
       />
-      <Image
-        style={styles.homeScreenChild}
-        resizeMode="cover"
-        source={require("../assets/frame-115.png")}
-      />
-      <Text style={[styles.search, styles.searchFlexBox]}>Search...</Text>
-      <Text
-        style={[
-          styles.welcomeBackAhmed,
-          styles.campusAtALayout,
-          styles.forum1Typo1,
-        ]}
-      >
+      <View style={[styles.rectangleParent, styles.rectangleLayout1]}>
+        <TextInput
+          style={[
+            styles.rectangle,
+            styles.rectangleLayout,
+            styles.rectangleLayout1,
+          ]}
+          placeholder="Search..."
+          keyboardType="default"
+          autoCapitalize="none"
+        />
+        <Image
+          style={styles.groupIcon}
+          resizeMode="cover"
+          source={require("../assets/group.png")}
+        />
+      </View>
+      <Text style={[styles.welcomeBackAhmed, styles.campusAtALayout]}>
         Welcome back, Ahmed!
       </Text>
       <Image
@@ -31,22 +47,26 @@ const HomeScreen = () => {
         source={require("../assets/iconoutlinebell.png")}
       />
       <Image
-        style={[styles.homeScreenItem, styles.homeLayout]}
+        style={[styles.homeScreenChild, styles.homeLayout]}
         resizeMode="cover"
         source={require("../assets/ellipse-5.png")}
       />
-      <View style={styles.rectangleParent}>
+      <TouchableOpacity
+        style={styles.rectangleGroup}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("InteractiveMap")}
+      >
         <Image
-          style={styles.rectangleIcon}
+          style={[styles.rectangleIcon, styles.rectangleLayout]}
           resizeMode="cover"
           source={require("../assets/rectangle4.png")}
         />
         <Text style={[styles.campusAtA, styles.campusAtALayout]}>
           Campus at a glance
         </Text>
-      </View>
+      </TouchableOpacity>
       <Text style={styles.mySchedule}>My Schedule</Text>
-      <View style={[styles.frameParent, styles.searchFlexBox]}>
+      <View style={styles.frameParent}>
         <View style={[styles.frameWrapper, styles.frameLayout]}>
           <View style={styles.advancedProgrammingParent}>
             <Text
@@ -83,35 +103,76 @@ const HomeScreen = () => {
         </View>
       </View>
       <View style={styles.frameGroup}>
-        <View style={styles.monWrapper}>
+        <TouchableOpacity
+          style={styles.monWrapper}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={[styles.mon, styles.monTypo]}>Mon</Text>
-        </View>
-        <View style={[styles.wrapperSpaceBlock, styles.ml4]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.wrapperSpaceBlock, styles.ml4]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={[styles.tue, styles.tueTypo]}>Tue</Text>
-        </View>
-        <View style={[styles.wrapperSpaceBlock, styles.ml4]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.wrapperSpaceBlock, styles.ml4]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={[styles.tue, styles.tueTypo]}>Wed</Text>
-        </View>
-        <View style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={styles.tueTypo}>Thu</Text>
-        </View>
-        <View style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={styles.tueTypo}>Fri</Text>
-        </View>
-        <View style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={styles.tueTypo}>Sat</Text>
-        </View>
-        <View style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
           <Text style={styles.tueTypo}>Sun</Text>
-        </View>
+        </TouchableOpacity>
+      </View>
+      <View style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
       </View>
       <Image
-        style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
-      <Image
-        style={[styles.homeScreenInner, styles.homeLayout]}
+        style={[styles.homeScreenItem, styles.homeLayout]}
         resizeMode="cover"
         source={require("../assets/ellipse-5.png")}
       />
@@ -132,19 +193,18 @@ const styles = StyleSheet.create({
   ml4: {
     marginLeft: 4,
   },
-  searchFlexBox: {
-    alignItems: "flex-end",
+  rectangleLayout1: {
+    height: 42,
+    width: 355,
+  },
+  rectangleLayout: {
+    borderRadius: Border.br_3xs,
     position: "absolute",
   },
   campusAtALayout: {
     height: 38,
     textAlign: "left",
     position: "absolute",
-  },
-  forum1Typo1: {
-    color: Color.skyblue_100,
-    fontFamily: FontFamily.robotoMedium,
-    fontWeight: "500",
   },
   homeFlexBox: {
     justifyContent: "center",
@@ -156,6 +216,7 @@ const styles = StyleSheet.create({
   },
   forum1Typo: {
     fontSize: FontSize.size_xs,
+    color: Color.white,
     textAlign: "left",
   },
   text3Typo: {
@@ -176,10 +237,10 @@ const styles = StyleSheet.create({
   networkSecurityTypo: {
     fontFamily: FontFamily.poppinsSemibold,
     letterSpacing: 0.3,
+    fontSize: FontSize.size_sm,
     color: Color.darkNeutral,
     fontWeight: "600",
     textAlign: "left",
-    fontSize: FontSize.size_sm,
   },
   monTypo: {
     letterSpacing: 0.4,
@@ -207,6 +268,15 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   burgerMenuIcon: {
     marginTop: -358,
     marginLeft: -175,
@@ -216,31 +286,32 @@ const styles = StyleSheet.create({
     height: 16,
     position: "absolute",
   },
-  homeScreenChild: {
-    top: 152,
-    left: 27,
-    width: 355,
-    height: 42,
+  rectangle: {
+    left: 0,
+    backgroundColor: Color.darkslategray_200,
+    top: 0,
+  },
+  groupIcon: {
+    left: 305,
+    width: 40,
+    height: 40,
+    top: 0,
     position: "absolute",
   },
-  search: {
-    height: "1.91%",
-    width: "22.44%",
-    top: "20.05%",
-    left: "10%",
-    letterSpacing: 1,
-    color: Color.gray_400,
-    display: "flex",
-    textAlign: "left",
-    fontSize: FontSize.size_sm,
-    alignItems: "flex-end",
-    fontFamily: FontFamily.robotoRegular,
+  rectangleParent: {
+    top: 152,
+    left: 27,
+    position: "absolute",
   },
   welcomeBackAhmed: {
     top: 104,
     left: 30,
     fontSize: FontSize.size_6xl,
     width: 382,
+    color: Color.skyblue_100,
+    textAlign: "left",
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
   },
   iconoutlinebell: {
     left: 344,
@@ -249,27 +320,24 @@ const styles = StyleSheet.create({
     top: 56,
     position: "absolute",
   },
-  homeScreenItem: {
+  homeScreenChild: {
     left: 361,
   },
   rectangleIcon: {
     top: -10,
     left: -14,
-    borderRadius: Border.br_3xs,
     width: 396,
     height: 230,
-    position: "absolute",
   },
   campusAtA: {
     top: 133,
     left: 12,
     fontSize: FontSize.size_mid,
+    fontFamily: FontFamily.robotoRegular,
     width: 157,
     color: Color.white,
-    fontFamily: FontFamily.robotoRegular,
-    height: 38,
   },
-  rectangleParent: {
+  rectangleGroup: {
     top: 214,
     left: 28,
     width: 353,
@@ -284,8 +352,8 @@ const styles = StyleSheet.create({
     height: 35,
     fontWeight: "600",
     left: 17,
-    color: Color.skyblue_100,
     textAlign: "left",
+    color: Color.skyblue_100,
     position: "absolute",
   },
   advancedProgramming: {
@@ -322,6 +390,8 @@ const styles = StyleSheet.create({
     left: 66,
     width: 289,
     height: 239,
+    alignItems: "flex-end",
+    position: "absolute",
   },
   mon: {
     opacity: 0.7,
@@ -349,16 +419,22 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
   },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
+  },
   iconoutlinemessageCircle: {
     top: 58,
     left: 312,
     position: "absolute",
   },
-  homeScreenInner: {
+  homeScreenItem: {
     left: 327,
   },
   homeScreen: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -369,9 +445,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

@@ -7,11 +7,11 @@ export const FontFamily = {
   robotoLight: "Roboto_light",
   robotoExtrabold: "Roboto_extrabold",
   robotoMedium: "Roboto_medium",
+  interMedium: "Inter_medium",
   robotoBold: "Roboto_bold",
   poppinsRegular: "Poppins_regular",
   poppinsBold: "Poppins_bold",
   poppinsBlack: "Poppins_black",
-  interMedium: "Inter_medium",
   poppinsSemibold: "Poppins_semibold",
 };
 /* font sizes */
@@ -27,15 +27,14 @@ export const FontSize = {
   size_mid: 17,
   size_6xl: 25,
   size_lgi: 19,
-  size_2xs: 11,
   size_xs_3: 11,
 };
 /* Colors */
 export const Color = {
   gray_100: "#272a35",
   gray_200: "#0e1936",
-  gray_300: "rgba(255, 255, 255, 0)",
   gray_400: "rgba(255, 255, 255, 0.6)",
+  gray_300: "rgba(255, 255, 255, 0)",
   gray_500: "rgba(0, 0, 0, 0.25)",
   gray_600: "rgba(255, 255, 255, 0.3)",
   white: "#fff",
@@ -74,15 +73,15 @@ export const Margin = {
 };
 /* border radiuses */
 export const Border = {
-  br_11xs: 2,
-  br_21xl: 40,
   br_10xs_5: 3,
   br_11xl: 30,
   br_10xl: 29,
   br_81xl: 100,
   br_xl: 20,
   br_3xs: 10,
+  br_11xs: 2,
   br_31xl: 50,
+  br_21xl: 40,
   br_4xs: 9,
   br_xs: 12,
   br_base: 16,

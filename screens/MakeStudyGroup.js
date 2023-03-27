@@ -1,8 +1,19 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const MakeStudyGroup = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.makeStudyGroup}>
       <Image
@@ -10,11 +21,24 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <View style={styles.iconoutlinemessageCircle}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         style={styles.makeStudyGroupChild}
         resizeMode="cover"
@@ -26,7 +50,11 @@ const MakeStudyGroup = () => {
         source={require("../assets/vector-1.png")}
       />
       <Text style={styles.newStudyGroup}>New Study Group</Text>
-      <View style={styles.rectangle} />
+      <Image
+        style={styles.rectangleIcon}
+        resizeMode="cover"
+        source={require("../assets/rectangle3.png")}
+      />
       <Text style={styles.addDisplayPicture}>
         + Add Display Picture for Study Group
       </Text>
@@ -34,27 +62,78 @@ const MakeStudyGroup = () => {
       <Text style={[styles.subject, styles.subjectTypo]}>Subject:</Text>
       <Text style={[styles.days, styles.daysTypo]}>Days:</Text>
       <Text style={[styles.groupName, styles.daysTypo]}>Group name:</Text>
-      <View style={[styles.rectangle1, styles.rectangleLayout]} />
-      <View style={styles.rectangle2} />
-      <View style={[styles.rectangle3, styles.rectangleLayout]} />
-      <View style={[styles.rectangle4, styles.rectangleLayout]} />
+      <TextInput
+        style={[
+          styles.rectangle,
+          styles.rectangleLayout,
+          styles.rectanglePosition1,
+        ]}
+        placeholder="..."
+        keyboardType="default"
+      />
+      <TextInput
+        style={[styles.rectangle1, styles.rectangleLayout]}
+        placeholder="..."
+        keyboardType="default"
+      />
+      <TextInput
+        style={[
+          styles.rectangle2,
+          styles.rectangleLayout,
+          styles.rectanglePosition1,
+        ]}
+        placeholder="..."
+        keyboardType="default"
+      />
+      <TextInput
+        style={[
+          styles.rectangle3,
+          styles.rectangleLayout,
+          styles.rectanglePosition1,
+        ]}
+        placeholder="..."
+        keyboardType="default"
+      />
       <Text style={[styles.location, styles.subjectTypo]}>Location:</Text>
-      <View style={[styles.rectangle5, styles.rectanglePosition]} />
-      <View style={[styles.rectangle6, styles.rectanglePosition]} />
+      <TextInput
+        style={[styles.rectangle4, styles.rectanglePosition]}
+        placeholder="..."
+        keyboardType="default"
+      />
+      <TextInput
+        style={[styles.rectangle5, styles.rectanglePosition]}
+        placeholder="..."
+        keyboardType="default"
+      />
       <Text style={[styles.addDescription, styles.subjectTypo]}>
         Add description:
       </Text>
-      <Image
-        style={styles.rectangle395Icon}
-        resizeMode="cover"
-        source={require("../assets/rectangle395.png")}
-      />
+      <TouchableOpacity
+        style={styles.rectangle395}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/rectangle395.png")}
+        />
+      </TouchableOpacity>
       <Text style={styles.createGroup}>Create Group</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   daysTypo: {
     left: "2.44%",
     width: "64.39%",
@@ -82,17 +161,20 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   rectangleLayout: {
-    left: 76,
-    height: 27,
-    width: 296,
     backgroundColor: Color.gray_500,
+    height: 27,
     borderRadius: Border.br_3xs,
     position: "absolute",
   },
+  rectanglePosition1: {
+    left: 76,
+    backgroundColor: Color.gray_500,
+    width: 296,
+  },
   rectanglePosition: {
     left: 81,
-    width: 296,
     backgroundColor: Color.gray_500,
+    width: 296,
     borderRadius: Border.br_3xs,
     position: "absolute",
   },
@@ -103,6 +185,13 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     position: "absolute",
+  },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -137,12 +226,11 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     position: "absolute",
   },
-  rectangle: {
+  rectangleIcon: {
     top: 159,
     left: 65,
     height: 150,
     width: 296,
-    backgroundColor: Color.gray_500,
     borderRadius: Border.br_3xs,
     position: "absolute",
   },
@@ -172,47 +260,48 @@ const styles = StyleSheet.create({
   groupName: {
     top: "38.42%",
   },
-  rectangle1: {
+  rectangle: {
     top: 379,
     height: 27,
   },
-  rectangle2: {
+  rectangle1: {
     top: 322,
     left: 117,
     width: 255,
     height: 27,
-    backgroundColor: Color.gray_500,
-    borderRadius: Border.br_3xs,
-    position: "absolute",
   },
-  rectangle3: {
+  rectangle2: {
     top: 433,
     height: 27,
   },
-  rectangle4: {
+  rectangle3: {
     top: 494,
     height: 27,
   },
   location: {
     top: "81.38%",
   },
-  rectangle5: {
+  rectangle4: {
     top: 678,
     height: 27,
   },
-  rectangle6: {
+  rectangle5: {
     top: 579,
     height: 87,
   },
   addDescription: {
     top: "65.04%",
   },
-  rectangle395Icon: {
-    top: 746,
+  icon: {
+    borderRadius: Border.br_3xs,
+    height: "100%",
+    width: "100%",
+  },
+  rectangle395: {
     left: 131,
+    top: 746,
     width: 163,
     height: 40,
-    borderRadius: Border.br_3xs,
     position: "absolute",
   },
   createGroup: {
@@ -227,7 +316,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   makeStudyGroup: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -238,9 +326,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

@@ -1,56 +1,77 @@
 import * as React from "react";
-import { StyleSheet, View, Text, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Pressable,
+  Text,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { FontSize, FontFamily, Color, Border } from "../GlobalStyles";
 
 const ForumsTabPostSettings = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.forumsTabPostSettings}>
       <View style={styles.retweetMenu}>
         <View style={styles.background} />
         <View style={styles.rectangle} />
-        <View style={[styles.row, styles.rowLayout]}>
+        <Pressable style={[styles.row, styles.rowLayout]}>
           <View style={styles.background1} />
-          <Text
-            style={[styles.deletePost, styles.ccFlexBox, styles.cancelTypo]}
-          >
+          <Text style={[styles.deletePost, styles.cancelTypo]}>
             Delete Post
           </Text>
           <View style={styles.color}>
-            <View style={styles.base} />
+            <View style={[styles.base, styles.basePosition]} />
           </View>
           <Image
             style={[styles.iconoutlinetrash2, styles.iconoutlinetrash2Layout]}
             resizeMode="cover"
             source={require("../assets/iconoutlinetrash2.png")}
           />
-        </View>
-        <View style={[styles.row1, styles.rowLayout]}>
+        </Pressable>
+        <Pressable style={[styles.row1, styles.rowLayout]}>
           <View style={styles.background1} />
           <Image
-            style={styles.penStrokeIcon}
+            style={[styles.penStrokeIcon, styles.iconLayout]}
             resizeMode="cover"
             source={require("../assets/pen-stroke-icon.png")}
           />
-          <Text
-            style={[styles.deletePost, styles.ccFlexBox, styles.cancelTypo]}
-          >
-            Edit Post
-          </Text>
-        </View>
+          <Text style={[styles.deletePost, styles.cancelTypo]}>Edit Post</Text>
+        </Pressable>
       </View>
       <Image
         style={styles.imageIcon}
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
+      <TouchableOpacity
         style={[
           styles.iconoutlinemessageCircle,
           styles.iconoutlinetrash2Layout,
         ]}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
+        <Image
+          style={styles.iconLayout}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base1, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
       <Image
         style={styles.forumsTabPostSettingsChild}
         resizeMode="cover"
@@ -120,20 +141,12 @@ const ForumsTabPostSettings = () => {
         </View>
       </View>
       <Image
-        style={[
-          styles.forumsTabPostSettingsItem,
-          styles.itemLayout,
-          styles.forumsLayout,
-        ]}
+        style={[styles.forumsTabPostSettingsItem, styles.forumsLayout]}
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
       <Image
-        style={[
-          styles.forumsTabPostSettingsInner,
-          styles.itemLayout,
-          styles.forumsLayout,
-        ]}
+        style={[styles.forumsTabPostSettingsInner, styles.forumsLayout]}
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
@@ -176,26 +189,18 @@ const ForumsTabPostSettings = () => {
           <Text style={[styles.text2, styles.textTypo]}>37</Text>
         </View>
       </View>
-      <View style={styles.lineParent}>
-        <View style={styles.frameChild} />
+      <TouchableOpacity
+        style={styles.rectangle395}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("ForumsTab")}
+      >
         <Image
-          style={[styles.frameItem, styles.itemLayout]}
+          style={styles.icon}
           resizeMode="cover"
-          source={require("../assets/line-20.png")}
+          source={require("../assets/rectangle3953.png")}
         />
-        <View style={styles.frameInner} />
-        <View style={[styles.lineView, styles.lineViewLayout]} />
-        <View style={[styles.frameChild1, styles.lineViewLayout]} />
-        <Text style={[styles.cc, styles.ccFlexBox]}>CC</Text>
-      </View>
-      <Image
-        style={styles.rectangle395Icon}
-        resizeMode="cover"
-        source={require("../assets/rectangle3953.png")}
-      />
-      <Text style={[styles.cancel, styles.ccFlexBox, styles.cancelTypo]}>
-        Cancel
-      </Text>
+      </TouchableOpacity>
+      <Text style={[styles.cancel, styles.cancelTypo]}>Cancel</Text>
     </View>
   );
 };
@@ -208,20 +213,30 @@ const styles = StyleSheet.create({
     position: "absolute",
     overflow: "hidden",
   },
-  ccFlexBox: {
+  cancelTypo: {
     textAlign: "left",
     letterSpacing: 0,
-    position: "absolute",
-  },
-  cancelTypo: {
     fontSize: FontSize.size_lgi,
     fontFamily: FontFamily.poppinsRegular,
-    letterSpacing: 0,
+    position: "absolute",
+  },
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
   },
   iconoutlinetrash2Layout: {
     height: 24,
     width: 24,
     position: "absolute",
+  },
+  iconLayout: {
+    height: 20,
+    width: 20,
   },
   tweetPosition: {
     right: "-0.98%",
@@ -289,30 +304,18 @@ const styles = StyleSheet.create({
     bottom: 0,
     position: "absolute",
   },
-  itemLayout: {
-    height: 1,
-    position: "absolute",
-  },
   forumsLayout: {
-    width: 410,
     height: 1,
+    width: 410,
     left: 1,
-  },
-  lineViewLayout: {
-    height: 8,
-    width: 1,
-    borderRightWidth: 1,
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    left: 0,
     position: "absolute",
   },
   background: {
     borderTopLeftRadius: Border.br_xs,
     borderTopRightRadius: Border.br_xs,
     backgroundColor: Color.slategray,
-    left: 0,
     top: 0,
+    left: 0,
     height: 235,
     width: 414,
     position: "absolute",
@@ -337,18 +340,10 @@ const styles = StyleSheet.create({
   deletePost: {
     top: 19,
     color: Color.gainsboro_100,
-    fontFamily: FontFamily.poppinsRegular,
     left: 68,
   },
   base: {
-    height: "100%",
-    top: "0%",
-    right: "0%",
-    bottom: "0%",
     backgroundColor: "#0d1c2e",
-    left: "0%",
-    position: "absolute",
-    width: "100%",
   },
   color: {
     height: "40%",
@@ -369,8 +364,6 @@ const styles = StyleSheet.create({
   penStrokeIcon: {
     top: 20,
     left: 26,
-    width: 20,
-    height: 20,
     position: "absolute",
   },
   row1: {
@@ -390,6 +383,9 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     position: "absolute",
+  },
+  base1: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -484,6 +480,8 @@ const styles = StyleSheet.create({
   commentStrokeIcon: {
     height: 15,
     left: 0,
+    width: 15,
+    bottom: 3,
   },
   text1: {
     left: 19,
@@ -538,58 +536,14 @@ const styles = StyleSheet.create({
     top: "35.44%",
     bottom: "51.91%",
   },
-  frameChild: {
-    borderTopWidth: 1,
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    height: 1,
-    width: 24,
-    left: 0,
-    top: 0,
-    position: "absolute",
-  },
-  frameItem: {
-    top: 18,
-    width: 22,
-    left: 0,
-  },
-  frameInner: {
-    left: 22,
-    width: 1,
-    borderRightWidth: 1,
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    height: 20,
-    top: 0,
-    position: "absolute",
-  },
-  lineView: {
-    top: 0,
-    height: 8,
-  },
-  frameChild1: {
-    top: 12,
-  },
-  cc: {
-    top: 3,
-    left: 4,
-    fontSize: FontSize.size_2xs,
-    fontFamily: FontFamily.robotoRegular,
-    color: Color.skyblue_100,
-    width: 34,
-    height: 10,
-  },
-  lineParent: {
-    top: 70,
-    left: 192,
-    width: 23,
-    height: 19,
-    position: "absolute",
-  },
-  rectangle395Icon: {
-    top: 753,
-    left: 51,
+  icon: {
     borderRadius: Border.br_3xs,
+    height: "100%",
+    width: "100%",
+  },
+  rectangle395: {
+    left: 51,
+    top: 753,
     width: 313,
     height: 40,
     position: "absolute",
@@ -600,10 +554,8 @@ const styles = StyleSheet.create({
     width: 106,
     height: 21,
     color: Color.white,
-    fontFamily: FontFamily.poppinsRegular,
   },
   forumsTabPostSettings: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,

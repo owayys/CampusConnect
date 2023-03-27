@@ -1,20 +1,43 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { FontFamily, Color, FontSize, Border } from "../GlobalStyles";
 
 const EventsExtended = () => {
+  const navigation = useNavigation();
+
   return (
-    <View style={[styles.eventsExtended, styles.rectangleShadowBox]}>
+    <View style={styles.eventsExtended}>
       <Image
         style={[styles.imageIcon, styles.imageIconPosition]}
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <View style={styles.iconoutlinemessageCircle}>
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </View>
       <Image
         style={styles.eventsExtendedChild}
         resizeMode="cover"
@@ -25,13 +48,7 @@ const EventsExtended = () => {
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
-      <View
-        style={[
-          styles.rectangle,
-          styles.imageIconPosition,
-          styles.rectangleShadowBox,
-        ]}
-      />
+      <View style={[styles.rectangle, styles.imageIconPosition]} />
       <Image
         style={styles.eventsExtendedInner}
         resizeMode="cover"
@@ -47,7 +64,7 @@ Dates: 15th March - 20th March
 Timing: 6:00pm - 7:00 pm
 
 Team Size: 5 Players and 2 substitutes per team`}</Text>
-      <View
+      <Pressable
         style={[
           styles.tcikButton,
           styles.groupIconLayout,
@@ -64,7 +81,7 @@ Team Size: 5 Players and 2 substitutes per team`}</Text>
           source={require("../assets/group6.png")}
         />
         <Text style={[styles.going, styles.goingTypo]}>Going</Text>
-      </View>
+      </Pressable>
       <Image
         style={[styles.rectangle395Icon, styles.groupIconLayout]}
         resizeMode="cover"
@@ -83,16 +100,18 @@ Going`}</Text>
 };
 
 const styles = StyleSheet.create({
-  rectangleShadowBox: {
-    shadowOpacity: 1,
-    shadowOffset: {
-      width: 40,
-      height: 40,
-    },
-  },
   imageIconPosition: {
     left: 27,
     position: "absolute",
+  },
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
   },
   groupIconLayout: {
     height: 40,
@@ -115,6 +134,13 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_31xl,
     width: 38,
     height: 38,
+  },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -146,6 +172,12 @@ const styles = StyleSheet.create({
     elevation: 34,
     width: 354,
     height: 650,
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 40,
+      height: 40,
+    },
+    left: 27,
   },
   eventsExtendedInner: {
     top: 204,
@@ -218,15 +250,19 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   eventsExtended: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,
     elevation: 100,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 40,
+      height: 40,
+    },
   },
 });
 

@@ -1,8 +1,18 @@
 import * as React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
-import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
 
 const UserProfile = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.userProfile}>
       <Image
@@ -13,7 +23,9 @@ const UserProfile = () => {
       <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
         Ahmed Luqman
       </Text>
-      <Text style={[styles.aCsJunior, styles.aCsJuniorLayout]}>
+      <Text
+        style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
+      >
         A CS Junior, who loves playing football and chess!!!
       </Text>
       <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
@@ -21,7 +33,9 @@ const UserProfile = () => {
         My Interests
       </Text>
       <View style={styles.gradYear}>
-        <Text style={styles.graduation2024}>Graduation: 2024</Text>
+        <Text style={[styles.graduation2024, styles.forum1Typo]}>
+          Graduation: 2024
+        </Text>
         <Image
           style={styles.iconoutlinecalendar}
           resizeMode="cover"
@@ -41,10 +55,10 @@ const UserProfile = () => {
         <Text style={[styles.gym, styles.gymTypo]}>Gym</Text>
         <View style={[styles.rectangle2, styles.rectangleLayout]} />
         <View style={[styles.rectangle3, styles.rectangleLayout]} />
-        <View style={[styles.editProfileParent, styles.rectangleLayout2]}>
+        <Pressable style={[styles.editProfileParent, styles.rectangleLayout2]}>
           <Text style={[styles.editProfile, styles.gymTypo]}>Edit Profile</Text>
           <View style={styles.rectangle4} />
-        </View>
+        </Pressable>
         <Text style={[styles.cooking, styles.gymTypo]}>Cooking</Text>
         <Text style={[styles.chess, styles.gymTypo]}>Chess</Text>
         <View
@@ -68,27 +82,131 @@ const UserProfile = () => {
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
+      <View style={styles.st}>
+        <View style={styles.iconsHead}>
+          <TouchableOpacity
+            style={[styles.home, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("ForumsTab")}
+          >
+            <Image
+              style={styles.home03Icon}
+              resizeMode="cover"
+              source={require("../assets/home03.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.forum1Typo, styles.text3Typo, styles.forum1Clr]}
+              >
+                Forum
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Events")}
+          >
+            <Image
+              style={styles.home03Icon}
+              resizeMode="cover"
+              source={require("../assets/iconoutlinespeaker.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.text3Typo, styles.forum1Clr]}>Events</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Socials")}
+          >
+            <Image
+              style={styles.home03Icon}
+              resizeMode="cover"
+              source={require("../assets/box.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.forum1Clr}>Social</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.homeFlexBox}>
+            <TouchableOpacity
+              style={styles.home03Icon}
+              activeOpacity={0.2}
+              onPress={() => navigation.navigate("StudyGroups")}
+            >
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={require("../assets/iconoutlinebookopen.png")}
+              />
+            </TouchableOpacity>
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.forum1Typo, styles.forum1Clr]}>
+                <Text style={styles.study}>Study</Text>
+                <Text style={styles.text3Typo}>{` `}</Text>
+                <Text style={styles.study}>Group</Text>
+              </Text>
+            </View>
+            <Image
+              style={[styles.home03Icon, styles.mt2]}
+              resizeMode="cover"
+              source={require("../assets/piggybank02.png")}
+            />
+          </View>
+          <TouchableOpacity
+            style={[styles.more, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("UserProfile")}
+          >
+            <Image
+              style={styles.home03Icon}
+              resizeMode="cover"
+              source={require("../assets/morehorizontal.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.profile, styles.forum1Typo, styles.text3Typo]}
+              >
+                Profile
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mt2: {
+    marginTop: 2,
+  },
   aCsJuniorLayout: {
     height: 38,
     width: 192,
-    color: Color.white,
     textAlign: "left",
+    color: Color.white,
     left: 31,
     position: "absolute",
   },
+  text3Typo: {
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
+  },
   myProfileTypo: {
-    color: Color.skyblue_100,
     fontFamily: FontFamily.robotoSemibold,
     fontWeight: "600",
     fontSize: FontSize.size_xl,
+    color: Color.skyblue_100,
     height: 38,
     textAlign: "left",
     position: "absolute",
+  },
+  forum1Typo: {
+    fontSize: FontSize.size_xs,
+    textAlign: "left",
   },
   rectangleLayout2: {
     height: 40,
@@ -136,6 +254,18 @@ const styles = StyleSheet.create({
     left: 1,
     position: "absolute",
   },
+  homeFlexBox: {
+    justifyContent: "center",
+    paddingVertical: Padding.p_6xs,
+    paddingHorizontal: Padding.p_2xl,
+    width: 76,
+    backgroundColor: Color.gray_300,
+    alignItems: "center",
+  },
+  forum1Clr: {
+    color: Color.white,
+    fontSize: FontSize.size_xs,
+  },
   imageIcon: {
     top: 82,
     left: 11,
@@ -153,28 +283,26 @@ const styles = StyleSheet.create({
   aCsJunior: {
     top: 208,
     fontSize: FontSize.size_mini,
-    fontWeight: "500",
-    fontFamily: FontFamily.robotoMedium,
   },
   myProfile: {
     top: 66,
     left: 155,
     width: 97,
+    color: Color.skyblue_100,
   },
   myInterests: {
     top: 293,
     width: 142,
+    color: Color.skyblue_100,
     left: 31,
   },
   graduation2024: {
     top: 3,
     left: 24,
-    fontSize: FontSize.size_xs,
     fontFamily: FontFamily.robotoRegular,
     color: Color.darkgray_100,
     width: 143,
     height: 21,
-    textAlign: "left",
     position: "absolute",
   },
   iconoutlinecalendar: {
@@ -273,8 +401,42 @@ const styles = StyleSheet.create({
   userProfileItem: {
     top: 431,
   },
+  home03Icon: {
+    width: 24,
+    height: 24,
+  },
+  forum: {
+    flexDirection: "row",
+  },
+  home: {
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
+  study: {
+    fontFamily: FontFamily.interMedium,
+    fontWeight: "500",
+  },
+  profile: {
+    color: Color.skyblue_100,
+  },
+  more: {
+    borderTopRightRadius: Border.br_11xs,
+  },
+  iconsHead: {
+    flexDirection: "row",
+    borderTopRightRadius: Border.br_11xs,
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  st: {
+    top: 771,
+    left: 17,
+    width: 380,
+    position: "absolute",
+  },
   userProfile: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {
@@ -285,9 +447,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 

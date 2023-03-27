@@ -1,8 +1,18 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Color, FontSize, FontFamily, Padding, Border } from "../GlobalStyles";
 
 const ForumsTab = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.forumsTab}>
       <Image
@@ -10,11 +20,28 @@ const ForumsTab = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
+      <TouchableOpacity
         style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
       <Image
         style={styles.forumsTabChild}
         resizeMode="cover"
@@ -42,12 +69,18 @@ const ForumsTab = () => {
           resizeMode="cover"
           source={require("../assets/line.png")}
         />
-        <Image
+        <TouchableOpacity
           style={[styles.downArrowIcon, styles.downIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/down-arrow-icon.png")}
-        />
-        <Text style={[styles.asherJavaidAnd, styles.ccPosition]}>
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("ForumsTabPostSettings")}
+        >
+          <Image
+            style={styles.icon}
+            resizeMode="cover"
+            source={require("../assets/down-arrow-icon.png")}
+          />
+        </TouchableOpacity>
+        <Text style={styles.asherJavaidAnd}>
           Asher Javaid and Owais Ahsan liked
         </Text>
         <Text
@@ -79,10 +112,12 @@ const ForumsTab = () => {
             resizeMode="cover"
             source={require("../assets/comment-stroke-icon.png")}
           />
-          <Text style={[styles.text1, styles.stPosition, styles.textTypo]}>
+          <Text style={[styles.text1, styles.textTypo, styles.textPosition]}>
             28
           </Text>
-          <Text style={[styles.text2, styles.textTypo]}>21</Text>
+          <Text style={[styles.text2, styles.textTypo, styles.textPosition]}>
+            21
+          </Text>
         </View>
       </View>
       <Image
@@ -107,11 +142,17 @@ const ForumsTab = () => {
       />
       <View style={[styles.tweet1, styles.tweetPosition]}>
         <View style={[styles.background1, styles.backgroundShadowBox]} />
-        <Image
+        <TouchableOpacity
           style={[styles.downArrowIcon1, styles.downIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/down-arrow-icon.png")}
-        />
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("ForumsTabPostSettings")}
+        >
+          <Image
+            style={styles.icon}
+            resizeMode="cover"
+            source={require("../assets/down-arrow-icon.png")}
+          />
+        </TouchableOpacity>
         <Text
           style={[styles.jafferIqbalJafferIqbalContainer, styles.jafferTypo]}
         >
@@ -140,10 +181,12 @@ const ForumsTab = () => {
             resizeMode="cover"
             source={require("../assets/comment-stroke-icon1.png")}
           />
-          <Text style={[styles.text1, styles.stPosition, styles.textTypo]}>
+          <Text style={[styles.text1, styles.textTypo, styles.textPosition]}>
             19
           </Text>
-          <Text style={[styles.text2, styles.textTypo]}>37</Text>
+          <Text style={[styles.text2, styles.textTypo, styles.textPosition]}>
+            37
+          </Text>
         </View>
       </View>
       <Image
@@ -151,60 +194,78 @@ const ForumsTab = () => {
         resizeMode="cover"
         source={require("../assets/frame-116.png")}
       />
-      <View style={styles.lineParent}>
-        <View style={[styles.frameChild, styles.rectangleBorder]} />
-        <Image
-          style={styles.frameItem}
-          resizeMode="cover"
-          source={require("../assets/line-20.png")}
-        />
-        <View style={styles.frameInner} />
-        <View style={[styles.lineView, styles.lineViewLayout]} />
-        <View style={[styles.frameChild1, styles.lineViewLayout]} />
-        <Text style={[styles.cc, styles.ccClr, styles.ccPosition]}>CC</Text>
-      </View>
-      <View style={[styles.st, styles.stPosition]}>
+      <TouchableOpacity
+        style={styles.addFriendsToSeeMorePostsParent}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("Socials")}
+      >
+        <Text style={styles.addFriendsTo}>Add Friends to see more posts</Text>
+        <View style={styles.rectangle} />
+      </TouchableOpacity>
+      <View style={styles.st}>
         <View style={styles.iconsHead}>
-          <View style={[styles.home, styles.homeFlexBox]}>
+          <TouchableOpacity
+            style={[styles.home, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("ForumsTab")}
+          >
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
-              source={require("../assets/home03.png")}
+              source={require("../assets/home031.png")}
             />
             <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.forum1, styles.text8Typo, styles.ccClr]}>
+              <Text style={[styles.forum1, styles.text8Typo, styles.textTypo]}>
                 Forum
               </Text>
             </View>
-          </View>
-          <View style={styles.homeFlexBox}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Events")}
+          >
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
               source={require("../assets/iconoutlinespeaker.png")}
             />
             <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.events, styles.text8Typo]}>Events</Text>
+              <Text style={[styles.events, styles.text8Typo, styles.textTypo]}>
+                Events
+              </Text>
             </View>
-          </View>
-          <View style={styles.homeFlexBox}>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Socials")}
+          >
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
               source={require("../assets/box.png")}
             />
             <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.events, styles.text8Typo]}>Social</Text>
+              <Text style={[styles.events, styles.text8Typo, styles.textTypo]}>
+                Social
+              </Text>
             </View>
-          </View>
+          </TouchableOpacity>
           <View style={styles.homeFlexBox}>
-            <Image
+            <TouchableOpacity
               style={styles.home03IconLayout}
-              resizeMode="cover"
-              source={require("../assets/iconoutlinebookopen.png")}
-            />
+              activeOpacity={0.2}
+              onPress={() => navigation.navigate("StudyGroups")}
+            >
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={require("../assets/iconoutlinebookopen.png")}
+              />
+            </TouchableOpacity>
             <View style={[styles.forum, styles.mt2]}>
-              <Text style={styles.studyGroup}>
+              <Text style={[styles.studyGroup, styles.textTypo]}>
                 <Text style={styles.study}>Study</Text>
                 <Text style={styles.text8Typo}>{` `}</Text>
                 <Text style={styles.study}>Group</Text>
@@ -216,23 +277,23 @@ const ForumsTab = () => {
               source={require("../assets/piggybank02.png")}
             />
           </View>
-          <View style={[styles.more, styles.homeFlexBox]}>
+          <TouchableOpacity
+            style={[styles.more, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("UserProfile")}
+          >
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
               source={require("../assets/morehorizontal.png")}
             />
             <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.events, styles.text8Typo]}>More</Text>
+              <Text style={[styles.events, styles.text8Typo, styles.textTypo]}>
+                Profile
+              </Text>
             </View>
-          </View>
+          </TouchableOpacity>
         </View>
-      </View>
-      <View style={[styles.addFriendsToSeeMorePostsParent, styles.addLayout]}>
-        <Text style={[styles.addFriendsTo, styles.addLayout]}>
-          Add Friends to see more posts
-        </Text>
-        <View style={[styles.rectangle, styles.rectangleBorder]} />
       </View>
     </View>
   );
@@ -246,10 +307,19 @@ const styles = StyleSheet.create({
     height: 24,
     width: 24,
   },
-  tweetPosition: {
+  basePosition: {
     left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
+  tweetPosition: {
     right: "-0.98%",
     width: "100.98%",
+    left: "0%",
     position: "absolute",
     overflow: "hidden",
   },
@@ -259,8 +329,8 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     shadowColor: "#ced5dc",
     backgroundColor: Color.gray_300,
-    left: 0,
     top: 0,
+    left: 0,
     position: "absolute",
     shadowOpacity: 1,
     shadowOffset: {
@@ -277,10 +347,6 @@ const styles = StyleSheet.create({
     height: 6,
     width: 10,
     left: 384,
-    position: "absolute",
-  },
-  ccPosition: {
-    letterSpacing: 0,
     position: "absolute",
   },
   jafferTypo: {
@@ -308,42 +374,23 @@ const styles = StyleSheet.create({
     bottom: 3,
     position: "absolute",
   },
-  stPosition: {
-    left: 19,
-    position: "absolute",
-  },
   textTypo: {
+    fontSize: FontSize.size_xs,
+    textAlign: "left",
+  },
+  textPosition: {
     bottom: 0,
     fontSize: FontSize.size_xs,
     color: Color.white,
-    textAlign: "left",
     fontFamily: FontFamily.poppinsRegular,
     letterSpacing: 0,
+    position: "absolute",
   },
   forumsLayout: {
+    height: 1,
     width: 410,
     left: 1,
-    height: 1,
     position: "absolute",
-  },
-  rectangleBorder: {
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    left: 0,
-    position: "absolute",
-  },
-  lineViewLayout: {
-    height: 8,
-    width: 1,
-    borderRightWidth: 1,
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    left: 0,
-    position: "absolute",
-  },
-  ccClr: {
-    color: Color.skyblue_100,
-    textAlign: "left",
   },
   homeFlexBox: {
     justifyContent: "center",
@@ -357,10 +404,6 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoMedium,
     fontWeight: "500",
   },
-  addLayout: {
-    height: 29,
-    position: "absolute",
-  },
   imageIcon: {
     top: 57,
     left: 27,
@@ -368,6 +411,13 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     position: "absolute",
+  },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
   },
   iconoutlinemessageCircle: {
     top: 66,
@@ -411,6 +461,10 @@ const styles = StyleSheet.create({
     height: 68,
     position: "absolute",
   },
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
   downArrowIcon: {
     top: 35,
   },
@@ -418,10 +472,11 @@ const styles = StyleSheet.create({
     top: 10,
     fontSize: FontSize.size_sm,
     textAlign: "left",
+    letterSpacing: 0,
+    left: 83,
     color: Color.silver,
     fontFamily: FontFamily.poppinsRegular,
-    left: 83,
-    letterSpacing: 0,
+    position: "absolute",
   },
   jafferIqbal: {
     fontWeight: "900",
@@ -465,12 +520,10 @@ const styles = StyleSheet.create({
     left: 0,
   },
   text1: {
-    fontSize: FontSize.size_xs,
+    left: 19,
   },
   text2: {
     left: 68,
-    fontSize: FontSize.size_xs,
-    position: "absolute",
   },
   actionButtons: {
     bottom: 40,
@@ -484,19 +537,15 @@ const styles = StyleSheet.create({
   },
   forumsTabItem: {
     top: 101,
-    height: 1,
   },
   forumsTabInner: {
     top: 408,
-    height: 1,
   },
   vectorIcon: {
     top: 746,
-    height: 1,
   },
   forumsTabChild1: {
     top: 317,
-    height: 1,
   },
   background1: {
     height: 105,
@@ -535,86 +584,6 @@ const styles = StyleSheet.create({
     top: 682,
     left: 333,
   },
-  frameChild: {
-    borderTopWidth: 1,
-    height: 1,
-    top: 0,
-    width: 24,
-    borderStyle: "solid",
-  },
-  frameItem: {
-    top: 18,
-    width: 22,
-    height: 1,
-    left: 0,
-    position: "absolute",
-  },
-  frameInner: {
-    left: 22,
-    height: 20,
-    width: 1,
-    borderRightWidth: 1,
-    borderColor: "#4ec6e0",
-    borderStyle: "solid",
-    top: 0,
-    position: "absolute",
-  },
-  lineView: {
-    top: 0,
-  },
-  frameChild1: {
-    top: 12,
-  },
-  cc: {
-    top: 3,
-    left: 4,
-    fontSize: FontSize.size_2xs,
-    fontFamily: FontFamily.robotoRegular,
-    width: 34,
-    height: 10,
-  },
-  lineParent: {
-    top: 70,
-    left: 192,
-    width: 23,
-    height: 19,
-    position: "absolute",
-  },
-  forum1: {
-    fontSize: FontSize.size_xs,
-  },
-  forum: {
-    flexDirection: "row",
-  },
-  home: {
-    borderTopLeftRadius: Border.br_11xs,
-  },
-  events: {
-    fontSize: FontSize.size_xs,
-    color: Color.white,
-    textAlign: "left",
-  },
-  study: {
-    fontFamily: FontFamily.interMedium,
-    fontWeight: "500",
-  },
-  studyGroup: {
-    fontSize: FontSize.size_xs,
-    color: Color.white,
-    textAlign: "left",
-  },
-  more: {
-    borderTopRightRadius: Border.br_11xs,
-  },
-  iconsHead: {
-    flexDirection: "row",
-    borderTopRightRadius: Border.br_11xs,
-    borderTopLeftRadius: Border.br_11xs,
-  },
-  st: {
-    top: 749,
-    width: 380,
-  },
   addFriendsTo: {
     left: 13,
     fontSize: FontSize.size_smi,
@@ -628,30 +597,69 @@ const styles = StyleSheet.create({
     color: Color.white,
     textAlign: "left",
     top: 0,
+    position: "absolute",
   },
   rectangle: {
     top: 5,
     borderRadius: Border.br_xl,
     backgroundColor: Color.skyblue_300,
+    borderStyle: "solid",
+    borderColor: "#4ec6e0",
     borderWidth: 1,
     width: 228,
     height: 19,
+    left: 0,
+    position: "absolute",
   },
   addFriendsToSeeMorePostsParent: {
     top: 422,
     left: 84,
     width: 255,
+    height: 29,
+    position: "absolute",
+  },
+  forum1: {
+    color: Color.skyblue_100,
+  },
+  forum: {
+    flexDirection: "row",
+  },
+  home: {
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  events: {
+    color: Color.white,
+  },
+  study: {
+    fontFamily: FontFamily.interMedium,
+    fontWeight: "500",
+  },
+  studyGroup: {
+    color: Color.white,
+  },
+  more: {
+    borderTopRightRadius: Border.br_11xs,
+  },
+  iconsHead: {
+    flexDirection: "row",
+    borderTopRightRadius: Border.br_11xs,
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  st: {
+    top: 768,
+    left: 14,
+    width: 380,
+    position: "absolute",
   },
   forumsTab: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,
     elevation: 100,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
     shadowOpacity: 1,
     shadowOffset: {
       width: 40,

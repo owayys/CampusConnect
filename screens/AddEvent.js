@@ -3,8 +3,8 @@ import {
   Text,
   StyleSheet,
   Image,
-  TextInput,
   Pressable,
+  TextInput,
   View,
   TouchableOpacity,
 } from "react-native";
@@ -219,7 +219,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   addEvent: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {

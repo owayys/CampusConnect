@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { FontSize, FontFamily, Border, Color } from "../GlobalStyles";
+import { FontSize, FontFamily, Color } from "../GlobalStyles";
 
 const FrameScreen = () => {
   return (
@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   bgImageParent: {
-    borderRadius: Border.br_11xs,
     backgroundColor: Color.gray_200,
     borderStyle: "solid",
     borderColor: "rgba(0, 0, 0, 0.1)",

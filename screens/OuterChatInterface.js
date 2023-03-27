@@ -1,5 +1,12 @@
 import * as React from "react";
-import { Text, StyleSheet, Image, View, TextInput } from "react-native";
+import {
+  Text,
+  StyleSheet,
+  Image,
+  View,
+  Pressable,
+  TextInput,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
@@ -110,10 +117,12 @@ const OuterChatInterface = () => {
         source={require("../assets/group4.png")}
       />
       <LinearGradient
-        style={[styles.rectangle, styles.rectangleShadowBox]}
+        style={[styles.rectangle, styles.rectangleLayout]}
         locations={[0, 0.64]}
         colors={["#fff", "#3c3c3c"]}
-      />
+      >
+        <Pressable style={[styles.pressable, styles.rectangleShadowBox]} />
+      </LinearGradient>
       <Image
         style={styles.unionIcon}
         resizeMode="cover"
@@ -124,7 +133,11 @@ const OuterChatInterface = () => {
       >{`Software 
 Engineering`}</Text>
       <LinearGradient
-        style={[styles.rectangle1, styles.rectangleShadowBox]}
+        style={[
+          styles.rectangle1,
+          styles.rectangleShadowBox,
+          styles.rectangleLayout,
+        ]}
         locations={[0, 1]}
         colors={["#b347ea", "#053cff"]}
       />
@@ -136,7 +149,11 @@ Engineering`}</Text>
       <Text style={[styles.machineLearning, styles.moenkaWalinaTypo]}>{`Machine
 Learning`}</Text>
       <LinearGradient
-        style={[styles.rectangle2, styles.rectangleShadowBox]}
+        style={[
+          styles.rectangle2,
+          styles.rectangleShadowBox,
+          styles.rectangleLayout,
+        ]}
         locations={[0, 1]}
         colors={["#03a9f1", "#a0025a"]}
       />
@@ -150,7 +167,11 @@ Learning`}</Text>
       >{`Advanced
 Programming`}</Text>
       <LinearGradient
-        style={[styles.rectangle3, styles.rectangleShadowBox]}
+        style={[
+          styles.rectangle3,
+          styles.rectangleShadowBox,
+          styles.rectangleLayout,
+        ]}
         locations={[0, 1]}
         colors={["#00ffcd", "#dcd4ff"]}
       />
@@ -284,16 +305,18 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     position: "absolute",
   },
-  rectangleShadowBox: {
-    backgroundColor: "transparent",
+  rectangleLayout: {
     height: 140,
     width: 95,
+    top: 202,
+    position: "absolute",
+  },
+  rectangleShadowBox: {
+    backgroundColor: "transparent",
     elevation: 34,
     shadowRadius: 34,
     shadowColor: "rgba(0, 0, 0, 0.45)",
-    top: 202,
     borderRadius: Border.br_11xl,
-    position: "absolute",
     shadowOpacity: 1,
     shadowOffset: {
       width: 40,
@@ -424,6 +447,14 @@ const styles = StyleSheet.create({
     top: 373,
     position: "absolute",
   },
+  pressable: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "transparent",
+    elevation: 34,
+    shadowRadius: 34,
+    shadowColor: "rgba(0, 0, 0, 0.45)",
+  },
   rectangle: {
     left: 28,
   },
@@ -495,13 +526,11 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   outerChatInterface: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,
     elevation: 100,
     flex: 1,
-    width: "100%",
     height: 844,
     overflow: "hidden",
     shadowOpacity: 1,
@@ -509,6 +538,7 @@ const styles = StyleSheet.create({
       width: 40,
       height: 40,
     },
+    width: "100%",
   },
 });
 

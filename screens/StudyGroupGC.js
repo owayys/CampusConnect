@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
+import { Pressable, Image, StyleSheet, View, Text } from "react-native";
+import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 
 const StudyGroupGC = () => {
   return (
@@ -10,7 +10,7 @@ const StudyGroupGC = () => {
         resizeMode="cover"
         source={require("../assets/group1.png")}
       />
-      <View
+      <Pressable
         style={[
           styles.rectangle,
           styles.rectangleLayout1,
@@ -23,10 +23,6 @@ const StudyGroupGC = () => {
         source={require("../assets/subtract.png")}
       />
       <View style={[styles.rectangle1, styles.rectangleLayout1]} />
-      <Text style={styles.sureWhatTime}>
-        Sure! What time do you want to meet? We could meet at the default
-        scheduled time in the group description which is Wednesday 5:00 pm
-      </Text>
       <View style={[styles.rectangle2, styles.rectangleBg1]} />
       <Text
         style={[styles.thisIsOur, styles.hiHowAreTypo, styles.thisIsOurTypo]}
@@ -146,16 +142,19 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_xl,
   },
   hiHowAreTypo: {
-    fontSize: FontSize.size_smi,
     alignItems: "center",
-    display: "flex",
-    color: Color.white,
     fontFamily: FontFamily.robotoLight,
     fontWeight: "300",
+    fontSize: FontSize.size_smi,
+    display: "flex",
+    color: Color.white,
     letterSpacing: 1,
   },
   thisIsOurTypo: {
     textAlign: "left",
+    alignItems: "center",
+    fontFamily: FontFamily.robotoLight,
+    fontWeight: "300",
     fontSize: FontSize.size_smi,
   },
   rectangle3Position: {
@@ -207,7 +206,6 @@ const styles = StyleSheet.create({
   ohWowThatsTypo: {
     left: 67,
     height: 50,
-    fontSize: FontSize.size_smi,
     alignItems: "center",
     display: "flex",
     textAlign: "left",
@@ -215,6 +213,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoLight,
     fontWeight: "300",
     letterSpacing: 1,
+    fontSize: FontSize.size_smi,
     position: "absolute",
   },
   groupIcon: {
@@ -235,21 +234,6 @@ const styles = StyleSheet.create({
     backgroundColor: Color.gray_500,
     width: 288,
     height: 98,
-  },
-  sureWhatTime: {
-    height: "17.78%",
-    width: "64.68%",
-    top: "80.19%",
-    left: "12.94%",
-    fontSize: FontSize.size_sm,
-    alignItems: "center",
-    fontFamily: FontFamily.robotoLight,
-    fontWeight: "300",
-    display: "flex",
-    textAlign: "left",
-    color: Color.white,
-    letterSpacing: 1,
-    position: "absolute",
   },
   rectangle2: {
     top: 357,
@@ -289,6 +273,11 @@ const styles = StyleSheet.create({
     left: 116,
     textAlign: "right",
     width: 223,
+    alignItems: "center",
+    fontFamily: FontFamily.robotoLight,
+    fontWeight: "300",
+    fontSize: FontSize.size_smi,
+    top: 224,
   },
   rectangle5: {
     width: 94,
@@ -312,7 +301,6 @@ const styles = StyleSheet.create({
     width: 255,
     top: 173,
     height: 41,
-    fontSize: FontSize.size_smi,
     alignItems: "center",
     display: "flex",
     textAlign: "left",
@@ -320,6 +308,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoLight,
     fontWeight: "300",
     letterSpacing: 1,
+    fontSize: FontSize.size_smi,
   },
   mar1334: {
     top: 146,
@@ -406,7 +395,6 @@ const styles = StyleSheet.create({
     left: 20,
   },
   studyGroupGc: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowOffset: {

@@ -317,7 +317,6 @@ const styles = StyleSheet.create({
     left: 317,
   },
   studyGroupJoinRequests: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,

@@ -1,8 +1,18 @@
 import * as React from "react";
-import { Image, StyleSheet, View, Text } from "react-native";
-import { FontFamily, FontSize, Color, Border } from "../GlobalStyles";
+import {
+  Image,
+  StyleSheet,
+  Pressable,
+  TouchableOpacity,
+  View,
+  Text,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { FontFamily, FontSize, Color, Border, Padding } from "../GlobalStyles";
 
 const Events = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.events}>
       <Image
@@ -10,11 +20,28 @@ const Events = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <Image
-        style={styles.iconoutlinemessageCircle}
-        resizeMode="cover"
-        source={require("../assets/iconoutlinemessagecircle.png")}
-      />
+      <TouchableOpacity
+        style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
+        <Image
+          style={styles.maskIcon}
+          resizeMode="cover"
+          source={require("../assets/mask.png")}
+        />
+        <TouchableOpacity
+          style={styles.basePosition}
+          activeOpacity={0.2}
+          onPress={() => {}}
+        >
+          <TouchableOpacity
+            style={[styles.base, styles.basePosition]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("OuterChatInterface")}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
       <Image
         style={[styles.eventsChild, styles.eventsLayout]}
         resizeMode="cover"
@@ -42,7 +69,10 @@ const Events = () => {
       />
       <View style={[styles.lineView, styles.lineViewLayout]} />
       <Text style={styles.events1}>EVENTS</Text>
-      <View style={styles.rectangle} />
+      <Pressable
+        style={styles.rectangle}
+        onPress={() => navigation.navigate("EventsExtended")}
+      />
       <Image
         style={[styles.rectangleIcon, styles.iconLayout]}
         resizeMode="cover"
@@ -52,15 +82,21 @@ const Events = () => {
         style={[styles.basketballLeague, styles.foodStreetTypo]}
       >{`Basketball 
 League`}</Text>
-      <Text style={styles.details}>Details</Text>
+      <TouchableOpacity
+        style={styles.details}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("EventsExtended")}
+      >
+        <Text style={styles.details1}>Details</Text>
+      </TouchableOpacity>
       <View style={[styles.rectangle1, styles.rectangleShadowBox]} />
       <Text style={[styles.holiFestival, styles.foodStreetTypo]}>{`Holi 
 Festival`}</Text>
-      <Text style={[styles.details1, styles.detailsTypo]}>Details</Text>
+      <Text style={[styles.details2, styles.detailsTypo]}>Details</Text>
       <View style={[styles.rectangle2, styles.rectangleShadowBox]} />
       <Text style={[styles.foodStreet, styles.foodStreetTypo]}>{`Food
  Street`}</Text>
-      <Text style={[styles.details2, styles.detailsTypo]}>Details</Text>
+      <Text style={[styles.details3, styles.detailsTypo]}>Details</Text>
       <Image
         style={[styles.image3Icon, styles.iconLayout]}
         resizeMode="cover"
@@ -78,11 +114,116 @@ Festival`}</Text>
         resizeMode="cover"
         source={require("../assets/image-2.png")}
       />
+      <View style={styles.st}>
+        <View style={styles.iconsHead}>
+          <TouchableOpacity
+            style={[styles.home, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("ForumsTab")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/home03.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text
+                style={[styles.forum1Typo, styles.forum1Clr, styles.text3Typo]}
+              >
+                Forum
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Events")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/iconoutlinespeaker.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.events2, styles.forum1Typo]}>Events</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeFlexBox}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Socials")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/box.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.forum1Clr, styles.text3Typo]}>Social</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.homeFlexBox}>
+            <TouchableOpacity
+              style={styles.home03IconLayout}
+              activeOpacity={0.2}
+              onPress={() => navigation.navigate("StudyGroups")}
+            >
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={require("../assets/iconoutlinebookopen.png")}
+              />
+            </TouchableOpacity>
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.forum1Typo, styles.forum1Clr]}>
+                <Text style={styles.study}>Study</Text>
+                <Text style={styles.text3Typo}>{` `}</Text>
+                <Text style={styles.study}>Group</Text>
+              </Text>
+            </View>
+            <Image
+              style={[styles.home03IconLayout, styles.mt2]}
+              resizeMode="cover"
+              source={require("../assets/piggybank02.png")}
+            />
+          </View>
+          <TouchableOpacity
+            style={[styles.more, styles.homeFlexBox]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("UserProfile")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/morehorizontal.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.text3Typo}>Profile</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  mt2: {
+    marginTop: 2,
+  },
+  home03IconLayout: {
+    height: 24,
+    width: 24,
+  },
+  basePosition: {
+    left: "0%",
+    bottom: "0%",
+    right: "0%",
+    top: "0%",
+    height: "100%",
+    position: "absolute",
+    width: "100%",
+  },
   eventsLayout: {
     height: 7,
     width: 7,
@@ -146,7 +287,26 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.latoRegular,
     textTransform: "uppercase",
     lineHeight: 16,
+  },
+  homeFlexBox: {
+    justifyContent: "center",
+    alignItems: "center",
+    paddingVertical: Padding.p_6xs,
+    paddingHorizontal: Padding.p_2xl,
+    width: 76,
+    backgroundColor: Color.gray_300,
+  },
+  forum1Clr: {
+    color: Color.white,
     fontSize: FontSize.size_xs,
+  },
+  text3Typo: {
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
+  },
+  forum1Typo: {
+    fontSize: FontSize.size_xs,
+    textAlign: "left",
   },
   imageIcon: {
     top: 58,
@@ -156,11 +316,16 @@ const styles = StyleSheet.create({
     left: 27,
     position: "absolute",
   },
+  maskIcon: {
+    width: 20,
+    height: 20,
+  },
+  base: {
+    backgroundColor: Color.white,
+  },
   iconoutlinemessageCircle: {
     top: 66,
     left: 340,
-    width: 24,
-    height: 24,
     position: "absolute",
   },
   eventsChild: {
@@ -168,15 +333,15 @@ const styles = StyleSheet.create({
     left: 355,
   },
   eventsItem: {
-    top: 343,
+    top: 331,
     left: 251,
   },
   eventsInner: {
-    top: 546,
+    top: 534,
     left: 251,
   },
   ellipseIcon: {
-    top: 747,
+    top: 735,
     left: 248,
   },
   vectorIcon: {
@@ -185,7 +350,7 @@ const styles = StyleSheet.create({
     width: 410,
   },
   lineView: {
-    top: 174,
+    top: 162,
     borderStyle: "solid",
     borderColor: "#4ec6e0",
     borderTopWidth: 1,
@@ -193,19 +358,19 @@ const styles = StyleSheet.create({
     left: 44,
   },
   events1: {
-    top: 128,
+    top: 116,
     left: 162,
     fontSize: FontSize.size_3xl,
-    fontWeight: "500",
-    fontFamily: FontFamily.robotoMedium,
     textAlign: "center",
-    color: Color.skyblue_100,
     textTransform: "capitalize",
     letterSpacing: 1,
+    color: Color.skyblue_100,
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
     position: "absolute",
   },
   rectangle: {
-    top: 201,
+    top: 189,
     height: 169,
     width: 354,
     elevation: 34,
@@ -222,79 +387,114 @@ const styles = StyleSheet.create({
     },
   },
   rectangleIcon: {
-    top: 230,
+    top: 218,
     borderRadius: Border.br_4xs,
     width: 172,
     left: 44,
   },
   basketballLeague: {
-    top: 239,
+    top: 227,
     left: 234,
   },
-  details: {
-    top: 304,
-    left: 262,
+  details1: {
     textAlign: "left",
-    color: Color.white,
     textDecoration: "underline",
     fontSize: FontSize.size_mini,
+    color: Color.white,
     fontFamily: FontFamily.robotoRegular,
     textTransform: "capitalize",
     letterSpacing: 1,
+  },
+  details: {
+    left: 262,
+    top: 292,
     position: "absolute",
   },
   rectangle1: {
-    top: 405,
+    top: 393,
   },
   holiFestival: {
-    top: 443,
+    top: 431,
     left: 251,
   },
-  details1: {
-    top: 508,
+  details2: {
+    top: 496,
   },
   rectangle2: {
-    top: 601,
+    top: 589,
   },
   foodStreet: {
-    top: 639,
+    top: 627,
     left: 257,
   },
-  details2: {
-    top: 704,
+  details3: {
+    top: 692,
   },
   image3Icon: {
-    top: 630,
+    top: 618,
     left: 48,
     width: 175,
   },
   going: {
-    top: 338,
+    top: 326,
   },
   going1: {
-    top: 541,
+    top: 529,
   },
   going2: {
-    top: 741,
+    top: 729,
     left: 258,
   },
   image2Icon: {
-    top: 431,
+    top: 419,
     left: 43,
     width: 173,
     height: 118,
     position: "absolute",
   },
+  forum: {
+    flexDirection: "row",
+  },
+  home: {
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  events2: {
+    fontSize: FontSize.size_xs,
+    color: Color.skyblue_100,
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
+  },
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
+  study: {
+    fontFamily: FontFamily.interMedium,
+    fontWeight: "500",
+  },
+  more: {
+    borderTopRightRadius: Border.br_11xs,
+  },
+  iconsHead: {
+    flexDirection: "row",
+    borderTopRightRadius: Border.br_11xs,
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  st: {
+    top: 778,
+    left: 15,
+    width: 380,
+    position: "absolute",
+  },
   events: {
-    borderRadius: Border.br_21xl,
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius: 100,
     elevation: 100,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
     shadowOpacity: 1,
     shadowOffset: {
       width: 40,
