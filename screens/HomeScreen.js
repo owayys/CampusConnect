@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Border, Padding, Color, FontSize, FontFamily } from "../GlobalStyles";
+import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -102,7 +102,7 @@ const HomeScreen = () => {
           </View>
         </View>
       </View>
-      <View style={styles.frameGroup}>
+      <View style={[styles.frameGroup, styles.stPosition]}>
         <TouchableOpacity
           style={styles.monWrapper}
           activeOpacity={0.2}
@@ -111,42 +111,42 @@ const HomeScreen = () => {
           <Text style={[styles.mon, styles.monTypo]}>Mon</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.wrapperSpaceBlock, styles.ml4]}
+          style={[styles.wrapperFlexBox, styles.ml4]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
           <Text style={[styles.tue, styles.tueTypo]}>Tue</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.wrapperSpaceBlock, styles.ml4]}
+          style={[styles.wrapperFlexBox, styles.ml4]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
           <Text style={[styles.tue, styles.tueTypo]}>Wed</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperFlexBox]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
           <Text style={styles.tueTypo}>Thu</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperFlexBox]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
           <Text style={styles.tueTypo}>Fri</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperFlexBox]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
           <Text style={styles.tueTypo}>Sat</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.thuWrapper, styles.ml4, styles.wrapperSpaceBlock]}
+          style={[styles.thuWrapper, styles.ml4, styles.wrapperFlexBox]}
           activeOpacity={0.2}
           onPress={() => {}}
         >
@@ -176,14 +176,96 @@ const HomeScreen = () => {
         resizeMode="cover"
         source={require("../assets/ellipse-5.png")}
       />
+      <View style={[styles.st, styles.stPosition]}>
+        <View style={styles.iconsHead}>
+          <TouchableOpacity
+            style={[styles.home, styles.homeSpaceBlock]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("ForumsTab")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/home03.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={[styles.forum1Typo, styles.text4Typo]}>Forum</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeSpaceBlock}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Events")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/iconoutlinespeaker.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.text4Typo}>Events</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.homeSpaceBlock}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("Socials")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/box.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.text4Typo}>Social</Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.homeSpaceBlock}>
+            <TouchableOpacity
+              style={styles.home03IconLayout}
+              activeOpacity={0.2}
+              onPress={() => navigation.navigate("StudyGroups")}
+            >
+              <Image
+                style={styles.icon}
+                resizeMode="cover"
+                source={require("../assets/iconoutlinebookopen.png")}
+              />
+            </TouchableOpacity>
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.forum1Typo}>
+                <Text style={styles.study}>Study</Text>
+                <Text style={styles.text4Typo}>{` `}</Text>
+                <Text style={styles.study}>Group</Text>
+              </Text>
+            </View>
+            <Image
+              style={[styles.home03IconLayout, styles.mt2]}
+              resizeMode="cover"
+              source={require("../assets/piggybank02.png")}
+            />
+          </View>
+          <TouchableOpacity
+            style={[styles.more, styles.homeSpaceBlock]}
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("UserProfile")}
+          >
+            <Image
+              style={styles.home03IconLayout}
+              resizeMode="cover"
+              source={require("../assets/morehorizontal.png")}
+            />
+            <View style={[styles.forum, styles.mt2]}>
+              <Text style={styles.text4Typo}>Profile</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  mt2: {
-    marginTop: 2,
-  },
   mt4: {
     marginTop: 4,
   },
@@ -192,6 +274,9 @@ const styles = StyleSheet.create({
   },
   ml4: {
     marginLeft: 4,
+  },
+  mt2: {
+    marginTop: 2,
   },
   rectangleLayout1: {
     height: 42,
@@ -205,23 +290,6 @@ const styles = StyleSheet.create({
     height: 38,
     textAlign: "left",
     position: "absolute",
-  },
-  homeFlexBox: {
-    justifyContent: "center",
-    alignItems: "center",
-    paddingVertical: Padding.p_6xs,
-    paddingHorizontal: Padding.p_2xl,
-    width: 76,
-    backgroundColor: Color.gray_300,
-  },
-  forum1Typo: {
-    fontSize: FontSize.size_xs,
-    color: Color.white,
-    textAlign: "left",
-  },
-  text3Typo: {
-    fontFamily: FontFamily.robotoMedium,
-    fontWeight: "500",
   },
   homeLayout: {
     height: 7,
@@ -249,6 +317,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "left",
   },
+  stPosition: {
+    left: 17,
+    position: "absolute",
+  },
   tueTypo: {
     color: Color.darkgray_100,
     letterSpacing: 0.4,
@@ -257,12 +329,12 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "left",
   },
-  wrapperSpaceBlock: {
+  wrapperFlexBox: {
     borderRadius: Border.br_base,
-    paddingVertical: Padding.p_base,
-    paddingHorizontal: Padding.p_sm,
     justifyContent: "center",
     alignItems: "center",
+    paddingVertical: Padding.p_base,
+    paddingHorizontal: Padding.p_sm,
   },
   home03IconLayout: {
     height: 24,
@@ -276,6 +348,18 @@ const styles = StyleSheet.create({
     height: "100%",
     position: "absolute",
     width: "100%",
+  },
+  homeSpaceBlock: {
+    paddingVertical: Padding.p_6xs,
+    paddingHorizontal: Padding.p_2xl,
+    width: 76,
+    backgroundColor: Color.gray_300,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text4Typo: {
+    fontFamily: FontFamily.robotoMedium,
+    fontWeight: "500",
   },
   burgerMenuIcon: {
     marginTop: -358,
@@ -399,11 +483,11 @@ const styles = StyleSheet.create({
   },
   monWrapper: {
     backgroundColor: Color.skyblue_100,
+    justifyContent: "center",
+    alignItems: "center",
     paddingVertical: Padding.p_base,
     paddingHorizontal: Padding.p_sm,
     borderRadius: Border.br_xs,
-    justifyContent: "center",
-    alignItems: "center",
   },
   tue: {
     opacity: 0.7,
@@ -415,9 +499,7 @@ const styles = StyleSheet.create({
     top: 425,
     width: 359,
     height: 45,
-    left: 17,
     flexDirection: "row",
-    position: "absolute",
   },
   maskIcon: {
     width: 20,
@@ -433,6 +515,37 @@ const styles = StyleSheet.create({
   },
   homeScreenItem: {
     left: 327,
+  },
+  forum1Typo: {
+    fontSize: FontSize.size_xs,
+    color: Color.white,
+    textAlign: "left",
+  },
+  forum: {
+    flexDirection: "row",
+  },
+  home: {
+    borderTopLeftRadius: Border.br_11xs,
+  },
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
+  study: {
+    fontFamily: FontFamily.interMedium,
+    fontWeight: "500",
+  },
+  more: {
+    borderTopRightRadius: Border.br_11xs,
+  },
+  iconsHead: {
+    borderTopRightRadius: Border.br_11xs,
+    borderTopLeftRadius: Border.br_11xs,
+    flexDirection: "row",
+  },
+  st: {
+    top: 767,
+    width: 380,
   },
   homeScreen: {
     backgroundColor: Color.gray_200,

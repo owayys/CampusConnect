@@ -2,38 +2,55 @@ import * as React from "react";
 import {
   StyleProp,
   ViewStyle,
+  Pressable,
   Image,
   StyleSheet,
   Text,
   View,
+  TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Padding, Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const St = ({ style }) => {
+  const navigation = useNavigation();
+
   return (
     <View style={[styles.st, style]}>
       <View style={styles.iconsHead}>
-        <View style={[styles.home, styles.homeFlexBox]}>
+        <TouchableOpacity
+          style={[styles.home, styles.homeFlexBox]}
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("ForumsTab")}
+        >
           <Image
             style={styles.home03Icon}
             resizeMode="cover"
             source={require("../assets/home03.png")}
           />
           <View style={[styles.forum, styles.mt2]}>
-            <Text style={styles.forum1}>Forum</Text>
+            <Text style={[styles.forum1Typo, styles.text3Typo]}>Forum</Text>
           </View>
-        </View>
-        <View style={styles.homeFlexBox}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.homeFlexBox}
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("Events")}
+        >
           <Image
             style={styles.home03Icon}
             resizeMode="cover"
             source={require("../assets/iconoutlinespeaker.png")}
           />
           <View style={[styles.forum, styles.mt2]}>
-            <Text style={[styles.eventsTypo, styles.text3Typo]}>Events</Text>
+            <Text style={styles.text3Typo}>Events</Text>
           </View>
-        </View>
-        <View style={styles.homeFlexBox}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.homeFlexBox}
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("Socials")}
+        >
           <Image
             style={styles.home03Icon}
             resizeMode="cover"
@@ -42,15 +59,21 @@ const St = ({ style }) => {
           <View style={[styles.forum, styles.mt2]}>
             <Text style={styles.text3Typo}>Social</Text>
           </View>
-        </View>
+        </TouchableOpacity>
         <View style={styles.homeFlexBox}>
-          <Image
+          <TouchableOpacity
             style={styles.home03Icon}
-            resizeMode="cover"
-            source={require("../assets/iconoutlinebookopen.png")}
-          />
+            activeOpacity={0.2}
+            onPress={() => navigation.navigate("StudyGroups")}
+          >
+            <Image
+              style={styles.icon}
+              resizeMode="cover"
+              source={require("../assets/iconoutlinebookopen.png")}
+            />
+          </TouchableOpacity>
           <View style={[styles.forum, styles.mt2]}>
-            <Text style={styles.eventsTypo}>
+            <Text style={styles.forum1Typo}>
               <Text style={styles.study}>Study</Text>
               <Text style={styles.text3Typo}>{` `}</Text>
               <Text style={styles.study}>Group</Text>
@@ -62,16 +85,20 @@ const St = ({ style }) => {
             source={require("../assets/piggybank02.png")}
           />
         </View>
-        <View style={[styles.more, styles.homeFlexBox]}>
+        <TouchableOpacity
+          style={[styles.more, styles.homeFlexBox]}
+          activeOpacity={0.2}
+          onPress={() => navigation.navigate("UserProfile")}
+        >
           <Image
             style={styles.home03Icon}
             resizeMode="cover"
             source={require("../assets/morehorizontal.png")}
           />
           <View style={[styles.forum, styles.mt2]}>
-            <Text style={styles.text3Typo}>More</Text>
+            <Text style={styles.text3Typo}>Profile</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -97,12 +124,10 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
   },
-  forum1: {
-    color: Color.skyblue_100,
+  forum1Typo: {
     textAlign: "left",
+    color: Color.white,
     fontSize: FontSize.size_xs,
-    fontFamily: FontFamily.robotoMedium,
-    fontWeight: "500",
   },
   forum: {
     flexDirection: "row",
@@ -110,10 +135,9 @@ const styles = StyleSheet.create({
   home: {
     borderTopLeftRadius: Border.br_11xs,
   },
-  eventsTypo: {
-    color: Color.white,
-    textAlign: "left",
-    fontSize: FontSize.size_xs,
+  icon: {
+    width: "100%",
+    height: "100%",
   },
   study: {
     fontFamily: FontFamily.interMedium,

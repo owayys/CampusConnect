@@ -8,9 +8,12 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontSize, FontFamily } from "../GlobalStyles";
 
 const InteractiveMap = () => {
+  const navigation = useNavigation();
+
   const onGroupButtonClick = useCallback(() => {
     Alert.alert("Key", "placeholder", [
       {
@@ -41,11 +44,17 @@ const InteractiveMap = () => {
         <Text style={[styles.key, styles.keyLayout]}>Key</Text>
         <View style={styles.rectangle} />
       </TouchableOpacity>
-      <Image
-        style={styles.goBackIcon}
-        resizeMode="cover"
-        source={require("../assets/go-back.png")}
-      />
+      <TouchableOpacity
+        style={styles.goBack}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("HomeScreen")}
+      >
+        <Image
+          style={styles.icon}
+          resizeMode="cover"
+          source={require("../assets/go-back.png")}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -145,9 +154,13 @@ const styles = StyleSheet.create({
     left: 315,
     width: 100,
   },
-  goBackIcon: {
-    top: 56,
+  icon: {
+    height: "100%",
+    width: "100%",
+  },
+  goBack: {
     left: 5,
+    top: 56,
     width: 58,
     height: 58,
     position: "absolute",
@@ -163,9 +176,9 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    width: "100%",
     height: 838,
     overflow: "hidden",
+    width: "100%",
   },
 });
 
