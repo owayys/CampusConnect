@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from 'react';
 import {
   Text,
   StyleSheet,
@@ -14,6 +15,25 @@ import { Color, Border, FontFamily, FontSize } from "../GlobalStyles";
 const Login = () => {
   const navigation = useNavigation();
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await response.json();
+      console.log(data.message);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+
   return (
     <View style={styles.login}>
       <Text style={[styles.hiWelcomeBack, styles.hiWelcomeBackFlexBox]}>{`Hi,
@@ -28,7 +48,8 @@ Welcome back`}</Text>
       <TouchableOpacity
         style={[styles.login1, styles.sginupLayout]}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("HomeScreen")}
+        onPress={handleLogin}
+        //onPress={() => navigation.navigate("HomeScreen")}
       >
         <View style={[styles.loginButton, styles.buttonLayout]} />
         <Text style={[styles.login2, styles.signupTypo]}>login</Text>
@@ -41,7 +62,8 @@ Welcome back`}</Text>
           style={[styles.password1, styles.passwordLayout]}
           placeholder="**********"
           keyboardType="default"
-          autoCapitalize="none"
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry
         />
         <Image
@@ -57,7 +79,9 @@ Welcome back`}</Text>
           style={[styles.password3, styles.passwordLayout]}
           placeholder="username@email.com"
           keyboardType="email-address"
-          autoCapitalize="none"
+          value={username}
+          onChangeText={setUsername}
+          
         />
       </View>
     </View>
