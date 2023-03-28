@@ -52,7 +52,7 @@ const Signup = () => {
       </View>
       <View style={[styles.passwords, styles.emailLayout]}>
         <TextInput
-          style={styles.usernamePosition}
+          style={[styles.password2, styles.usernameLayout]}
           placeholder="**********"
           keyboardType="default"
           secureTextEntry
