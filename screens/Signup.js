@@ -13,13 +13,35 @@ import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 
 const Signup = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
+
+
+  const handleSignup = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name,email,password,confirmPass })
+      });
+
+      const data = await response.json();
+      console.log(data.message);
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
 
   return (
     <View style={styles.signup}>
       <TouchableOpacity
         style={styles.sginupButton}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("Login")}
+        //onPress={() => navigation.navigate("Login")}\
+        onPress={handleSignup}
       >
         <View style={styles.signupButton} />
         <Text style={styles.signup1}>Signup</Text>
@@ -28,8 +50,9 @@ const Signup = () => {
         <TextInput
           style={[styles.usernameLayout, styles.usernamePosition]}
           placeholder="Email"
-          keyboardType="default"
-          autoCapitalize="none"
+          keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
         />
         <Text style={[styles.email1, styles.passwordTypo, styles.email1Typo]}>
           Email:
@@ -44,7 +67,8 @@ const Signup = () => {
           ]}
           placeholder="Your Full Name"
           keyboardType="default"
-          autoCapitalize="none"
+          value={name}
+          onChangeText={setName}
         />
         <Text style={[styles.email1, styles.passwordTypo, styles.email1Typo]}>
           Your Name:
@@ -56,6 +80,8 @@ const Signup = () => {
           placeholder="**********"
           keyboardType="default"
           secureTextEntry
+          value={password}
+          onChangeText={setPassword}
         />
         <Image
           style={[styles.hideIcon, styles.hideIconLayout]}
@@ -74,6 +100,8 @@ const Signup = () => {
           placeholder="**********"
           keyboardType="default"
           secureTextEntry
+          value={confirmPass}
+          onChangeText={setConfirmPass}
         />
         <Image
           style={[styles.hideIcon1, styles.hideIconLayout]}
