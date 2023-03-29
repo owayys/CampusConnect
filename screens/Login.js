@@ -20,17 +20,23 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
+        const body = {
+            email: username,
+            password: password,
+            soc_flag: 0
+        }
 
-      const data = await response.json();
-     //navigation.navigate('HomeScreen', { name: data.name });
-      console.log(data.message);
+        const response = await fetch('http://localhost:8080/api/auth/login', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {'Content-Type': 'application/json'}
+        });
+        const data = await response.json();
+
+        console.log(response)
+        console.log(data);
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
 

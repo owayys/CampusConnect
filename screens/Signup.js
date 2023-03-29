@@ -22,16 +22,21 @@ const Signup = () => {
 
   const handleSignup = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/auth/signup', {
-        method: 'POST',
-        headers: {
-           'Content-Type': 'application/json' },
-        body: JSON.stringify({name,email,password})
-      });
+        const body = {
+            name: name,
+            email: email,
+            password: password
+        }
 
-      console.log(response)
-      const data = await response.JSON;
-      console.log(data);
+        const response = await fetch('http://localhost:8080/api/auth/signup', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {'Content-Type': 'application/json'}
+        });
+        const data = await response.json();
+
+        console.log(response)
+        console.log(data);
     } catch (err) {
       console.log(err);
     }
