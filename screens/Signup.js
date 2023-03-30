@@ -29,9 +29,14 @@ const Signup = () => {
         body: JSON.stringify({name,email,password})
       });
 
-      console.log(response)
-      const data = await response.JSON;
-      console.log(data);
+      const data = await response.json();
+      if (data.code===200){
+        console.log(data);
+        navigation.navigate("Login")
+      }
+      else{
+        console.log("Error");
+      }
     } catch (err) {
       console.log(err);
     }

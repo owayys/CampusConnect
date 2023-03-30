@@ -11,9 +11,9 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
 
-const HomeScreen = ({ name }) => {
+const HomeScreen = ({route}) => {
   const navigation = useNavigation();
-
+  const { name } = route.params;
   return (
     <View style={styles.homeScreen}>
       <Image
@@ -38,8 +38,8 @@ const HomeScreen = ({ name }) => {
           source={require("../assets/group.png")}
         />
       </View>
-      <Text style={[styles.welcomeBackAhmed, styles.campusAtALayout]}>
-        Welcome back, Ahmed!
+      <Text style={[styles.welcomeBack, styles.campusAtALayout]}>
+        Welcome back, {name}!
       </Text>
       <Image
         style={styles.iconoutlinebell}
@@ -387,7 +387,7 @@ const styles = StyleSheet.create({
     left: 27,
     position: "absolute",
   },
-  welcomeBackAhmed: {
+  welcomeBack: {
     top: 104,
     left: 30,
     fontSize: FontSize.size_6xl,

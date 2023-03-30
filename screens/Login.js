@@ -20,17 +20,26 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
+      console.log(username)
+      console.log(password)
       const response = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email:username, password:password,soc_flag: 0 })
       });
 
       const data = await response.json();
+      if (data.code===200){
+        console.log(data);
+        console.log(data.name)
+        navigation.navigate('HomeScreen', { name: data.name});
+      }
+      else{
+        console.log("Error");
+      }
      //navigation.navigate('HomeScreen', { name: data.name });
-      console.log(data.message);
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
 
