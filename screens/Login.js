@@ -17,6 +17,7 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async () => {
     try {
@@ -36,10 +37,12 @@ const Login = () => {
       }
       else{
         console.log("Error");
+        setErrorMessage('Incorrect username or password.');
       }
      //navigation.navigate('HomeScreen', { name: data.name });
     } catch (err) {
       console.log(err);
+      setErrorMessage('Something went wrong. Please try again later.');
     }
   };
 
@@ -65,9 +68,10 @@ Welcome back`}</Text>
         <Text style={[styles.login2, styles.signupTypo]}>login</Text>
       </TouchableOpacity>
       <View style={styles.password}>
-        <Text style={[styles.forgotPassword, styles.hiWelcomeBackFlexBox]}>
+        {/* <Text style={[styles.forgotPassword, styles.hiWelcomeBackFlexBox]}>
           forgot password?
-        </Text>
+        </Text> */}
+        {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
           placeholder="**********"
@@ -103,6 +107,17 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: Color.skyblue_100,
     position: "absolute",
+  },
+  errorMessagestyle: {
+    textAlign: "left",
+    color: 'red',
+    position: "absolute",
+    top: 78,
+    left: 10,
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.robotoRegular,
+    width: 250,
+    height: 17,
   },
   sginupLayout: {
     height: 37,
@@ -197,6 +212,7 @@ const styles = StyleSheet.create({
     width: 179,
     height: 17,
   },
+
   password1: {
     top: 25,
   },
