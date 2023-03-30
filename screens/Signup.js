@@ -18,9 +18,14 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
 
   const handleSignup = async () => {
+    if (password !== confirmPass) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
     try {
         const body = {
             name: name,
@@ -118,6 +123,7 @@ const Signup = () => {
         <Text style={[styles.rePassword, styles.passwordTypo]}>
           Re-Password :
         </Text>
+        {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
       </View>
     </View>
   );
@@ -133,6 +139,17 @@ const styles = StyleSheet.create({
   usernamePosition: {
     top: 27,
     backgroundColor: Color.gainsboro_200,
+  },
+  errorMessagestyle: {
+    textAlign: "left",
+    color: 'red',
+    position: "absolute",
+    top: 100,
+    left: 10,
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.robotoRegular,
+    width: 250,
+    height: 17,
   },
   passwordTypo: {
     height: 23,

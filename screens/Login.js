@@ -80,11 +80,11 @@ Welcome back`}</Text>
           onChangeText={setPassword}
           secureTextEntry
         />
-        <Image
+        {/* <Image
           style={styles.hideIcon}
           resizeMode="cover"
           source={require("../assets/hide2.png")}
-        />
+        /> */}
         <Text style={[styles.password2, styles.emailTypo]}>Password :</Text>
       </View>
       <View style={styles.usernameOrEmail}>
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: 'red',
     position: "absolute",
-    top: 78,
+    top: 100,
     left: 10,
     fontSize: FontSize.size_base,
     fontFamily: FontFamily.robotoRegular,
