@@ -17,19 +17,32 @@ const Login = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      console.log(username)
+      console.log(password)
+      const response = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
+        body: JSON.stringify({ email:username, password:password,soc_flag: 0 })
       });
 
       const data = await response.json();
-      console.log(data.message);
+      if (data.code===200){
+        console.log(data);
+        console.log(data.name)
+        navigation.navigate('HomeScreen', { name: data.name});
+      }
+      else{
+        console.log("Error");
+        setErrorMessage('Incorrect username or password.');
+      }
+     //navigation.navigate('HomeScreen', { name: data.name });
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
+      setErrorMessage('Something went wrong. Please try again later.');
     }
   };
 
@@ -55,9 +68,10 @@ Welcome back`}</Text>
         <Text style={[styles.login2, styles.signupTypo]}>login</Text>
       </TouchableOpacity>
       <View style={styles.password}>
-        <Text style={[styles.forgotPassword, styles.hiWelcomeBackFlexBox]}>
+        {/* <Text style={[styles.forgotPassword, styles.hiWelcomeBackFlexBox]}>
           forgot password?
-        </Text>
+        </Text> */}
+        {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
           placeholder="**********"
@@ -66,11 +80,11 @@ Welcome back`}</Text>
           onChangeText={setPassword}
           secureTextEntry
         />
-        <Image
+        {/* <Image
           style={styles.hideIcon}
           resizeMode="cover"
           source={require("../assets/hide2.png")}
-        />
+        /> */}
         <Text style={[styles.password2, styles.emailTypo]}>Password :</Text>
       </View>
       <View style={styles.usernameOrEmail}>
@@ -93,6 +107,17 @@ const styles = StyleSheet.create({
     textAlign: "left",
     color: Color.skyblue_100,
     position: "absolute",
+  },
+  errorMessagestyle: {
+    textAlign: "left",
+    color: 'red',
+    position: "absolute",
+    top: 100,
+    left: 10,
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.robotoRegular,
+    width: 250,
+    height: 17,
   },
   sginupLayout: {
     height: 37,
@@ -187,6 +212,7 @@ const styles = StyleSheet.create({
     width: 179,
     height: 17,
   },
+
   password1: {
     top: 25,
   },

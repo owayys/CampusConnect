@@ -18,20 +18,31 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPass, setConfirmPass] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
 
   const handleSignup = async () => {
+    if (password !== confirmPass) {
+      setErrorMessage('Passwords do not match.');
+      return;
+    }
     try {
-      const response = await fetch('http://localhost:3000/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name,email,password,confirmPass })
-      });
+        const body = {
+            name: name,
+            email: email,
+            password: password
+        }
 
       const data = await response.json();
-      console.log(data.message);
+      if (data.code===200){
+        console.log(data);
+        navigation.navigate("Login")
+      }
+      else{
+        console.log("Error");
+      }
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
     }
   };
 
@@ -112,6 +123,7 @@ const Signup = () => {
         <Text style={[styles.rePassword, styles.passwordTypo]}>
           Re-Password :
         </Text>
+        {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
       </View>
     </View>
   );
@@ -127,6 +139,17 @@ const styles = StyleSheet.create({
   usernamePosition: {
     top: 27,
     backgroundColor: Color.gainsboro_200,
+  },
+  errorMessagestyle: {
+    textAlign: "left",
+    color: 'red',
+    position: "absolute",
+    top: 100,
+    left: 10,
+    fontSize: FontSize.size_base,
+    fontFamily: FontFamily.robotoRegular,
+    width: 250,
+    height: 17,
   },
   passwordTypo: {
     height: 23,
