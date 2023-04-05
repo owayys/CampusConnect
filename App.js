@@ -23,10 +23,25 @@ import ForumsTabPostSettings from "./screens/ForumsTabPostSettings";
 import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
 import InnerChatInterface11 from "./screens/InnerChatInterface11";
+import io from 'socket.io-client';
+import * as Location from 'expo-location';
+import  {useEffect}  from 'react';
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 
+const socket = io('http://192.168.100.15:3000');
+
+const captureLocation = async () => {
+  let { status } = await Location.requestForegroundPermissionsAsync();
+  if (status !== 'granted') {
+    return;
+  }
+
+  let location = await Location.getCurrentPositionAsync({});
+  const { latitude, longitude } = location.coords;
+  socket.emit('location', { latitude, longitude });
+}
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(false);
   const [fontsLoaded, error] = useFonts({
@@ -51,9 +66,18 @@ const App = () => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      captureLocation();
+    }, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   if (!fontsLoaded && !error) {
     return null;
   }
+
+
 
   return (
     <>

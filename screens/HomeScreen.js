@@ -157,7 +157,7 @@ const HomeScreen = ({route}) => {
         <Image
           style={styles.maskIcon}
           resizeMode="cover"
-          source={require("../assets/mask.png")}
+          source={require("../assets/mask2.png")}
         />
         <TouchableOpacity
           style={styles.basePosition}
@@ -165,7 +165,7 @@ const HomeScreen = ({route}) => {
           onPress={() => {}}
         >
           <TouchableOpacity
-            style={[styles.base, styles.basePosition]}
+            style={[styles.basePosition]}
             activeOpacity={0.2}
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
