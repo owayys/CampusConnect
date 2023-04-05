@@ -54,7 +54,7 @@ const HomeScreen = ({route}) => {
       <TouchableOpacity
         style={styles.rectangleGroup}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("InteractiveMap")}
+        onPress={() => navigation.navigate("InteractiveMap", { name: name})}
       >
         <Image
           style={[styles.rectangleIcon, styles.rectangleLayout]}
