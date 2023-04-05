@@ -29,6 +29,11 @@ import  {useEffect}  from 'react';
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
+import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+
+
 
 const socket = io('http://192.168.100.15:3000');
 
@@ -66,6 +71,7 @@ const App = () => {
     }, 2000);
   }, []);
 
+  captureLocation();
   useEffect(() => {
     const interval = setInterval(() => {
       captureLocation();
@@ -193,8 +199,11 @@ const App = () => {
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
+
+          
         ) : (
           <FrameScreen />
+          
         )}
       </NavigationContainer>
     </>

@@ -12,7 +12,7 @@ const FrameScreen = () => {
       />
       <Text style={styles.connectEngageThrive}>Connect. Engage. Thrive.</Text>
       <Image
-        style={styles.hereYaGoSherry12}
+        style={styles.logo}
         resizeMode="cover"
         source={require("../assets/here-ya-go-sherry-1-2.png")}
       />
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
   connectEngageThrive: {
     top: 764,
-    left: 138,
+    // left: 138,
     fontSize: FontSize.size_sm,
     lineHeight: 19,
     textTransform: "uppercase",
@@ -41,12 +41,14 @@ const styles = StyleSheet.create({
     height: 73,
     position: "absolute",
   },
-  hereYaGoSherry12: {
-    top: 341,
-    left: 48,
-    width: 344,
+  logo: {
+    // top: 341,
+    // left: 48,
+    // width: 344,
+    // height: 258,
+    //position: "absolute",
+    width: 300,
     height: 258,
-    position: "absolute",
   },
   bgImageParent: {
     backgroundColor: Color.gray_200,
@@ -57,6 +59,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 940,
     overflow: "hidden",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
