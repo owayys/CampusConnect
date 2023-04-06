@@ -18,8 +18,51 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import SearchFilter from "./SearchFilter";
 
 const OuterChatInterface = () => {
+
+  /* Temporary Dictionary for Search Filter Testing*/
+
+  const temp_dict = [
+
+    {
+      name: "Shehryar Khan",
+      icon: "icon1",
+      content: "Heyyy",
+    },
+    {
+      name: "Asher",
+      icon: "icon2",
+      content: "Wow",
+    },
+    {
+      name: "Luqman",
+      icon: "icon3",
+      content: "!gsb",
+    },
+    {
+      name: "owais",
+      icon: "icon4",
+      content: "asdadadaw",
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon5",
+      content: "adadadadadadadadad",
+    },
+
+
+  ]
+
+
+
+  /* Dictionary ends here */
+
+
+
+
+
 
   const navigation = useNavigation();
 
@@ -36,7 +79,9 @@ const OuterChatInterface = () => {
   return (
     <View style={styles.outerChatInterface}>
       <View style={styles.group}>
-        <Text style={[styles.noPracujemyZ, styles.willDoSuperTypo]}>
+
+
+        {/* <Text style={[styles.noPracujemyZ, styles.willDoSuperTypo]}>
           no pracujemy z domu przez 5 ...
         </Text>
         <Image
@@ -61,8 +106,13 @@ const OuterChatInterface = () => {
           style={styles.groupIcon}
           resizeMode="cover"
           source={require("../assets/group2.png")}
-        />
-        <Image
+        /> */}
+
+
+
+
+
+        {/* <Image
           style={[styles.imageIcon1, styles.imageIconLayout]}
           resizeMode="cover"
           source={require("../assets/image14.png")}
@@ -71,8 +121,11 @@ const OuterChatInterface = () => {
         <Text style={[styles.alina, styles.marTypo, styles.aliPosition]}>
           {" "}
           Alina
-        </Text>
-        <Text style={[styles.hereIsAnother, styles.willDoSuperTypo]}>
+        </Text> */}
+
+
+
+        {/* <Text style={[styles.hereIsAnother, styles.willDoSuperTypo]}>
           Here is another tutorial, if you...
         </Text>
         <Image
@@ -84,8 +137,12 @@ const OuterChatInterface = () => {
         <Text style={[styles.kamran, styles.mar1Typo, styles.aliPosition]}>
           {" "}
           Kamran
-        </Text>
-        <Text style={[styles.uploadedFile, styles.willDoSuperTypo]}>
+        </Text> */}
+
+
+
+
+        {/* <Text style={[styles.uploadedFile, styles.willDoSuperTypo]}>
           Uploaded file.
         </Text>
         <Image
@@ -97,18 +154,20 @@ const OuterChatInterface = () => {
         <Text style={[styles.sara, styles.sunTypo, styles.aliPosition]}>
           {" "}
           Sara
-        </Text>
-        <Image
+        </Text> */}
+        
+        
+        {/* <Image
           style={[styles.vectorIcon, styles.iconPosition]}
           resizeMode="cover"
           source={require("../assets/vector1.png")}
-        />
-        <Image
+        /> */}
+        {/* <Image
           style={[styles.groupIcon1, styles.iconPosition]}
           resizeMode="cover"
           source={require("../assets/group3.png")}
-        />
-        <Text style={[styles.willDoSuper, styles.willDoSuperTypo]}>
+        /> */}  
+        {/* <Text style={[styles.willDoSuper, styles.willDoSuperTypo]}>
           Will do, super, thank you
         </Text>
         <Image
@@ -119,8 +178,10 @@ const OuterChatInterface = () => {
         <Text style={[styles.tue, styles.tueTypo]}>Tue</Text>
         <Text style={[styles.ahmed, styles.tueTypo, styles.aliPosition]}>
           Ahmed
-        </Text>
-        <Text style={[styles.maciejkowalskiemailcom, styles.willDoSuperTypo]}>
+        </Text> */}
+
+
+        {/* <Text style={[styles.maciejkowalskiemailcom, styles.willDoSuperTypo]}>
           maciej.kowalski@email.com
         </Text>
         <Image
@@ -131,7 +192,9 @@ const OuterChatInterface = () => {
         <Text style={[styles.text, styles.aliTypo]}>08:43</Text>
         <Text style={[styles.ali, styles.aliTypo, styles.aliPosition]}>
           Ali
-        </Text>
+        </Text> */}
+
+
       </View>
       <Image
         style={styles.groupIcon2}
@@ -217,6 +280,8 @@ Walina`}</Text>
         onChangeText={searchInput => setSearchInput(searchInput)}
       />
       <SearchIconButton /> 
+
+      <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput}/>
 
       <Text style={[styles.ahmedLuqman, styles.febTypo]}>Ahmed Luqman</Text>
       <Image
