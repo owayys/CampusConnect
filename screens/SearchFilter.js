@@ -16,6 +16,14 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
                     </View>
                 )
             }
+
+            if(item.name.toLowerCase().includes(searchInput.toLowerCase())){
+                return (
+                    <View>
+                        <Text>{item.name}, {item.icon}, {item.content}</Text>
+                    </View>
+                )
+            }
     
         }}
 
