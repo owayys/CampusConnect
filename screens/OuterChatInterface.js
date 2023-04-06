@@ -1,4 +1,7 @@
 import * as React from "react";
+
+import { useState } from "react";
+
 import {
   Text,
   StyleSheet,
@@ -7,10 +10,25 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useNavigation } from "@react-navigation/native";
 
 const OuterChatInterface = () => {
+
+  const navigation = useNavigation();
+
+  const [selectedUser, setSelectedUser] = useState('')
+
+  const handleUserSelect = () => {
+
+  }
+
+  const sendMessage = () => {
+    
+  }
+
   return (
     <View style={styles.outerChatInterface}>
       <View style={styles.group}>
