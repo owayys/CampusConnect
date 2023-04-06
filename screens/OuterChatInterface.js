@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useState } from "react";
+import { useState, Component } from "react";
 
 import {
   Text,
@@ -9,6 +9,10 @@ import {
   View,
   Pressable,
   TextInput,
+  Button,
+  TouchableOpacity,
+  TouchableHighlight
+
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,15 +23,15 @@ const OuterChatInterface = () => {
 
   const navigation = useNavigation();
 
-  const [selectedUser, setSelectedUser] = useState('')
+  const [searchInput, setSearchInput] = useState('') // for search bar input
 
-  const handleUserSelect = () => {
-
-  }
-
-  const sendMessage = () => {
-    
-  }
+  const SearchIconButton = () => (
+    <TouchableOpacity 
+      onPress={() => {console.log(searchInput)}}
+    >
+      <Image style = {styles.searchButton} source={require("../assets/group5.png")}/>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.outerChatInterface}>
@@ -164,8 +168,7 @@ Engineering`}</Text>
         resizeMode="cover"
         source={require("../assets/union.png")}
       />
-      <Text style={[styles.machineLearning, styles.moenkaWalinaTypo]}>{`Machine
-Learning`}</Text>
+      <Text style={[styles.machineLearning, styles.moenkaWalinaTypo]}>{`Machine Learning`}</Text>
       <LinearGradient
         style={[
           styles.rectangle2,
@@ -203,17 +206,18 @@ Walina`}</Text>
       <Text style={[styles.studyGroupsChats, styles.febTypo]}>
         Study Groups Chats
       </Text>
-      <TextInput
-        style={[styles.rectangle4, styles.rectangle4Position]}
+    
+        
+      <TextInput style={styles.searchBar}
+        
         placeholder="Search..."
+        placeholderTextColor={"white"}
         keyboardType="default"
         autoCapitalize="none"
+        onChangeText={searchInput => setSearchInput(searchInput)}
       />
-      <Image
-        style={[styles.groupIcon3, styles.rectangle4Position]}
-        resizeMode="cover"
-        source={require("../assets/group5.png")}
-      />
+      <SearchIconButton /> 
+
       <Text style={[styles.ahmedLuqman, styles.febTypo]}>Ahmed Luqman</Text>
       <Image
         style={styles.imageIcon6}
@@ -225,6 +229,28 @@ Walina`}</Text>
 };
 
 const styles = StyleSheet.create({
+
+  searchBar : {
+    borderRadius: Border.br_3xs,
+    backgroundColor: Color.darkslategray_200,
+    width: 340,
+    height: 40,
+    left: 28,
+    marginTop: "15%",
+    color: "white"
+    
+  },
+
+  searchButton : {
+    left: "80%",
+    marginTop: "-12%",
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    
+  },
+
+
   willDoSuperTypo: {
     color: Color.white,
     fontFamily: FontFamily.robotoLight,
