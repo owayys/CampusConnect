@@ -33,9 +33,9 @@ import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom
 
 
 
+const Tab = createBottomTabNavigator();
 
-
-const socket = io('http://192.168.100.15:3000');
+const socket = io('http://10.130.140.127:3000');
 
 const captureLocation = async () => {
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -46,6 +46,25 @@ const captureLocation = async () => {
   let location = await Location.getCurrentPositionAsync({});
   const { latitude, longitude } = location.coords;
   socket.emit('location', { latitude, longitude });
+}
+
+function HomeTabs() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Events" component={Events}  options={{ headerShown: false }}/>
+      <Tab.Screen name="Socials" component={Socials} options={{ headerShown: false }} />
+      <Tab.Screen name="Study Groups" component={StudyGroups} options={{ headerShown: false }} />
+      <Tab.Screen name="My Profile" component={UserProfile} options={{ headerShown: false }} />
+      <Tab.Screen
+          name="SGJoinReq"
+          component={StudyGroupJoinRequests}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+
+        />
+    </Tab.Navigator>
+  );
+
 }
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(false);
@@ -75,7 +94,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       captureLocation();
-    }, 60000);
+    }, 20000);
     return () => clearInterval(interval);
   }, []);
 
@@ -190,7 +209,7 @@ const App = () => {
             />
             <Stack.Screen
               name="HomeScreen"
-              component={HomeScreen}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -198,9 +217,7 @@ const App = () => {
               component={InnerChatInterface11}
               options={{ headerShown: false }}
             />
-          </Stack.Navigator>
-
-          
+          </Stack.Navigator>        
         ) : (
           <FrameScreen />
           

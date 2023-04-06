@@ -23,7 +23,7 @@ const Login = () => {
     try {
       console.log(username)
       console.log(password)
-      const response = await fetch('http://192.168.100.15:3000/api/auth/login', {
+      const response = await fetch('http://10.130.140.127:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email:username, password:password,soc_flag: 0 })
@@ -32,8 +32,10 @@ const Login = () => {
       const data = await response.json();
       if (data.code===200){
         console.log(data);
-        console.log(data.name)
-        navigation.navigate('HomeScreen', { name: data.name});
+        //console.log(data.name)
+        navigation.navigate('HomeScreen', {
+          screen: 'Home',
+          params: { name: data.name }});
       }
       else{
         console.log("Error");

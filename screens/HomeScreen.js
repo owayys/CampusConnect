@@ -12,6 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
 
 const HomeScreen = ({route}) => {
+  console.log(route)
   const navigation = useNavigation();
   const { name } = route.params;
   return (
