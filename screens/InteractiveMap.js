@@ -182,7 +182,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const socket = io('http://192.168.100.15:3000');
+const socket = io('http://10.130.140.127:3000');
 
 const mapStyle=[
   {
