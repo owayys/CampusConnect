@@ -455,7 +455,9 @@ const InteractiveMap = ({route}) => {
        <TouchableOpacity
          style={styles.goBack}
          activeOpacity={0.2}
-         onPress={() => navigation.navigate("HomeScreen", { name: name})}
+         onPress={() => navigation.navigate('HomeScreen', {
+          screen: 'Home',
+          params: { name: name }})}
        >
          <Image
            style={{ width: 60, height: 60 }}
