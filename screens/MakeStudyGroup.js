@@ -10,9 +10,57 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useState } from "react";
+
+function AddCourse({ addCourse }) {
+  const [course, setCourse] = useState("");
+  const handleAddCourse = () => {
+    addCourse(course);
+    setCourse("");
+  };
+  return (
+    <div>
+      <select value={course} onChange={(e) => setCourse(e.target.value)}>
+        <option value="">Select a course</option>
+        <option value="CS 100">CS 100</option>
+        <option value="CS 200">CS 200</option>
+        <option value="CS 300">CS 300</option>
+      </select>
+      <button onClick={handleAddCourse}>Add Course</button>
+    </div>
+  );
+}
 
 const MakeStudyGroup = () => {
   const navigation = useNavigation();
+  const [groupName, setGroupName] = React.useState("");
+  const [subject, setSubject] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  const handleCreateGroup = () => {
+    // Makes an HTTP POST request to to backend API
+    fetch("https://example.com/api/study-groups", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        groupName,
+        subject,
+        location,
+        description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response from your backend API
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <View style={styles.makeStudyGroup}>
