@@ -27,7 +27,7 @@ const Signup = () => {
       return;
     }
     try {
-      const response = await fetch('http://10.130.140.127:3000/api/auth/signup', {
+      const response = await fetch('http://10.130.135.140:3000/api/auth/signup', {
         method: 'POST',
         headers: {'Content-Type': 'application/json' },
         body: JSON.stringify({name,email,password})

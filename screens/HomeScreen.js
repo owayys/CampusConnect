@@ -7,6 +7,7 @@ import {
   Text,
   Pressable,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
@@ -16,6 +17,7 @@ const HomeScreen = ({route}) => {
   const navigation = useNavigation();
   const { name } = route.params;
   return (
+    <ScrollView>
     <View style={styles.homeScreen}>
       <Image
         style={styles.burgerMenuIcon}
@@ -177,7 +179,7 @@ const HomeScreen = ({route}) => {
         resizeMode="cover"
         source={require("../assets/ellipse-5.png")}
       />
-      <View style={[styles.st, styles.stPosition]}>
+      {/* <View style={[styles.st, styles.stPosition]}>
         <View style={styles.iconsHead}>
           <TouchableOpacity
             style={[styles.home, styles.homeSpaceBlock]}
@@ -261,8 +263,9 @@ const HomeScreen = ({route}) => {
             </View>
           </TouchableOpacity>
         </View>
-      </View>
+      </View> */}
     </View>
+    </ScrollView>
   );
 };
 
