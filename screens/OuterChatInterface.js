@@ -19,6 +19,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
 import SearchFilter from "./SearchFilter";
+import OuterChatInterfaceGroups from "./OuterChatInterfaceGroups";
 
 const OuterChatInterface = () => {
 
@@ -63,6 +64,25 @@ const OuterChatInterface = () => {
     },
 
 
+  ]
+
+  const courses = [
+    {
+      course:"ML",
+      course_code:"532"
+    },
+    {
+      course:"AP",
+      course_code:"300"
+    },
+    {
+      course:"SE",
+      course_code:"310"
+    },
+    {
+      course:"NetSec",
+      course_code:"472"
+    },   
   ]
 
 
@@ -141,6 +161,7 @@ Engineering`}</Text>
         style={[styles.advancedProgramming, styles.moenkaWalinaTypo]}
       >{`Advanced
 Programming`}</Text>
+      
       <LinearGradient
         style={[
           styles.rectangle3,
@@ -157,11 +178,9 @@ Walina`}</Text>
         resizeMode="cover"
         source={require("../assets/union1.png")}
       />
-      <Text style={[styles.studyGroupsChats, styles.febTypo]}>
-        Study Groups Chats
-      </Text>
     
-        
+      
+
       <TextInput style={styles.searchBar}
         
         placeholder="Search..."
@@ -172,7 +191,11 @@ Walina`}</Text>
       />
       <SearchIconButton /> 
 
+      <OuterChatInterfaceGroups data={courses} searchInput={searchInput} setSearchInput={setSearchInput}/>
+
       <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput}/>
+
+      
 
       <Text style={[styles.ahmedLuqman, styles.febTypo]}>Ahmed Luqman</Text>
       <Image
@@ -180,6 +203,9 @@ Walina`}</Text>
         resizeMode="cover"
         source={require("../assets/image19.png")}
       />
+
+      
+
     </View>
   );
 };
@@ -193,7 +219,8 @@ const styles = StyleSheet.create({
     height: 40,
     left: 28,
     marginTop: "15%",
-    color: "white"
+    color: "white",
+    paddingLeft:10
     
   },
 
