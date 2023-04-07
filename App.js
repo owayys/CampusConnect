@@ -9,6 +9,7 @@ import StudyGroupAdminPanel from "./screens/StudyGroupAdminPanel";
 import Login from "./screens/Login";
 import StudyGroupGC from "./screens/StudyGroupGC";
 import OuterChatInterface from "./screens/OuterChatInterface";
+import OuterChatInterfaceGroups from "./screens/OuterChatInterfaceGroups";
 import UserProfile from "./screens/UserProfile";
 import Socials from "./screens/Socials";
 import MakeStudyGroup from "./screens/MakeStudyGroup";
@@ -34,6 +35,7 @@ import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom
 import {
   Image,
 } from "react-native";
+
 
 
 const Tab = createBottomTabNavigator();
@@ -68,7 +70,7 @@ function HomeTabs() {
               resizeMode="contain"
               style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
             />
-          </View>
+          </View> 
         )
         }}/>
       <Tab.Screen name="Socials" component={Socials} options={{ 
@@ -135,6 +137,11 @@ function HomeTabs() {
         <Tab.Screen
           name="OuterChatInterface"
           component={OuterChatInterface}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="OuterChatInterfaceGroups"
+          component={OuterChatInterfaceGroups}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
         <Tab.Screen
@@ -229,10 +236,15 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <Stack.Navigator
-            // initialRouteName="Login"
             initialRouteName="Login"
+            // initialRouteName="OuterChatInterface"
             screenOptions={{ headerShown: false }}
-          >
+          > 
+            <Stack.Screen
+              name="OuterChatInterfaceGroups"
+              component={HomeTabs}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="Frame1"
               component={FrameScreen}
