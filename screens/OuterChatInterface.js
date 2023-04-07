@@ -51,6 +51,16 @@ const OuterChatInterface = () => {
       icon: "icon5",
       content: "adadadadadadadadad",
     },
+    {
+      name: "jaid",
+      icon: "icon6",
+      content: "adadadadadadadadad",
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon7",
+      content: "adadadadadadadadad",
+    },
 
 
   ]
@@ -58,10 +68,6 @@ const OuterChatInterface = () => {
 
 
   /* Dictionary ends here */
-
-
-
-
 
 
   const navigation = useNavigation();
@@ -79,121 +85,6 @@ const OuterChatInterface = () => {
   return (
     <View style={styles.outerChatInterface}>
       <View style={styles.group}>
-
-
-        {/* <Text style={[styles.noPracujemyZ, styles.willDoSuperTypo]}>
-          no pracujemy z domu przez 5 ...
-        </Text>
-        <Image
-          style={[styles.imageIcon, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image.png")}
-        />
-        <Text style={[styles.feb, styles.febTypo, styles.febTypo1]}>
-          01 Feb
-        </Text>
-        <Text
-          style={[
-            styles.babar,
-            styles.febTypo,
-            styles.febTypo1,
-            styles.aliPosition,
-          ]}
-        >
-          Babar
-        </Text>
-        <Image
-          style={styles.groupIcon}
-          resizeMode="cover"
-          source={require("../assets/group2.png")}
-        /> */}
-
-
-
-
-
-        {/* <Image
-          style={[styles.imageIcon1, styles.imageIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/image14.png")}
-        />
-        <Text style={[styles.marPosition, styles.marTypo]}>18 Mar</Text>
-        <Text style={[styles.alina, styles.marTypo, styles.aliPosition]}>
-          {" "}
-          Alina
-        </Text> */}
-
-
-
-        {/* <Text style={[styles.hereIsAnother, styles.willDoSuperTypo]}>
-          Here is another tutorial, if you...
-        </Text>
-        <Image
-          style={[styles.imageIcon2, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image15.png")}
-        />
-        <Text style={[styles.mar1Typo, styles.marPosition]}>23 Mar</Text>
-        <Text style={[styles.kamran, styles.mar1Typo, styles.aliPosition]}>
-          {" "}
-          Kamran
-        </Text> */}
-
-
-
-
-        {/* <Text style={[styles.uploadedFile, styles.willDoSuperTypo]}>
-          Uploaded file.
-        </Text>
-        <Image
-          style={[styles.imageIcon3, styles.imageIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/image16.png")}
-        />
-        <Text style={[styles.sun, styles.sunTypo]}>Sun</Text>
-        <Text style={[styles.sara, styles.sunTypo, styles.aliPosition]}>
-          {" "}
-          Sara
-        </Text> */}
-        
-        
-        {/* <Image
-          style={[styles.vectorIcon, styles.iconPosition]}
-          resizeMode="cover"
-          source={require("../assets/vector1.png")}
-        /> */}
-        {/* <Image
-          style={[styles.groupIcon1, styles.iconPosition]}
-          resizeMode="cover"
-          source={require("../assets/group3.png")}
-        /> */}  
-        {/* <Text style={[styles.willDoSuper, styles.willDoSuperTypo]}>
-          Will do, super, thank you
-        </Text>
-        <Image
-          style={[styles.imageIcon4, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image17.png")}
-        />
-        <Text style={[styles.tue, styles.tueTypo]}>Tue</Text>
-        <Text style={[styles.ahmed, styles.tueTypo, styles.aliPosition]}>
-          Ahmed
-        </Text> */}
-
-
-        {/* <Text style={[styles.maciejkowalskiemailcom, styles.willDoSuperTypo]}>
-          maciej.kowalski@email.com
-        </Text>
-        <Image
-          style={[styles.imageIcon5, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image18.png")}
-        />
-        <Text style={[styles.text, styles.aliTypo]}>08:43</Text>
-        <Text style={[styles.ali, styles.aliTypo, styles.aliPosition]}>
-          Ali
-        </Text> */}
-
 
       </View>
       <Image
@@ -323,6 +214,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: FontSize.size_smi,
     textAlign: "left",
+    top: 23,
     left: 60,
     position: "absolute",
   },
