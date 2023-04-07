@@ -94,22 +94,6 @@ const OuterChatInterface = () => {
 
   const [searchInput, setSearchInput] = useState('') // for search bar input
 
-  const SearchIconButton = () => (
-    <TouchableOpacity 
-      onPress={() => {console.log(searchInput)}}
-    >
-      <Image style = {styles.searchButton} source={require("../assets/group5.png")}/>
-    </TouchableOpacity>
-  );
-
-  const GroupChatsButton = () => (
-    <TouchableOpacity 
-      onPress={() => {navigation.navigate("OuterChatInterfaceGroups")}}
-    >
-      <Text style = {styles.GroupChatsButton}> Group Study Chats </Text>
-    </TouchableOpacity>
-  );
-
   return (
 
     <View style={styles.outerChatInterface}>
@@ -140,7 +124,7 @@ const OuterChatInterface = () => {
       <View style={styles.GroupChatsButton}>
         <Button 
           title="Group Study Chats" 
-          onPress={() => navigation.navigate("OuterChatInterfaceGroups")}
+          onPress={() => navigation.navigate("OuterChatInterfaceGroups", {courses: courses})}
           style={{backgroundColor:'navy blue'}} 
           color={Color.gray_200}
         />
@@ -224,7 +208,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_11xl,
     position: "absolute",
   },
-  
+
   outerChatInterface: {
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",

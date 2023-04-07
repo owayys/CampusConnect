@@ -1,39 +1,50 @@
-import { StyleSheet, Text, View, Flat, FlatList, Image} from "react-native";
+import { StyleSheet, Text, View, Flat, FlatList, Image, Pressable, Button,} from "react-native";
 import React from "react";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
-const OuterChatInterfaceGroups = ({data, searchInput, setSearchInput}) => {
+const OuterChatInterfaceGroups = ({route}) => {
+  
+  const { courses } = route.params; // Receiving Value
+  navigation = useNavigation()
   return (
 
-    // <View style={{top:-165}}>
-    //     <Text style={styles.group_heading}>
-    //         Study Groups Chats
-    //     </Text>
-        
-    //     {/* <Text style={styles.moenkaWalinaTypo}>
-    //         coursefsfnsf
-    //     </Text> */}
+    <View style={styles.mainInterface}>
+        <Text style={styles.group_heading}>
+            Study Groups Chats
+        </Text>
+        <SafeAreaView style={{flex:1, top:150,}}>
+            <FlatList data={courses} renderItem={({item}) => 
+                {
+                  return (
+                      <View style={{marginVertical:15}}>
+                        <Pressable onPress={() => console.log('HI')}>
+                            <Text style={styles.course_text}>{item.course}</Text>
+                            <Text style={{borderColor:"white", borderWidth:2, height:2, marginTop:25}}/>
+                        </Pressable>
+                      </View>
 
-    //     <SafeAreaView style={{flex:1, paddingVertical:-50,}}>
-    //         <FlatList data={data} renderItem={({item}) => 
-    //             {
-    //                 if (searchInput === ""){
-    //                     return (
-    //                         <Text style={styles.moenkaWalinaTypo}>
-    //                             {item.course}
-    //                         </Text>
+                  )
+                }}
 
-    //                     )
-    //                 }
-    //             }}
+            />
+        </SafeAreaView>
 
-    //         />
-    //     </SafeAreaView>
-    // </View>
+        <View style={styles.backButton}>
+          <Button 
+            title="Personal Chats" 
+            onPress={() => navigation.navigate("OuterChatInterface")}
+            style={{backgroundColor:'navy blue'}} 
+            color={Color.gray_200}
+          />
+      </View>
 
-    <Text>Hello!</Text>
+
+
+    </View>
+
   )
 }
 
@@ -42,43 +53,52 @@ const styles = StyleSheet.create({
     
     group_heading: {
         fontFamily: FontFamily.robotoSemibold,
-        top: 270,
-        fontSize: FontSize.size_xl,
+        top: 100,
+        fontSize: FontSize.size_6xl,
         flex: 1, 
         alignSelf:"center",
         textTransform: "capitalize",
         color: Color.white,
-        letterSpacing: 1.5,
+        letterSpacing: 2,
         position: "absolute",
     },
 
     course_text: {
-        fontSize: FontSize.size_xs,
-        top: 284,
-        fontFamily: FontFamily.robotoRegular,
-        textTransform: "capitalize",
-        textAlign: "left",
-        color: Color.white,
-        letterSpacing: 1,
-        position: "absolute",
-        left: 368,
+      color:'white', 
+      fontSize:25, 
+      fontFamily:FontFamily.robotoSemibold,
+      textAlign:'center'
     },
 
-    course_background: {
-
-    },
-
-    moenkaWalinaTypo: {
-        fontSize: FontSize.size_xs,
-        top: 284,
-        fontFamily: FontFamily.robotoRegular,
-        textTransform: "capitalize",
-        textAlign: "left",
-        color: Color.white,
-        letterSpacing: 1,
-        position: "absolute",
-        left: 143,
+    mainInterface: {
+      backgroundColor: Color.gray_200,
+      shadowColor: "rgba(24, 48, 63, 0.5)",
+      shadowRadius: 100,
+      elevation: 100,
+      flex: 1,
+      height: 844,
+      overflow: "hidden",
+      shadowOpacity: 1,
+      shadowOffset: {
+        width: 40,
+        height: 40,
       },
+      width: "100%",
+    },
+
+    backButton: {
+      fontFamily: FontFamily.robotoSemibold,
+      top: 700,
+      fontSize: FontSize.size_xl,
+      flex: 1, 
+      alignSelf:"center",
+      textTransform: "capitalize",
+      color: Color.white,
+      letterSpacing: 2,
+      position: "absolute",
+      width:"50%",
+    }
+
 
 })
 
