@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useState } from "react";
+import { useState, Component } from "react";
 
 import {
   Text,
@@ -9,125 +9,103 @@ import {
   View,
   Pressable,
   TextInput,
+  Button,
+  TouchableOpacity,
+  TouchableHighlight
+
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useNavigation } from "@react-navigation/native";
+import SearchFilter from "./SearchFilter";
+import OuterChatInterfaceGroups from "./OuterChatInterfaceGroups";
 
 const OuterChatInterface = () => {
 
+  /* Temporary Dictionary for Search Filter Testing*/
+
+  const temp_dict = [
+
+    {
+      name: "Shehryar Khan",
+      icon: "icon1",
+      content: "Heyyy",
+    },
+    {
+      name: "Asher",
+      icon: "icon2",
+      content: "Wow",
+    },
+    {
+      name: "Luqman",
+      icon: "icon3",
+      content: "!gsb",
+    },
+    {
+      name: "owais",
+      icon: "icon4",
+      content: "asdadadaw",
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon5",
+      content: "adadadadadadadadad",
+    },
+    {
+      name: "jaid",
+      icon: "icon6",
+      content: "adadadadadadadadad",
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon7",
+      content: "adadadadadadadadad",
+    },
+
+
+  ]
+
+  const courses = [
+    {
+      course:"ML",
+      course_code:"532"
+    },
+    {
+      course:"AP",
+      course_code:"300"
+    },
+    {
+      course:"SE",
+      course_code:"310"
+    },
+    {
+      course:"NetSec",
+      course_code:"472"
+    },   
+  ]
+
+
+
+  /* Dictionary ends here */
+
+
   const navigation = useNavigation();
 
-  const [selectedUser, setSelectedUser] = useState('')
+  const [searchInput, setSearchInput] = useState('') // for search bar input
 
-  const handleUserSelect = () => {
-
-  }
-
-  const sendMessage = () => {
-    
-  }
+  const SearchIconButton = () => (
+    <TouchableOpacity 
+      onPress={() => {console.log(searchInput)}}
+    >
+      <Image style = {styles.searchButton} source={require("../assets/group5.png")}/>
+    </TouchableOpacity>
+  );
 
   return (
     <View style={styles.outerChatInterface}>
       <View style={styles.group}>
-        <Text style={[styles.noPracujemyZ, styles.willDoSuperTypo]}>
-          no pracujemy z domu przez 5 ...
-        </Text>
-        <Image
-          style={[styles.imageIcon, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image.png")}
-        />
-        <Text style={[styles.feb, styles.febTypo, styles.febTypo1]}>
-          01 Feb
-        </Text>
-        <Text
-          style={[
-            styles.babar,
-            styles.febTypo,
-            styles.febTypo1,
-            styles.aliPosition,
-          ]}
-        >
-          Babar
-        </Text>
-        <Image
-          style={styles.groupIcon}
-          resizeMode="cover"
-          source={require("../assets/group2.png")}
-        />
-        <Image
-          style={[styles.imageIcon1, styles.imageIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/image14.png")}
-        />
-        <Text style={[styles.marPosition, styles.marTypo]}>18 Mar</Text>
-        <Text style={[styles.alina, styles.marTypo, styles.aliPosition]}>
-          {" "}
-          Alina
-        </Text>
-        <Text style={[styles.hereIsAnother, styles.willDoSuperTypo]}>
-          Here is another tutorial, if you...
-        </Text>
-        <Image
-          style={[styles.imageIcon2, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image15.png")}
-        />
-        <Text style={[styles.mar1Typo, styles.marPosition]}>23 Mar</Text>
-        <Text style={[styles.kamran, styles.mar1Typo, styles.aliPosition]}>
-          {" "}
-          Kamran
-        </Text>
-        <Text style={[styles.uploadedFile, styles.willDoSuperTypo]}>
-          Uploaded file.
-        </Text>
-        <Image
-          style={[styles.imageIcon3, styles.imageIconLayout]}
-          resizeMode="cover"
-          source={require("../assets/image16.png")}
-        />
-        <Text style={[styles.sun, styles.sunTypo]}>Sun</Text>
-        <Text style={[styles.sara, styles.sunTypo, styles.aliPosition]}>
-          {" "}
-          Sara
-        </Text>
-        <Image
-          style={[styles.vectorIcon, styles.iconPosition]}
-          resizeMode="cover"
-          source={require("../assets/vector1.png")}
-        />
-        <Image
-          style={[styles.groupIcon1, styles.iconPosition]}
-          resizeMode="cover"
-          source={require("../assets/group3.png")}
-        />
-        <Text style={[styles.willDoSuper, styles.willDoSuperTypo]}>
-          Will do, super, thank you
-        </Text>
-        <Image
-          style={[styles.imageIcon4, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image17.png")}
-        />
-        <Text style={[styles.tue, styles.tueTypo]}>Tue</Text>
-        <Text style={[styles.ahmed, styles.tueTypo, styles.aliPosition]}>
-          Ahmed
-        </Text>
-        <Text style={[styles.maciejkowalskiemailcom, styles.willDoSuperTypo]}>
-          maciej.kowalski@email.com
-        </Text>
-        <Image
-          style={[styles.imageIcon5, styles.imageIconLayout1]}
-          resizeMode="cover"
-          source={require("../assets/image18.png")}
-        />
-        <Text style={[styles.text, styles.aliTypo]}>08:43</Text>
-        <Text style={[styles.ali, styles.aliTypo, styles.aliPosition]}>
-          Ali
-        </Text>
+
       </View>
       <Image
         style={styles.groupIcon2}
@@ -164,8 +142,7 @@ Engineering`}</Text>
         resizeMode="cover"
         source={require("../assets/union.png")}
       />
-      <Text style={[styles.machineLearning, styles.moenkaWalinaTypo]}>{`Machine
-Learning`}</Text>
+      <Text style={[styles.machineLearning, styles.moenkaWalinaTypo]}>{`Machine Learning`}</Text>
       <LinearGradient
         style={[
           styles.rectangle2,
@@ -184,6 +161,7 @@ Learning`}</Text>
         style={[styles.advancedProgramming, styles.moenkaWalinaTypo]}
       >{`Advanced
 Programming`}</Text>
+      
       <LinearGradient
         style={[
           styles.rectangle3,
@@ -200,31 +178,62 @@ Walina`}</Text>
         resizeMode="cover"
         source={require("../assets/union1.png")}
       />
-      <Text style={[styles.studyGroupsChats, styles.febTypo]}>
-        Study Groups Chats
-      </Text>
-      <TextInput
-        style={[styles.rectangle4, styles.rectangle4Position]}
+    
+      
+
+      <TextInput style={styles.searchBar}
+        
         placeholder="Search..."
+        placeholderTextColor={"white"}
         keyboardType="default"
         autoCapitalize="none"
+        onChangeText={searchInput => setSearchInput(searchInput)}
       />
-      <Image
-        style={[styles.groupIcon3, styles.rectangle4Position]}
-        resizeMode="cover"
-        source={require("../assets/group5.png")}
-      />
+      <SearchIconButton /> 
+
+      <OuterChatInterfaceGroups data={courses} searchInput={searchInput} setSearchInput={setSearchInput}/>
+
+      <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput}/>
+
+      
+
       <Text style={[styles.ahmedLuqman, styles.febTypo]}>Ahmed Luqman</Text>
       <Image
         style={styles.imageIcon6}
         resizeMode="cover"
         source={require("../assets/image19.png")}
       />
+
+      
+
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+
+  searchBar : {
+    borderRadius: Border.br_3xs,
+    backgroundColor: Color.darkslategray_200,
+    width: 340,
+    height: 40,
+    left: 28,
+    marginTop: "15%",
+    color: "white",
+    paddingLeft:10
+    
+  },
+
+  searchButton : {
+    left: "80%",
+    marginTop: "-12%",
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    
+  },
+
+
   willDoSuperTypo: {
     color: Color.white,
     fontFamily: FontFamily.robotoLight,
@@ -232,6 +241,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: FontSize.size_smi,
     textAlign: "left",
+    top: 23,
     left: 60,
     position: "absolute",
   },
