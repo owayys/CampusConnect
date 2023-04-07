@@ -5,55 +5,56 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const SearchFilter = ({data, searchInput, setSearchInput}) => {
   return (
-    <View style={{marginTop:225, justifyContent:"center", flex : 1}}>
+    <View style={{marginTop:150, justifyContent:"center", flex : 1}}>
 
         <SafeAreaView style={{flex:1, paddingVertical:-50,}}>
-            <FlatList data={data} renderItem={({item}) => {
+            <FlatList data={data} renderItem={({item}) => 
+                {
             
-                if(searchInput === ""){
-                    return (
-                        <View style={{margin:30}}>
-                            <Text style={styles.last_message}>
-                                {item.content}
-                            </Text>
+                    if(searchInput === ""){
+                        return (
+                            <View style={{margin:30}}>
+                                <Text style={styles.last_message}>
+                                    {item.content}
+                                </Text>
 
-                            <Image
-                                style={styles.image_icon}
-                                resizeMode="cover"
-                                source={require("../assets/image18.png")}
-                            />
+                                <Image
+                                    style={styles.image_icon}
+                                    resizeMode="cover"
+                                    source={require("../assets/image18.png")}
+                                />
 
-                            <Text style={styles.time}>08:43</Text>
+                                <Text style={styles.time}>08:43</Text>
 
-                            <Text style={styles.person_position}>
-                                {item.name}
-                            </Text>
-                        </View>
-                    )
-                }
+                                <Text style={styles.person_position}>
+                                    {item.name}
+                                </Text>
+                            </View>
+                        )
+                    }
 
-                if(item.name.toLowerCase().includes(searchInput.toLowerCase())){
-                    return (
-                        <View style={{margin:30}}>
-                            <Text style={styles.last_message}>
-                                {item.content}
-                            </Text>
+                    if(item.name.toLowerCase().includes(searchInput.toLowerCase())){
+                        return (
+                            <View style={{margin:30}}>
+                                <Text style={styles.last_message}>
+                                    {item.content}
+                                </Text>
 
-                            <Image
-                                style={styles.image_icon}
-                                resizeMode="cover"
-                                source={require("../assets/image18.png")}
-                            />
+                                <Image
+                                    style={styles.image_icon}
+                                    resizeMode="cover"
+                                    source={require("../assets/image18.png")}
+                                />
 
-                            <Text style={styles.time}>08:43</Text>
+                                <Text style={styles.time}>08:43</Text>
 
-                            <Text style={styles.person_position}>
-                                {item.name}
-                            </Text>
-                        </View>
-                    )
-                }
-        
+                                <Text style={styles.person_position}>
+                                    {item.name}
+                                </Text>
+                            </View>
+                        )
+                    }
+            
                 }}
 
             />

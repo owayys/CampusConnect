@@ -102,12 +102,18 @@ const OuterChatInterface = () => {
     </TouchableOpacity>
   );
 
+  const GroupChatsButton = () => (
+    <TouchableOpacity 
+      onPress={() => {navigation.navigate("OuterChatInterfaceGroups")}}
+    >
+      <Text style = {styles.GroupChatsButton}> Group Study Chats </Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.outerChatInterface}>
-      <View style={styles.group}>
 
-      </View>
-      <Image
+      {/* <Image
         style={styles.groupIcon2}
         resizeMode="cover"
         source={require("../assets/group4.png")}
@@ -177,7 +183,7 @@ Walina`}</Text>
         style={styles.unionIcon3}
         resizeMode="cover"
         source={require("../assets/union1.png")}
-      />
+      /> */}
     
       
 
@@ -191,11 +197,11 @@ Walina`}</Text>
       />
       <SearchIconButton /> 
 
-      <OuterChatInterfaceGroups data={courses} searchInput={searchInput} setSearchInput={setSearchInput}/>
+      <GroupChatsButton />
+
+      {/* <OuterChatInterfaceGroups data={courses} searchInput={searchInput} setSearchInput={setSearchInput}/>       */}
 
       <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput}/>
-
-      
 
       <Text style={[styles.ahmedLuqman, styles.febTypo]}>Ahmed Luqman</Text>
       <Image
@@ -218,7 +224,8 @@ const styles = StyleSheet.create({
     width: 340,
     height: 40,
     left: 28,
-    marginTop: "15%",
+    top: 90,
+    marginTop: 50,
     color: "white",
     paddingLeft:10
     
@@ -227,12 +234,24 @@ const styles = StyleSheet.create({
   searchButton : {
     left: "80%",
     marginTop: "-12%",
+    top:90,
     width: 50,
     height: 50,
     resizeMode: 'contain',
     
   },
 
+  GroupChatsButton: {
+    fontFamily: FontFamily.robotoSemibold,
+    top: 110,
+    fontSize: FontSize.size_xl,
+    flex: 1, 
+    alignSelf:"center",
+    textTransform: "capitalize",
+    color: Color.white,
+    letterSpacing: 1.5,
+    position: "absolute",
+},
 
   willDoSuperTypo: {
     color: Color.white,
