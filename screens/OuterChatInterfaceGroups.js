@@ -8,7 +8,7 @@ import { useNavigation } from "@react-navigation/native";
 const OuterChatInterfaceGroups = ({route}) => {
   
   const { courses } = route.params; // Receiving Value
-  navigation = useNavigation()
+  const navigation = useNavigation()
   return (
 
     <View style={styles.mainInterface}>
