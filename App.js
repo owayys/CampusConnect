@@ -38,7 +38,7 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const socket = io('http://10.130.135.140:3000');
+const socket = io('https://campusconnect.herokuapp.com/');
 
 const captureLocation = async () => {
   let { status } = await Location.requestForegroundPermissionsAsync();
