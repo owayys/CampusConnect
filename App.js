@@ -230,7 +230,7 @@ const App = () => {
         {hideSplashScreen ? (
           <Stack.Navigator
             // initialRouteName="Login"
-            initialRouteName="OuterChatInterface"
+            initialRouteName="Login"
             screenOptions={{ headerShown: false }}
           >
             <Stack.Screen
