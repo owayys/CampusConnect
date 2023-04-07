@@ -23,7 +23,7 @@ const Login = () => {
     try {
       console.log(username)
       console.log(password)
-      const response = await fetch('http://10.130.140.127:3000/api/auth/login', {
+      const response = await fetch('http://10.130.135.140:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email:username, password:password,soc_flag: 0 })

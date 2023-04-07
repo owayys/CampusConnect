@@ -31,11 +31,14 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import {
+  Image,
+} from "react-native";
 
 
 const Tab = createBottomTabNavigator();
 
-const socket = io('http://10.130.140.127:3000');
+const socket = io('http://10.130.135.140:3000');
 
 const captureLocation = async () => {
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -50,17 +53,134 @@ const captureLocation = async () => {
 
 function HomeTabs() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
-      <Tab.Screen name="Events" component={Events}  options={{ headerShown: false }}/>
-      <Tab.Screen name="Socials" component={Socials} options={{ headerShown: false }} />
-      <Tab.Screen name="Study Groups" component={StudyGroups} options={{ headerShown: false }} />
-      <Tab.Screen name="My Profile" component={UserProfile} options={{ headerShown: false }} />
+    <Tab.Navigator
+    screenOptions={{
+      tabBarStyle: {
+        backgroundColor: '#0E1936',
+      },
+    }}>
+      <Tab.Screen name="Events" component={Events}  options={{ 
+        headerShown: false, 
+        tabBarIcon:({focused})=>(
+          <View>
+            <Image
+              source={require("./assets/iconoutlinespeaker-extra.png")}
+              resizeMode="contain"
+              style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
+            />
+          </View>
+        )
+        }}/>
+      <Tab.Screen name="Socials" component={Socials} options={{ 
+        headerShown: false,
+        tabBarIcon:({focused})=>(
+          <View>
+            <Image
+              source={require("./assets/box.png")}
+              resizeMode="contain"
+              style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
+            />
+          </View>
+        ) }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{
+        headerShown: false,
+        tabBarIcon:({focused})=>(
+          <View>
+            <Image
+              source={require("./assets/home03.png")}
+              resizeMode="contain"
+              style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
+            />
+          </View>
+        )
+        }} />
+      <Tab.Screen name="Study Groups" component={StudyGroups} options={{ 
+        headerShown: false, 
+        tabBarIcon:({focused})=>(
+          <View>
+            <Image
+              source={require("./assets/iconoutlinebookopen-extra.png")}
+              style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
+            />
+          </View>
+        )
+        }} />
+      <Tab.Screen name="My Profile" component={UserProfile} options={{ 
+        headerShown: false,
+        tabBarIcon:({focused})=>(
+          <View>
+            <Image
+              source={require("./assets/morehorizontal.png")}
+              style={{ width: 23, height: 23, tintColor: focused ? '#4ec6e0':'#ffffff' }}
+            />
+
+          </View>
+        )
+        }} />
       <Tab.Screen
           name="SGJoinReq"
           component={StudyGroupJoinRequests}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
-
+        />
+        <Tab.Screen
+          name="SGAdminPanel"
+          component={StudyGroupAdminPanel}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="SGGC"
+          component={StudyGroupGC}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="OuterChatInterface"
+          component={OuterChatInterface}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="MakeStudyGroup"
+          component={MakeStudyGroup}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="EnterSchedule"
+          component={EnterSchedule}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="InteractiveMap"
+          component={InteractiveMap}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="GroupDesc"
+          component={GroupDescription}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="EventsExtend"
+          component={EventsExtended}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="AddEvent"
+          component={AddEvent}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="ForumsTabPostSettings"
+          component={ForumsTabPostSettings}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="ForumsTab"
+          component={ForumsTab}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="InnerChatInterface11"
+          component={InnerChatInterface11}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
     </Tab.Navigator>
   );
@@ -119,7 +239,7 @@ const App = () => {
             />
             <Stack.Screen
               name="StudyGroupJoinRequests"
-              component={StudyGroupJoinRequests}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -129,7 +249,7 @@ const App = () => {
             />
             <Stack.Screen
               name="StudyGroupAdminPanel"
-              component={StudyGroupAdminPanel}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -139,72 +259,72 @@ const App = () => {
             />
             <Stack.Screen
               name="StudyGroupGC"
-              component={StudyGroupGC}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="OuterChatInterface"
-              component={OuterChatInterface}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="UserProfile"
-              component={UserProfile}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Socials"
-              component={Socials}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="MakeStudyGroup"
-              component={MakeStudyGroup}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="EnterSchedule"
-              component={EnterSchedule}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="InteractiveMap"
-              component={InteractiveMap}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="GroupDescription"
-              component={GroupDescription}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="StudyGroups"
-              component={StudyGroups}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="EventsExtended"
-              component={EventsExtended}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="AddEvent"
-              component={AddEvent}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="Events"
-              component={Events}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ForumsTabPostSettings"
-              component={ForumsTabPostSettings}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
               name="ForumsTab"
-              component={ForumsTab}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -214,7 +334,7 @@ const App = () => {
             />
             <Stack.Screen
               name="InnerChatInterface11"
-              component={InnerChatInterface11}
+              component={HomeTabs}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>        
