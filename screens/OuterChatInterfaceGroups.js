@@ -7,27 +7,33 @@ import { LinearGradient } from "expo-linear-gradient";
 const OuterChatInterfaceGroups = ({data, searchInput, setSearchInput}) => {
   return (
 
-    <View style={{top:-165}}>
-        <Text style={styles.group_heading}>
-            Study Groups Chats
-        </Text>
+    // <View style={{top:-165}}>
+    //     <Text style={styles.group_heading}>
+    //         Study Groups Chats
+    //     </Text>
         
-        <FlatList horizontal={true} data={data} renderItem={({item}) => 
-            {
-                // if (searchInput === ""){
-                    return (
-                        <Text style={styles.course_text}>
-                            {item.course}
-                        </Text>
+    //     {/* <Text style={styles.moenkaWalinaTypo}>
+    //         coursefsfnsf
+    //     </Text> */}
 
-                    )
-                // }
-            }}
+    //     <SafeAreaView style={{flex:1, paddingVertical:-50,}}>
+    //         <FlatList data={data} renderItem={({item}) => 
+    //             {
+    //                 if (searchInput === ""){
+    //                     return (
+    //                         <Text style={styles.moenkaWalinaTypo}>
+    //                             {item.course}
+    //                         </Text>
 
-        />
-    </View>
+    //                     )
+    //                 }
+    //             }}
 
-    
+    //         />
+    //     </SafeAreaView>
+    // </View>
+
+    <Text>Hello!</Text>
   )
 }
 
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
     
     group_heading: {
         fontFamily: FontFamily.robotoSemibold,
-        top: 170,
+        top: 270,
         fontSize: FontSize.size_xl,
         flex: 1, 
         alignSelf:"center",
@@ -60,7 +66,19 @@ const styles = StyleSheet.create({
 
     course_background: {
 
-    }
+    },
+
+    moenkaWalinaTypo: {
+        fontSize: FontSize.size_xs,
+        top: 284,
+        fontFamily: FontFamily.robotoRegular,
+        textTransform: "capitalize",
+        textAlign: "left",
+        color: Color.white,
+        letterSpacing: 1,
+        position: "absolute",
+        left: 143,
+      },
 
 })
 
