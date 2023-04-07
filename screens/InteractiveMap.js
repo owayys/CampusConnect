@@ -182,7 +182,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const socket = io('http://10.130.140.127:3000');
+const socket = io('https://campusconnect.herokuapp.com/');
 
 const mapStyle=[
   {
