@@ -7,14 +7,75 @@ import {
   View,
   Text,
   TextInput,
+  Button,
+  Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
+import { useState } from "react";
+import * as ImagePicker from 'expo-image-picker'
+import DropDownPicker from 'react-native-dropdown-picker';
+
+const selectImage = async () => {
+  const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  if (status !== 'granted') {
+    alert('Sorry, we need camera roll permissions to make this work!');
+    return;
+  }
+
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  if (!result.cancelled) {
+
+    console.log(result.uri);
+  }
+};
 
 const MakeStudyGroup = () => {
   const navigation = useNavigation();
+  const [groupName, setGroupName] = React.useState("");
+  const [subject, setSubject] = React.useState("");
+  const [location, setLocation] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: 'Apple', value: 'apple'},
+    {label: 'Banana', value: 'banana'}
+  ]);
+
+  const handleCreateGroup = () => {
+    // Makes an HTTP POST request to to backend API
+    fetch("https://example.com/api/study-groups", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        groupName,
+        subject,
+        location,
+        description,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+    
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
+    
     <View style={styles.makeStudyGroup}>
       <Image
         style={styles.imageIcon}
@@ -55,13 +116,16 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/rectangle3.png")}
       />
-      <Text style={styles.addDisplayPicture}>
-        + Add Display Picture for Study Group
-      </Text>
+      <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
+        <Image source={require("../assets/ic_add.png")} style={{ width: 50, height: 50, resizeMode: "contain" }} />
+        <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
+      </TouchableOpacity>
+
       <Text style={[styles.timing, styles.daysTypo]}>Timing:</Text>
-      <Text style={[styles.subject, styles.subjectTypo]}>Subject:</Text>
+      <Text style={[styles.subject, styles.subjectTypo]}>Select Subject:</Text>
       <Text style={[styles.days, styles.daysTypo]}>Days:</Text>
       <Text style={[styles.groupName, styles.daysTypo]}>Group name:</Text>
+
       <TextInput
         style={[
           styles.rectangle,
@@ -85,14 +149,24 @@ const MakeStudyGroup = () => {
         placeholder="..."
         keyboardType="default"
       />
-      <TextInput
-        style={[
-          styles.rectangle3,
-          styles.rectangleLayout,
-          styles.rectanglePosition1,
+      <DropDownPicker
+        items={[
+          {label: 'CS 100', value: 'option1'},
+          {label: 'CS 200', value: 'option2'},
+          {label: 'CS 300', value: 'option3'},
         ]}
-        placeholder="..."
-        keyboardType="default"
+        defaultValue={'option1'}
+        containerStyle={{height: 30, marginTop: 495, width: 250, marginLeft: 30, left: 95, zIndexInverse:2000, zIndex:2000}}
+        style={{backgroundColor: '#fafafa'}}
+        itemStyle={{
+          justifyContent: 'flex-start'
+        }}
+        dropDownStyle={{backgroundColor: '#fafafa'}}
+        open={open}
+        value={value}
+        setOpen={setOpen}
+        setValue={setValue}
+        setItems={setItems}
       />
       <Text style={[styles.location, styles.subjectTypo]}>Location:</Text>
       <TextInput
@@ -171,6 +245,7 @@ const styles = StyleSheet.create({
     backgroundColor: Color.gray_500,
     width: 296,
   },
+
   rectanglePosition: {
     left: 81,
     backgroundColor: Color.gray_500,
@@ -215,7 +290,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   newStudyGroup: {
-    top: 127,
+    top: 110,
     left: 15,
     fontSize: FontSize.size_3xl,
     fontWeight: "500",
@@ -234,10 +309,11 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_3xs,
     position: "absolute",
   },
+
   addDisplayPicture: {
-    width: "72.93%",
-    top: "26.85%",
-    left: "18.29%",
+    width: "74.93%",
+    top: "30.85%",
+    left: "28.29%",
     alignItems: "flex-end",
     display: "flex",
     color: Color.gray_400,
@@ -248,17 +324,34 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     position: "absolute",
   },
+
+  inputContainer: {
+    marginTop: 20,
+    marginBottom: 20,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: Color.gray_400,
+    overflow: "hidden",
+    width: "100%",
+    height: 50,
+  },
+  picker: {
+    height: 50,
+    width: "100%",
+  },
+
+
   timing: {
-    top: "51.67%",
+    top: "57.67%",
   },
   subject: {
-    top: "58.95%",
+    top: "65.95%",
   },
   days: {
-    top: "44.99%",
+    top: "50%",
   },
   groupName: {
-    top: "38.42%",
+    top: "42.42%",
   },
   rectangle: {
     top: 379,
@@ -279,7 +372,7 @@ const styles = StyleSheet.create({
     height: 27,
   },
   location: {
-    top: "81.38%",
+    top: "89.38%",
   },
   rectangle4: {
     top: 678,
@@ -290,7 +383,7 @@ const styles = StyleSheet.create({
     height: 87,
   },
   addDescription: {
-    top: "65.04%",
+    top: "72.04%",
   },
   icon: {
     borderRadius: Border.br_3xs,
@@ -299,13 +392,13 @@ const styles = StyleSheet.create({
   },
   rectangle395: {
     left: 131,
-    top: 746,
+    top: 716,
     width: 163,
     height: 40,
     position: "absolute",
   },
   createGroup: {
-    top: 757,
+    top: 727,
     left: 163,
     fontSize: FontSize.size_mini,
     color: Color.white,

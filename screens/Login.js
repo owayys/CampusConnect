@@ -90,22 +90,22 @@ Welcome back`}</Text>
         ) : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
-          placeholder="   **********"
+          placeholder="**********"
           keyboardType="default"
           value={password}
           onChangeText={setPassword}
           secureTextEntry={isSecureEntry}
         />
-<TouchableOpacity
-    onPress={() => setIsSecureEntry(prev => !prev)}
-    style={styles.hideIconWrapper} // Add this style prop
-  >
-    <Image
-      style={styles.hideIcon}
-      resizeMode="cover"
-      source={require("../assets/hide2.png")}
-    />
-  </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setIsSecureEntry((prev) => !prev)}
+          style={styles.hideIconWrapper} // Add this style prop
+        >
+          <Image
+            style={styles.hideIcon}
+            resizeMode="cover"
+            source={require("../assets/hide2.png")}
+          />
+        </TouchableOpacity>
         <Text style={[styles.password2, styles.emailTypo]}>Password :</Text>
       </View>
       <View style={styles.usernameOrEmail}>
@@ -220,15 +220,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: Border.br_81xl,
     left: 0,
-    position: "relative",
-    margin: "auto",
-
-    // height: 48,
-    // backgroundColor: Color.gainsboro_200,
-    // width: 324,
-    // borderRadius: Border.br_81xl,
-    // left: 0,
-    // position: "absolute",
+    position: "absolute",
   },
   emailTypo: {
     color: Color.darkgray_200,
