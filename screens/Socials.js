@@ -7,6 +7,7 @@ import {
   View,
   Text,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
@@ -15,6 +16,7 @@ const Socials = () => {
   const navigation = useNavigation();
 
   return (
+    <ScrollView>
     <View style={styles.socials}>
       <Image
         style={styles.imageIcon}
@@ -196,6 +198,7 @@ const Socials = () => {
             activeOpacity={0.2}
             onPress={() => navigation.navigate("ForumsTab")}
           >
+            {/*
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
@@ -283,10 +286,15 @@ const Socials = () => {
                 Profile
               </Text>
             </View>
+            */}
           </TouchableOpacity>
         </View>
+        
       </View>
+      
     </View>
+    
+    </ScrollView>
   );
 };
 

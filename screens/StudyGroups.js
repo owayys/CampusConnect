@@ -6,6 +6,7 @@ import {
   Pressable,
   TouchableOpacity,
   Text,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, Border, FontFamily, FontSize, Padding } from "../GlobalStyles";
@@ -14,6 +15,8 @@ const StudyGroups = () => {
   const navigation = useNavigation();
 
   return (
+    <ScrollView>
+    
     <View style={styles.studyGroups}>
       <View style={[styles.rectangle, styles.rectangleShadowBox]} />
       <Image
@@ -126,11 +129,14 @@ Max Capacity: 10`}</Text>
       >
         Join Group
       </Text>
+  
+      
       <Image
         style={[styles.rectangleIcon1, styles.rectangleIconLayout]}
         resizeMode="cover"
         source={require("../assets/rectangle2.png")}
       />
+      {/*
       <View style={styles.st}>
         <View style={styles.iconsHead}>
           <TouchableOpacity
@@ -214,13 +220,22 @@ Max Capacity: 10`}</Text>
               <Text style={[styles.forum1, styles.text3Typo]}>Profile</Text>
             </View>
           </TouchableOpacity>
+      
         </View>
       </View>
+      */}
     </View>
+    </ScrollView>
   );
 };
 
+
+
 const styles = StyleSheet.create({
+  Content: {
+    height: '400px', /* Or any fixed height that suits your design */
+    overflow: 'auto' /* This will add a scrollbar to the container when the content exceeds the height */
+  },
   mt2: {
     marginTop: 2,
   },
@@ -367,7 +382,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   makeNewGroup: {
-    top: 0,
+    top: 10,
     left: 19,
     fontSize: FontSize.size_smi,
     fontWeight: "300",
