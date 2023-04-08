@@ -32,7 +32,7 @@ const StudyGroups = () => {
         <Image
           style={styles.maskIcon}
           resizeMode="cover"
-          source={require("../assets/mask.png")}
+          source={require("../assets/chat_icon1.png")}
         />
         <TouchableOpacity
           style={styles.basePosition}
@@ -46,11 +46,6 @@ const StudyGroups = () => {
           />
         </TouchableOpacity>
       </TouchableOpacity>
-      <Image
-        style={styles.studyGroupsChild}
-        resizeMode="cover"
-        source={require("../assets/ellipse-5.png")}
-      />
       <Image
         style={styles.studyGroupsItem}
         resizeMode="cover"
@@ -255,8 +250,8 @@ const styles = StyleSheet.create({
     },
   },
   home03IconLayout: {
-    height: 24,
-    width: 24,
+    height: 0,
+    width: 0,
   },
   basePosition: {
     left: "0%",
@@ -317,8 +312,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   maskIcon: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
+    right:10,
   },
   base: {
     backgroundColor: Color.white,

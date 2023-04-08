@@ -23,11 +23,15 @@ const Socials = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <View style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}>
+      <TouchableOpacity
+        style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
         <Image
           style={styles.maskIcon}
           resizeMode="cover"
-          source={require("../assets/mask.png")}
+          source={require("../assets/chat_icon1.png")}
         />
         <TouchableOpacity
           style={styles.basePosition}
@@ -40,12 +44,7 @@ const Socials = () => {
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
         </TouchableOpacity>
-      </View>
-      <Image
-        style={styles.socialsChild}
-        resizeMode="cover"
-        source={require("../assets/ellipse-5.png")}
-      />
+      </TouchableOpacity>
       <Image
         style={styles.socialsItem}
         resizeMode="cover"
@@ -303,8 +302,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   home03IconLayout: {
-    height: 24,
-    width: 24,
+    height: 0,
+    width: 0,
   },
   basePosition: {
     left: "0%",
@@ -432,8 +431,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   maskIcon: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
+    right:10,
   },
   base: {
     backgroundColor: Color.white,
