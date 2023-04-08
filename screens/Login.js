@@ -90,7 +90,7 @@ Welcome back`}</Text>
         ) : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
-          placeholder="password"
+          placeholder="**********"
           keyboardType="default"
           value={password}
           onChangeText={setPassword}
@@ -220,7 +220,6 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: Border.br_81xl,
     left: 0,
-    padding: 15,
     position: "absolute",
   },
   emailTypo: {
