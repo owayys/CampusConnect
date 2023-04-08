@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Text,
   StyleSheet,
@@ -14,46 +14,52 @@ import { Color, Border, FontFamily, FontSize } from "../GlobalStyles";
 import {
   responsiveScreenHeight,
   responsiveScreenWidth,
-  responsiveScreenFontSize
+  responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
- 
 
 const Login = () => {
   const navigation = useNavigation();
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSecureEntry, setIsSecureEntry] = useState(true);
 
   const handleLogin = async () => {
     try {
-      console.log(username)
-      console.log(password)
-      const response = await fetch('https://campusconnect.herokuapp.com/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email:username, password:password,soc_flag: 0 })
-      });
+      console.log(username);
+      console.log(password);
+      const response = await fetch(
+        "https://campusconnect.herokuapp.com/api/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: username,
+            password: password,
+            soc_flag: 0,
+          }),
+        }
+      );
 
       const data = await response.json();
-      if (data.code===200){
+      if (data.code === 200) {
         console.log(data);
         //console.log(data.name)
-        navigation.navigate('HomeScreen', {
-          screen: 'Home',
-          params: { name: data.name }});
-      }
-      else{
+        navigation.navigate("HomeScreen", {
+          screen: "Home",
+          params: { name: data.name },
+        });
+      } else {
         console.log("Error");
-        setErrorMessage('Incorrect username or password.');
+        setErrorMessage("Incorrect username or password.");
       }
-     //navigation.navigate('HomeScreen', { name: data.name });
+      //navigation.navigate('HomeScreen', { name: data.name });
     } catch (err) {
       console.log(err);
-      setErrorMessage('Something went wrong. Please try again later.');
+      setErrorMessage("Something went wrong. Please try again later.");
     }
   };
-
 
   return (
     <View style={styles.login}>
@@ -79,20 +85,27 @@ Welcome back`}</Text>
         <Text style={[styles.forgotPassword, styles.hiWelcomeBackFlexBox]}>
           forgot password?
         </Text>
-        {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
+        {errorMessage ? (
+          <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text>
+        ) : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
           placeholder="   **********"
           keyboardType="default"
           value={password}
           onChangeText={setPassword}
-          secureTextEntry
+          secureTextEntry={isSecureEntry}
         />
-        {/* <Image
-          style={styles.hideIcon}
-          resizeMode="cover"
-          source={require("../assets/hide2.png")}
-        /> */}
+<TouchableOpacity
+    onPress={() => setIsSecureEntry(prev => !prev)}
+    style={styles.hideIconWrapper} // Add this style prop
+  >
+    <Image
+      style={styles.hideIcon}
+      resizeMode="cover"
+      source={require("../assets/hide2.png")}
+    />
+  </TouchableOpacity>
         <Text style={[styles.password2, styles.emailTypo]}>Password :</Text>
       </View>
       <View style={styles.usernameOrEmail}>
@@ -103,7 +116,6 @@ Welcome back`}</Text>
           keyboardType="email-address"
           value={username}
           onChangeText={setUsername}
-          
         />
       </View>
     </View>
@@ -118,12 +130,12 @@ const styles = StyleSheet.create({
   },
   errorMessagestyle: {
     textAlign: "left",
-    color: 'red',
+    color: "red",
     position: "absolute",
     // top: 100,
     // left: 10,
-    top:responsiveScreenHeight(12),
-    left:responsiveScreenWidth(2),
+    top: responsiveScreenHeight(12),
+    left: responsiveScreenWidth(2),
     // fontSize: FontSize.size_base,
     fontSize: responsiveScreenFontSize(1.8),
     fontFamily: FontFamily.robotoRegular,
@@ -147,9 +159,9 @@ const styles = StyleSheet.create({
     height: responsiveScreenHeight(4.4),
     width: "55%",
     // left: 80,
-    margin:"auto",
+    margin: "auto",
     position: "absolute",
-    alignItems:"center",
+    alignItems: "center",
 
     // height: 37,
     // width: 231,
@@ -171,9 +183,6 @@ const styles = StyleSheet.create({
     // height: 37,
     // width: 231,
     // position: "absolute",
-
-
-    
   },
   signupTypo: {
     // height: 18,
@@ -185,10 +194,10 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.interSemibold,
     fontWeight: "600",
     fontSize: responsiveScreenFontSize(2.5),
-    margin:"auto",
+    margin: "auto",
     // left: 46,
     // top: 3.5,
-    top:responsiveScreenHeight(0.7),
+    top: responsiveScreenHeight(0.7),
     position: "absolute",
 
     // height: 18,
@@ -212,7 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_81xl,
     left: 0,
     position: "relative",
-    margin:"auto",
+    margin: "auto",
 
     // height: 48,
     // backgroundColor: Color.gainsboro_200,
@@ -230,8 +239,7 @@ const styles = StyleSheet.create({
     top: 0,
     textAlign: "left",
     position: "absolute",
-    
-    
+
     // color: Color.darkgray_200,
     // fontFamily: FontFamily.robotoSemibold,
     // fontWeight: "600",
@@ -248,8 +256,7 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoExtrabold,
     width: responsiveScreenWidth(382),
     height: responsiveScreenHeight(109),
-    
-    
+
     // top: 143,
     // left: 34,
     // fontSize: 44,
@@ -263,7 +270,6 @@ const styles = StyleSheet.create({
     borderColor: "#4ec6e0",
     borderWidth: 2,
     // backgroundColor: Color.skyblue_100,
-
   },
   signup: {
     color: Color.skyblue_100,
@@ -296,7 +302,6 @@ const styles = StyleSheet.create({
     // top: 675,
     top: responsiveScreenHeight(80),
     // top: 675,
-    
   },
   loginButton: {
     backgroundColor: Color.skyblue_100,
@@ -320,23 +325,23 @@ const styles = StyleSheet.create({
     // height: 17,
     width: responsiveScreenWidth(179),
     height: responsiveScreenHeight(17),
-
   },
   password1: {
     // top: 25,
     top: responsiveScreenHeight(3),
   },
   hideIcon: {
-    height: "16.2%",
-    width: "4.82%",
-    top: "45.52%",
-    right: "16.84%",
-    bottom: "38.28%",
-    left: "78.33%",
+    height: responsiveScreenWidth(5),
+    width: responsiveScreenWidth(5),
+    top: responsiveScreenHeight(4.6),
+    // right: responsiveScreenWidth(10),
+    // bottom: "38.28%",
+    left: responsiveScreenWidth(70),
     maxWidth: "100%",
     maxHeight: "100%",
     position: "absolute",
-    overflow: "hidden",
+    // overflow: "hidden",
+    resizeMode: "contain",
   },
   password2: {
     left: responsiveScreenWidth(4),
@@ -358,15 +363,14 @@ const styles = StyleSheet.create({
     width: "80%%",
     // left: 31,
     position: "absolute",
-    alignItems:"center",
-    margin:"auto",
+    alignItems: "center",
+    margin: "auto",
 
     // top: 448,
     // width: 362,
     // height: 95,
     // left: 31,
     // position: "absolute",
-    
   },
   email: {
     // // left: 18,
@@ -380,6 +384,9 @@ const styles = StyleSheet.create({
     // width: 205,
     // height: 23,
   },
+  showPass: {
+    backgroundColor: Color.skyblue_100,
+  },
   password3: {
     // top: 29,
     top: responsiveScreenHeight(3),
@@ -388,12 +395,26 @@ const styles = StyleSheet.create({
     // top: 339,
     top: responsiveScreenHeight(40),
     // height: 77,
-    height:responsiveScreenHeight(8.9),
+    height: responsiveScreenHeight(8.9),
     width: "80%%",
     // left: 31,
     position: "absolute",
-    alignItems:"center",
-    margin:"auto",
+    alignItems: "center",
+    margin: "auto",
+  },
+  hideIconWrapper: {
+    position: "absolute",
+    right: 0,
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 1,
+  },
+  hideIcon: {
+    width: responsiveScreenWidth(5),
+    height: responsiveScreenWidth(5),
+    top: responsiveScreenHeight(1.3),
+    marginRight: responsiveScreenWidth(3),
   },
   login: {
     backgroundColor: Color.gray_200,
@@ -401,8 +422,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     overflow: "hidden",
-    alignItems: "center",    
-
+    alignItems: "center",
   },
 });
 
