@@ -76,7 +76,7 @@ Welcome back`}</Text>
         {errorMessage ? <Text style={[styles.errorMessagestyle]}>{errorMessage}</Text> : null}
         <TextInput
           style={[styles.password1, styles.passwordLayout]}
-          placeholder="**********"
+          placeholder="password"
           keyboardType="default"
           value={password}
           onChangeText={setPassword}
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     width: 324,
     borderRadius: Border.br_81xl,
     left: 0,
+    padding: 15,
     position: "absolute",
   },
   emailTypo: {
