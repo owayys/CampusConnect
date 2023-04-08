@@ -37,7 +37,7 @@ const OuterChatInterfaceGroups = ({route}) => {
             title="Personal Chats" 
             onPress={() => navigation.navigate("OuterChatInterface")}
             style={{backgroundColor:'navy blue'}} 
-            color={Color.gray_200}
+            color={"#4ec6e0"}
           />
       </View>
 
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
       color: Color.white,
       letterSpacing: 2,
       position: "absolute",
-      width:"50%",
+      width:"55%",
     }
 
 
