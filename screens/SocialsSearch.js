@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Flat, FlatList, Image, Button} from "react-native";
+import { StyleSheet, Text, View, Flat, FlatList, Image, Button, Alert} from "react-native";
 import React from "react";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const SocialsSearch = ({data, searchInput, setSearchInput}) => {
   
     const onAddFriend = () => {
-
+        return Alert("Friend Add karna hai?");
     }
   
     return (
@@ -25,7 +25,8 @@ const SocialsSearch = ({data, searchInput, setSearchInput}) => {
                                     <Button
                                         title="Add Friend"   
                                         // style={styles.addFriendButton} 
-                                        color={"#4ec6e0"}     
+                                        color={"#4ec6e0"}
+                                        onPress={onAddFriend}  
                                     />
                                 </View>
 
@@ -102,6 +103,7 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
         position: "absolute",
         width:"27%",
+        zIndex:1
     },
 
     imageIcon1: {
