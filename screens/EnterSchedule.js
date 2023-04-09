@@ -38,8 +38,9 @@ const EnterSchedule = () => {
         <View style={styles.pickerContainer}>
           <SearchableDropdown
             onTextChange={(text) => console.log(text)}
-            onItemSelect={(item) => {handleClassChange(i, item.id)
-            dropdownVals[i]=item.name
+            onItemSelect={(item) => {
+              dropdownVals[i]=item.name
+              handleClassChange(i, item.id)
             console.log(dropdownVals[i])}}
             containerStyle={{ padding: 5 }}
             textInputStyle={{ padding: 12, borderWidth: 1, borderColor: '#4EC6E0', borderRadius: 4 }}
@@ -48,7 +49,6 @@ const EnterSchedule = () => {
             itemsContainerStyle={{ maxHeight: 140 }}
             items={COURSES}
             placeholder={dropdownVals[i]}
-            
             resetValue={false}
             underlineColorAndroid="transparent"
           />

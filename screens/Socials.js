@@ -7,25 +7,89 @@ import {
   View,
   Text,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, Color, FontFamily, FontSize, Padding } from "../GlobalStyles";
+import { useState, Component } from "react";
+import SocialsSearch from "./SocialsSearch";
 
 const Socials = () => {
+
+  const temp_dict = [
+
+    {
+      name: "Shehryar Khan",
+      icon: "icon1",
+      interests: ["Anime", "Coding"] 
+    },
+    {
+      name: "Asher",
+      icon: "icon2",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "Luqman",
+      icon: "icon3",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "owais",
+      icon: "icon4",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon5",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "jaid",
+      icon: "icon6",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon7",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon7",
+      interests: ["Anime", "Coding"]
+    },
+    {
+      name: "jufe-pulpy",
+      icon: "icon7",
+      interests: ["Anime", "Coding"]
+    },
+
+
+  ]
+
+
+
   const navigation = useNavigation();
 
+  const [searchInput, setSearchInput] = useState('') // for search bar input
+
   return (
+    <>
     <View style={styles.socials}>
       <Image
         style={styles.imageIcon}
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <View style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}>
+      <TouchableOpacity
+        style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
         <Image
           style={styles.maskIcon}
           resizeMode="cover"
-          source={require("../assets/mask.png")}
+          source={require("../assets/chat_icon1.png")}
         />
         <TouchableOpacity
           style={styles.basePosition}
@@ -38,24 +102,19 @@ const Socials = () => {
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
         </TouchableOpacity>
-      </View>
-      <Image
-        style={styles.socialsChild}
-        resizeMode="cover"
-        source={require("../assets/ellipse-5.png")}
-      />
+      </TouchableOpacity>
       <Image
         style={styles.socialsItem}
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
-      <Pressable style={[styles.group, styles.groupLayout]}>
+      {/* <Pressable style={[styles.group, styles.groupLayout]}>
         <View style={[styles.rectangle395, styles.rectangleLayout]} />
         <Text style={[styles.addFriend, styles.socials1Position]}>
           Add Friend
         </Text>
-      </Pressable>
-      <Text
+      </Pressable> */}
+      {/*<Text
         style={[styles.socials1, styles.socialTypo, styles.socials1Position]}
       >
         Socials
@@ -74,15 +133,6 @@ const Socials = () => {
       >
         <Text style={styles.jafferIqbal1}>Jaffer Iqbal</Text>
         <Text style={styles.text}>{` `}</Text>
-      </Text>
-      <Text
-        style={[
-          styles.suggested,
-          styles.suggestedPosition,
-          styles.suggestedTypo,
-        ]}
-      >
-        Suggested
       </Text>
       <Text
         style={[
@@ -179,16 +229,31 @@ const Socials = () => {
         style={[styles.imageIcon5, styles.imageIconLayout]}
         resizeMode="cover"
         source={require("../assets/image3.png")}
-      />
-      <TextInput
-        style={[
-          styles.rectangle,
-          styles.suggestedPosition,
-          styles.rectangleLayout,
-        ]}
-        placeholder="Search for friends..."
-        keyboardType="default"
-      />
+      /> */}
+
+
+      <View style={styles.searchBar}>
+              
+        <TextInput style={{top:5}}
+          color='white'
+          placeholder="Search..."
+          placeholderTextColor={"white"}
+          keyboardType="default"
+          autoCapitalize="none"
+          onChangeText={searchInput => setSearchInput(searchInput)}
+        />
+
+        <TouchableOpacity 
+          onPress={() => console.log(searchInput)}
+        >
+          <Image style = {styles.searchButton} source={require("../assets/group5.png")}/>
+        </TouchableOpacity>
+
+      </View>
+
+      <SocialsSearch data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput}/>
+
+
       <View style={styles.st}>
         <View style={styles.iconsHead}>
           <TouchableOpacity
@@ -196,6 +261,7 @@ const Socials = () => {
             activeOpacity={0.2}
             onPress={() => navigation.navigate("ForumsTab")}
           >
+            {/*
             <Image
               style={styles.home03IconLayout}
               resizeMode="cover"
@@ -283,20 +349,51 @@ const Socials = () => {
                 Profile
               </Text>
             </View>
+            */}
           </TouchableOpacity>
         </View>
+        
       </View>
+      
     </View>
+    
+    </>
   );
 };
 
 const styles = StyleSheet.create({
+
+  searchBar : {
+    borderRadius: Border.br_3xs,
+    backgroundColor: Color.darkslategray_200,
+    width: 340,
+    height: 40,
+    left: 28,
+    top: 90,
+    marginTop: 50,
+    color: "white",
+    paddingLeft:10,
+    zIndex:1,
+    
+  },
+
+  searchButton : {
+    left: "80%",
+    marginTop: "-12%",
+    top:5,
+    width: 50,
+    height: 50,
+    resizeMode: 'contain',
+    
+  },
+
+
   mt2: {
     marginTop: 2,
   },
   home03IconLayout: {
-    height: 24,
-    width: 24,
+    height: 0,
+    width: 0,
   },
   basePosition: {
     left: "0%",
@@ -424,8 +521,9 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   maskIcon: {
-    width: 20,
-    height: 20,
+    width: 30,
+    height: 30,
+    right:10,
   },
   base: {
     backgroundColor: Color.white,
