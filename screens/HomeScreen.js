@@ -11,11 +11,21 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState } from "react";
 
 const HomeScreen = ({route}) => {
   console.log(route)
+  const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  const { name } = route.params;
+  if (route.params!==undefined){
+    const { name } = route.params;
+    AsyncStorage.setItem('username', name);
+  }
+  AsyncStorage.getItem('username').then((value) => {
+    setUsername(value);
+    console.log(value);
+  });
   return (
     <ScrollView>
     <View style={styles.homeScreen}>
@@ -42,7 +52,7 @@ const HomeScreen = ({route}) => {
         />
       </View>
       <Text style={[styles.welcomeBack, styles.campusAtALayout]}>
-        Welcome back, {name}!
+        Welcome back, {username}!
       </Text>
       <Image
         style={styles.iconoutlinebell}
@@ -57,7 +67,7 @@ const HomeScreen = ({route}) => {
       <TouchableOpacity
         style={styles.rectangleGroup}
         activeOpacity={0.2}
-        onPress={() => navigation.navigate("InteractiveMap", { name: name})}
+        onPress={() => navigation.navigate("InteractiveMap")}
       >
         <Image
           style={[styles.rectangleIcon, styles.rectangleLayout]}

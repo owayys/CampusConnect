@@ -407,10 +407,9 @@ const mapStyle=[
     ]
   }
 ]
-const InteractiveMap = ({route}) => {
+const InteractiveMap = () => {
   const [locations, setLocations] = useState([]);
   const navigation = useNavigation();
-  const { name } = route.params;
 
   useEffect(() => {
     // (async () => {
@@ -456,8 +455,7 @@ const InteractiveMap = ({route}) => {
          style={styles.goBack}
          activeOpacity={0.2}
          onPress={() => navigation.navigate('HomeScreen', {
-          screen: 'Home',
-          params: { name: name }})}
+          screen: 'Home'})}
        >
          <Image
            style={{ width: 60, height: 60 }}
