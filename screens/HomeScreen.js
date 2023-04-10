@@ -392,7 +392,7 @@ const styles = StyleSheet.create({
     margin: "auto",
     marginLeft: "5%",
     marginRight: "5%",
-    position: "auto",
+    position: "absolute",
     // backgroundColor:"#ffffff"
   },
   welcomeBack: {

@@ -15,7 +15,7 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
                         return (
                             <View style={{margin:30}}>
                                 <Text style={styles.last_message}>
-                                    {item.content}
+                                    {item.content === null ? "No Messages yet!" : item.content}
                                 </Text>
 
                                 <Image
@@ -24,7 +24,7 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
                                     source={require("../assets/image18.png")}
                                 />
 
-                                <Text style={styles.time}>08:43</Text>
+                                <Text style={styles.time}>{item.sent}</Text>
 
                                 <Text style={styles.person_position}>
                                     {item.name}
@@ -46,7 +46,7 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
                                     source={require("../assets/image18.png")}
                                 />
 
-                                <Text style={styles.time}>08:43</Text>
+                                <Text style={styles.time}>{item.sent}</Text>
 
                                 <Text style={styles.person_position}>
                                     {item.name}
