@@ -85,7 +85,7 @@ Welcome back`}</Text>
                 onPress={() => navigation.navigate("Signup")}
             >
                 <View style={[styles.signupButton, styles.buttonLayout]} />
-                <Text style={[styles.signup, styles.signupTypo]}>Signup</Text>
+                <Text style={[styles.signup2, styles.signupTypo]}>Signup</Text>
             </Pressable>
             <TouchableOpacity
                 style={[styles.login1, styles.signupLayout]}
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
         // top: 3.5,
         top: responsiveScreenHeight(0.7),
         position: "absolute",
-
+    
         // height: 18,
         // width: 127,
         // justifyContent: "center",
@@ -227,6 +227,9 @@ const styles = StyleSheet.create({
         // left: 46,
         // top: 9,
         // position: "absolute",
+    },
+    signup2: {
+        color: Color.skyblue_100,
     },
     passwordLayout: {
         // height: 48,
@@ -431,7 +434,7 @@ const styles = StyleSheet.create({
         height: "100%",
         overflow: "hidden",
         alignItems: "center",
-    },
+    }
 });
 
 export default Login;
