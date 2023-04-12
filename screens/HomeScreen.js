@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Border, FontFamily, FontSize, Color, Padding } from "../GlobalStyles";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useState } from "react";
 import {
   responsiveScreenHeight,
@@ -19,19 +19,53 @@ import {
   responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 const HomeScreen = ({ route }) => {
   console.log(route);
   const [username, setUsername] = useState("");
   const navigation = useNavigation();
-  if (route.params!==undefined){
+  if (route.params !== undefined) {
     const { name } = route.params;
-    AsyncStorage.setItem('username', name);
+    AsyncStorage.setItem("username", name);
   }
-  AsyncStorage.getItem('username').then((value) => {
+  AsyncStorage.getItem("username").then((value) => {
     setUsername(value);
     console.log(value);
   });
+  
+
+  const courses = [
+    { courseName: "Advanced Programming", courseTime: "12:30PM - 1:45PM" },
+    { courseName: "Software Engineering", courseTime: "02:00PM - 03:15PM" },
+    { courseName: "Topics in IR", courseTime: "03:30PM - 04:45PM" },
+    { courseName: "Advanced Programming", courseTime: "12:30PM - 1:45PM" },
+    { courseName: "Software Engineering", courseTime: "02:00PM - 03:15PM" },
+    { courseName: "Topics in IR", courseTime: "03:30PM - 04:45PM" },
+  ];
+
+  const allCourses={
+    "Mon":[
+      { courseName: "Advanced Programming", courseTime: "12:30PM - 1:45PM" },
+      { courseName: "Software Engineering", courseTime: "02:00PM - 03:15PM" },
+      { courseName: "Topics in IR", courseTime: "03:30PM - 04:45PM" },
+      { courseName: "Advanced Programming", courseTime: "12:30PM - 1:45PM" },
+      { courseName: "Software Engineering", courseTime: "02:00PM - 03:15PM" },
+      { courseName: "Topics in IR", courseTime: "03:30PM - 04:45PM" },
+    ],
+    "Tue":[
+      { courseName: "Artificial Intelligence", courseTime: "12:30PM - 1:45PM" },
+      { courseName: "Data Mining", courseTime: "02:00PM - 03:15PM" },
+      { courseName: "Haazri", courseTime: "03:30PM - 04:45PM" },
+    ],
+    "Wed":[],
+    "Thu":[],
+    "Fri":[],
+    "Sat":[],
+    "Sun":[]
+  }
+
   const [currDay, setCurrDay] = React.useState("Mon");
+  const [curDaySchedule,setCurDaySchedule ]=React.useState(allCourses.Mon);
   return (
     <ScrollView>
       <View style={styles.homeScreen}>
@@ -120,8 +154,31 @@ const HomeScreen = ({ route }) => {
           </Text>
         </TouchableOpacity>
         <Text style={styles.mySchedule}>My Schedule</Text>
-        {/* <View style={styles.frameParent}>
-          <View style={[styles.frameWrapper, styles.frameLayout]}>
+        <View style={styles.frameParent}>
+          <ScrollView>
+          {curDaySchedule.map((course,index) => {
+            return (
+              <View key={index} style={[styles.frameWrapper, styles.frameLayout]}>
+                <View style={styles.advancedProgrammingParent}>
+                  <Text
+                    style={[
+                      styles.advancedProgramming,
+                      styles.networkSecurityTypo,
+                    ]}
+                  >
+                    {course.courseName}
+                  </Text>
+                  <Text style={[styles.am145pm, styles.mt4, styles.monTypo]}>
+                    {course.courseTime}
+                  </Text>
+                </View>
+              </View>
+            );
+          })}
+            </ScrollView>
+          
+
+          {/* <View style={[styles.frameWrapper, styles.frameLayout]}>
             <View style={styles.advancedProgrammingParent}>
               <Text
                 style={[styles.advancedProgramming, styles.networkSecurityTypo]}
@@ -158,48 +215,48 @@ const HomeScreen = ({ route }) => {
                 5:00 - 6:15
               </Text>
             </View>
-          </View>
-        </View> */}
+          </View>*/}
+        </View>
         <View style={styles.frameGroup}>
           <TouchableOpacity
             style={[styles.button, currDay === "Mon" && styles.activeButton]}
-            onPress={() => setCurrDay("Mon")}
+            onPress={() => {setCurrDay("Mon");setCurDaySchedule(allCourses.Mon)}}
           >
             <Text style={styles.buttonText}>Mon</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Tue" && styles.activeButton]}
-            onPress={() => setCurrDay("Tue")}
+            onPress={() => {setCurrDay("Tue");setCurDaySchedule(allCourses.Tue)}}
           >
             <Text style={styles.buttonText}>Tue</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Wed" && styles.activeButton]}
-            onPress={() => setCurrDay("Wed")}
+            onPress={() => {setCurrDay("Wed");setCurDaySchedule(allCourses.Wed)}}
           >
             <Text style={styles.buttonText}>Wed</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Thu" && styles.activeButton]}
-            onPress={() => setCurrDay("Thu")}
+            onPress={() => {setCurrDay("Thu");setCurDaySchedule(allCourses.Thu)}}
           >
             <Text style={styles.buttonText}>Thu</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Fri" && styles.activeButton]}
-            onPress={() => setCurrDay("Fri")}
+            onPress={() => {setCurrDay("Fri");setCurDaySchedule(allCourses.Fri)}}
           >
             <Text style={styles.buttonText}>Fri</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Sat" && styles.activeButton]}
-            onPress={() => setCurrDay("Sat")}
+            onPress={() => {setCurrDay("Sat");setCurDaySchedule(allCourses.Sat)}}
           >
             <Text style={styles.buttonText}>Sat</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.button, currDay === "Sun" && styles.activeButton]}
-            onPress={() => setCurrDay("Sun")}
+            onPress={() => {setCurrDay("Sun");setCurDaySchedule(allCourses.Sun)}}
           >
             <Text style={styles.buttonText}>Sun</Text>
           </TouchableOpacity>
@@ -231,7 +288,7 @@ const HomeScreen = ({ route }) => {
 
 const styles = StyleSheet.create({
   mt4: {
-    marginTop: 4,
+    marginTop: responsiveScreenHeight(0.6),
   },
   mt16: {
     marginTop: 16,
@@ -269,21 +326,25 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   frameLayout: {
-    width: 303,
-    borderRadius: Border.br_xs,
+    //width: 303,
+    width: responsiveScreenWidth(80),
+    //borderRadius: Border.br_xs,
+    borderRadius: responsiveScreenWidth(3),
     overflow: "hidden",
   },
   networkSecurityTypo: {
     fontFamily: FontFamily.poppinsSemibold,
     letterSpacing: 0.3,
-    fontSize: FontSize.size_sm,
+    //fontSize: FontSize.size_sm,
+    fontSize: responsiveScreenFontSize(1.8),
     color: Color.darkNeutral,
     fontWeight: "600",
     textAlign: "left",
   },
   monTypo: {
     letterSpacing: 0.4,
-    fontSize: FontSize.size_xs_3,
+    //fontSize: FontSize.size_xs_3,
+    fontSize: responsiveScreenFontSize(1.5),
     fontFamily: FontFamily.poppinsSemibold,
     fontWeight: "600",
     textAlign: "left",
@@ -312,7 +373,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     // top: 56,
     top: responsiveScreenHeight(6.8),
-    left: responsiveScreenWidth(80)
+    left: responsiveScreenWidth(80),
   },
   home03IconLayout: {
     // height: 24,
@@ -347,7 +408,6 @@ const styles = StyleSheet.create({
     top: "0%",
     width: "100%",
     height: "100%",
-    
   },
   homeSpaceBlock: {
     paddingVertical: Padding.p_6xs,
@@ -475,7 +535,7 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   advancedProgramming: {
-    width: 196,
+    width: responsiveScreenHeight(70),
     color: Color.darkNeutral,
   },
   am145pm: {
@@ -483,13 +543,18 @@ const styles = StyleSheet.create({
     color: Color.darkNeutral,
   },
   advancedProgrammingParent: {
-    top: 16,
-    left: 16,
+    top: responsiveScreenHeight(1.2),
+    left: responsiveScreenWidth(5),
     position: "absolute",
   },
   frameWrapper: {
     backgroundColor: Color.peachpuff,
-    height: 70,
+    //height: 70,
+    height: responsiveScreenHeight(8),
+    borderStyle: "solid",
+    //borderColor: "#4ec6e0",
+    borderColor: Color.gray_200,
+    borderWidth: responsiveScreenWidth(1),
   },
   softwareEngineering: {
     width: 237,
@@ -504,12 +569,17 @@ const styles = StyleSheet.create({
     color: Color.darkNeutral,
   },
   frameParent: {
-    top: 478,
-    left: 66,
-    width: 289,
-    height: 239,
+    //top: 478,
+    top: responsiveScreenHeight(60),
+    // left: 66,
+    // width: 289,
+    width: responsiveScreenWidth(80),
+    left: responsiveScreenWidth(10),
+    // height: 239,
+    height: responsiveScreenHeight(37),
     alignItems: "flex-end",
     position: "absolute",
+    //backgroundColor: "white",
   },
   frameGroup: {
     top: responsiveScreenHeight(52.7),
@@ -552,7 +622,7 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    height: 838,
+    height: responsiveScreenHeight(100),
     overflow: "hidden",
     width: "100%",
   },
