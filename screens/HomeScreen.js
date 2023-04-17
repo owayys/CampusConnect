@@ -287,9 +287,6 @@ const HomeScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
-  mt4: {
-    marginTop: responsiveScreenHeight(0.6),
-  },
   mt16: {
     marginTop: 16,
   },
@@ -324,30 +321,6 @@ const styles = StyleSheet.create({
     //top: 56,
     top: responsiveScreenHeight(6.8),
     position: "absolute",
-  },
-  frameLayout: {
-    //width: 303,
-    width: responsiveScreenWidth(80),
-    //borderRadius: Border.br_xs,
-    borderRadius: responsiveScreenWidth(3),
-    overflow: "hidden",
-  },
-  networkSecurityTypo: {
-    fontFamily: FontFamily.poppinsSemibold,
-    letterSpacing: 0.3,
-    //fontSize: FontSize.size_sm,
-    fontSize: responsiveScreenFontSize(1.8),
-    color: Color.darkNeutral,
-    fontWeight: "600",
-    textAlign: "left",
-  },
-  monTypo: {
-    letterSpacing: 0.4,
-    //fontSize: FontSize.size_xs_3,
-    fontSize: responsiveScreenFontSize(1.5),
-    fontFamily: FontFamily.poppinsSemibold,
-    fontWeight: "600",
-    textAlign: "left",
   },
   stPosition: {
     // left: 0,
@@ -534,28 +507,6 @@ const styles = StyleSheet.create({
     color: Color.skyblue_100,
     position: "absolute",
   },
-  advancedProgramming: {
-    width: responsiveScreenHeight(70),
-    color: Color.darkNeutral,
-  },
-  am145pm: {
-    opacity: 0.6,
-    color: Color.darkNeutral,
-  },
-  advancedProgrammingParent: {
-    top: responsiveScreenHeight(1.2),
-    left: responsiveScreenWidth(5),
-    position: "absolute",
-  },
-  frameWrapper: {
-    backgroundColor: Color.peachpuff,
-    //height: 70,
-    height: responsiveScreenHeight(8),
-    borderStyle: "solid",
-    //borderColor: "#4ec6e0",
-    borderColor: Color.gray_200,
-    borderWidth: responsiveScreenWidth(1),
-  },
   softwareEngineering: {
     width: 237,
     color: Color.darkNeutral,
@@ -580,6 +531,55 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     position: "absolute",
     //backgroundColor: "white",
+  },
+  frameWrapper: {
+    backgroundColor: Color.peachpuff,
+    //height: 70,
+    height: responsiveScreenHeight(8),
+    borderStyle: "solid",
+    //borderColor: "#4ec6e0",
+    borderColor: Color.gray_200,
+    borderWidth: responsiveScreenWidth(1),
+  },
+  frameLayout: {
+    //width: 303,
+    width: responsiveScreenWidth(80),
+    //borderRadius: Border.br_xs,
+    borderRadius: responsiveScreenWidth(3),
+    overflow: "hidden",
+  },
+  advancedProgrammingParent: {
+    top: responsiveScreenHeight(1.2),
+    left: responsiveScreenWidth(5),
+    position: "absolute",
+  },
+  advancedProgramming: {
+    width: responsiveScreenHeight(70),
+    color: Color.darkNeutral,
+  },
+  networkSecurityTypo: {
+    fontFamily: FontFamily.poppinsSemibold,
+    letterSpacing: 0.3,
+    //fontSize: FontSize.size_sm,
+    fontSize: responsiveScreenFontSize(1.8),
+    color: Color.darkNeutral,
+    fontWeight: "600",
+    textAlign: "left",
+  },
+  am145pm: {
+    opacity: 0.6,
+    color: Color.darkNeutral,
+  },
+  mt4: {
+    marginTop: responsiveScreenHeight(0.6),
+  },
+  monTypo: {
+    letterSpacing: 0.4,
+    //fontSize: FontSize.size_xs_3,
+    fontSize: responsiveScreenFontSize(1.5),
+    fontFamily: FontFamily.poppinsSemibold,
+    fontWeight: "600",
+    textAlign: "left",
   },
   frameGroup: {
     top: responsiveScreenHeight(52.7),
