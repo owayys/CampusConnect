@@ -158,7 +158,7 @@ const HomeScreen = ({ route }) => {
           <ScrollView>
           {curDaySchedule.map((course,index) => {
             return (
-              <View key={index} style={[styles.frameWrapper, styles.frameLayout]}>
+              <View key={index} style={[styles.frameWrapper, styles.frameLayout,{ backgroundColor: index % 2 === 0 ? Color.peachpuff : "#D6E4FF" }]}>
                 <View style={styles.advancedProgrammingParent}>
                   <Text
                     style={[
