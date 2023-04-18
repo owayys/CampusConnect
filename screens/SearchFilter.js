@@ -1,15 +1,17 @@
-import { StyleSheet, Text, View, Flat, FlatList, Image} from "react-native";
+import { StyleSheet, Text, View, Flat, FlatList, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
-const SearchFilter = ({data, searchInput, setSearchInput}) => {
-  return (
-    <View style={{marginTop:150, justifyContent:"center", flex : 1}}>
+const SearchFilter = ({ data, searchInput, setSearchInput }) => {
+    const navigation = useNavigation()
 
-        <SafeAreaView style={{flex:1, paddingVertical:-50,}}>
-            <FlatList data={data} renderItem={({item}) => 
-                {
+    return (
+        <View style={{ marginTop: 150, justifyContent: "center", flex: 1 }}>
+
+            <SafeAreaView style={{ flex: 1, paddingVertical: -50, }}>
+                <FlatList data={data} renderItem={({ item }) => {
 
                     /*
                     ! Pending:
@@ -17,59 +19,67 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
                         ~ Send username of person you're talking to 
                         ~ Load chats independent of navigation?
                     */
-            
-                    if(searchInput === ""){
+
+                    if (searchInput === "") {
                         return (
-                            <View style={{margin:30}}>
-                                <Text style={styles.last_message}>
-                                    {item.content === null ? "No Messages yet!" : item.content}
-                                </Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('InnerChatInterface', {
+                                params: { name: item.name },
+                            })}>
+                                <View style={{ margin: 30 }}>
+                                    <Text style={styles.last_message}>
+                                        {item.content === null ? "No Messages yet!" : item.content}
+                                    </Text>
 
-                                <Image
-                                    style={styles.image_icon}
-                                    resizeMode="cover"
-                                    source={require("../assets/image18.png")}
-                                />
+                                    <Image
+                                        style={styles.image_icon}
+                                        resizeMode="cover"
+                                        source={require("../assets/image18.png")}
+                                    />
 
-                                <Text style={styles.time}>{item.sent}</Text>
+                                    <Text style={styles.time}>{item.sent}</Text>
 
-                                <Text style={styles.person_position}>
-                                    {item.name}
-                                </Text>
-                            </View>
+                                    <Text style={styles.person_position}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         )
                     }
 
-                    if(item.name.toLowerCase().includes(searchInput.toLowerCase())){
+                    if (item.name.toLowerCase().includes(searchInput.toLowerCase())) {
                         return (
-                            <View style={{margin:30}}>
-                                <Text style={styles.last_message}>
-                                    {item.content}
-                                </Text>
+                            <TouchableOpacity onPress={() => navigation.navigate('InnerChatInterface', {
+                                params: { name: item.name },
+                            })}>
+                                <View style={{ margin: 30 }}>
+                                    <Text style={styles.last_message}>
+                                        {item.content}
+                                    </Text>
 
-                                <Image
-                                    style={styles.image_icon}
-                                    resizeMode="cover"
-                                    source={require("../assets/image18.png")}
-                                />
+                                    <Image
+                                        style={styles.image_icon}
+                                        resizeMode="cover"
+                                        source={require("../assets/image18.png")}
+                                    />
 
-                                <Text style={styles.time}>{item.sent}</Text>
+                                    <Text style={styles.time}>{item.sent}</Text>
 
-                                <Text style={styles.person_position}>
-                                    {item.name}
-                                </Text>
-                            </View>
+                                    <Text style={styles.person_position}>
+                                        {item.name}
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                         )
                     }
-            
+
                 }}
 
-            />
-        </SafeAreaView>
+                />
+            </SafeAreaView>
 
 
-    </View>
-  )
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

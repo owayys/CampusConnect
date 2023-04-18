@@ -26,46 +26,46 @@ const OuterChatInterface = () => {
     const [data, setData] = useState({})
     /* Temporary Dictionary for Search Filter Testing*/
 
-    // const temp_dict = [
+    const temp_dict = [
 
-    //     {
-    //         name: "Shehryar Khan",
-    //         icon: "icon1",
-    //         content: "Heyyy",
-    //     },
-    //     {
-    //         name: "Asher",
-    //         icon: "icon2",
-    //         content: "Wow",
-    //     },
-    //     {
-    //         name: "Luqman",
-    //         icon: "icon3",
-    //         content: "!gsb",
-    //     },
-    //     {
-    //         name: "owais",
-    //         icon: "icon4",
-    //         content: "asdadadaw",
-    //     },
-    //     {
-    //         name: "jufe-pulpy",
-    //         icon: "icon5",
-    //         content: "adadadadadadadadad",
-    //     },
-    //     {
-    //         name: "jaid",
-    //         icon: "icon6",
-    //         content: "adadadadadadadadad",
-    //     },
-    //     {
-    //         name: "jufe-pulpy",
-    //         icon: "icon7",
-    //         content: "adadadadadadadadad",
-    //     },
+        {
+            name: "Shehryar Khan",
+            icon: "icon1",
+            content: "Heyyy",
+        },
+        {
+            name: "Asher",
+            icon: "icon2",
+            content: "Wow",
+        },
+        {
+            name: "Luqman",
+            icon: "icon3",
+            content: "!gsb",
+        },
+        {
+            name: "owais",
+            icon: "icon4",
+            content: "asdadadaw",
+        },
+        {
+            name: "jufe-pulpy",
+            icon: "icon5",
+            content: "adadadadadadadadad",
+        },
+        {
+            name: "jaid",
+            icon: "icon6",
+            content: "adadadadadadadadad",
+        },
+        {
+            name: "jufe-pulpy",
+            icon: "icon7",
+            content: "adadadadadadadadad",
+        },
 
 
-    // ]
+    ]
 
     const courses = [
         {
@@ -160,7 +160,7 @@ const OuterChatInterface = () => {
 
             </View>
 
-            <SearchFilter data={data} searchInput={searchInput} setSearchInput={setSearchInput} />
+            <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput} />
 
             <View style={styles.GroupChatsButton}>
                 <Button
