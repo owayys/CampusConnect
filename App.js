@@ -23,7 +23,7 @@ import Events from "./screens/Events";
 import ForumsTabPostSettings from "./screens/ForumsTabPostSettings";
 import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
-import InnerChatInterface11 from "./screens/InnerChatInterface11";
+import InnerChatInterface from "./screens/InnerChatInterface";
 import io from 'socket.io-client';
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
@@ -185,8 +185,8 @@ function HomeTabs() {
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
         <Tab.Screen
-          name="InnerChatInterface11"
-          component={InnerChatInterface11}
+          name="InnerChatInterface"
+          component={InnerChatInterface}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
     </Tab.Navigator>
