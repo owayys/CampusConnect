@@ -166,6 +166,7 @@ const OuterChatInterface = () => {
                 <Button
                     title="Group Study Chats"
                     onPress={() => navigation.navigate("OuterChatInterfaceGroups", { courses: courses })}
+                    // onPress={() => navigation.navigate("InnerChatInterface", { current_user : "Ahmed Luqman"})}
                     style={{ backgroundColor: 'navy blue' }}
                     color={"#4ec6e0"}
                 />

@@ -10,6 +10,13 @@ const SearchFilter = ({data, searchInput, setSearchInput}) => {
         <SafeAreaView style={{flex:1, paddingVertical:-50,}}>
             <FlatList data={data} renderItem={({item}) => 
                 {
+
+                    /*
+                    ! Pending:
+                        ~ Navigate to chat based on chat clicked to InnerChatInterface
+                        ~ Send username of person you're talking to 
+                        ~ Load chats independent of navigation?
+                    */
             
                     if(searchInput === ""){
                         return (
