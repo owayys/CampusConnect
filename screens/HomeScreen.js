@@ -87,15 +87,10 @@ const HomeScreen = ({ route }) => {
     }
 
     const [currDay, setCurrDay] = React.useState("MONDAY");
-    const [curDaySchedule, setCurDaySchedule] = React.useState(sched.filter(x => x.class_day === currDay));
 
     React.useEffect(() => {
         getSched()
     })
-
-    React.useEffect(() => {
-        setCurDaySchedule(sched.filter(x => x.class_day === currDay))
-    }, [currDay])
 
     return (
         <ScrollView>
@@ -187,7 +182,7 @@ const HomeScreen = ({ route }) => {
                 <Text style={styles.mySchedule}>My Schedule</Text>
                 <View style={styles.frameParent}>
                     <ScrollView>
-                        {curDaySchedule.map((course, index) => {
+                        {sched.filter(x => x.class_day === currDay).map((course, index) => {
                             return (
                                 <View key={index} style={[styles.frameWrapper, styles.frameLayout, { backgroundColor: index % 2 === 0 ? Color.peachpuff : "#D6E4FF" }]}>
                                     <View style={styles.advancedProgrammingParent}>
