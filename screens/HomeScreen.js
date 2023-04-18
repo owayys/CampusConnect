@@ -192,7 +192,7 @@ const HomeScreen = ({ route }) => {
                                                 styles.networkSecurityTypo,
                                             ]}
                                         >
-                                            {course.c_name.length > 25 ? course.c_name.substring(0, 25) + '...' : course.c_name}
+                                            {course.c_name.substring(0, 25) + '...'}
                                         </Text>
                                         <Text style={[styles.am145pm, styles.mt4, styles.monTypo]}>
                                             {`${course.start_time.slice(0, -3)} - ${course.end_time.slice(0, -3)}`}
