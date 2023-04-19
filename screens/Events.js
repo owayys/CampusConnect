@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     left: 263,
     textAlign: "left",
     color: Color.white,
-    textDecoration: "underline",
+    textDecorationLine: "underline",
     fontSize: FontSize.size_mini,
     fontFamily: FontFamily.robotoRegular,
     textTransform: "capitalize",
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
   },
   details1: {
     textAlign: "left",
-    textDecoration: "underline",
+    textDecorationLine: "underline",
     fontSize: FontSize.size_mini,
     color: Color.white,
     fontFamily: FontFamily.robotoRegular,
