@@ -29,36 +29,43 @@ const OuterChatInterface = () => {
     const temp_dict = [
 
         {
+            chatroom_id: 1,
             name: "Shehryar Khan",
             icon: "icon1",
             content: "Heyyy",
         },
         {
+            chatroom_id: 2,
             name: "Asher",
             icon: "icon2",
             content: "Wow",
         },
         {
+            chatroom_id: 3,
             name: "Luqman",
             icon: "icon3",
             content: "!gsb",
         },
         {
+            chatroom_id: 4,
             name: "owais",
             icon: "icon4",
             content: "asdadadaw",
         },
         {
+            chatroom_id: 5,
             name: "jufe-pulpy",
             icon: "icon5",
             content: "adadadadadadadadad",
         },
         {
+            chatroom_id: 6,
             name: "jaid",
             icon: "icon6",
             content: "adadadadadadadadad",
         },
         {
+            chatroom_id: 7,
             name: "jufe-pulpy",
             icon: "icon7",
             content: "adadadadadadadadad",
@@ -126,8 +133,9 @@ const OuterChatInterface = () => {
             console.log(e)
         }
     }
-
-    getData()
+    React.useEffect(() => {
+        getData()
+    }, [])
     /* Dictionary ends here */
 
 

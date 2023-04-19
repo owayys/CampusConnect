@@ -23,7 +23,7 @@ const SearchFilter = ({ data, searchInput, setSearchInput }) => {
                     if (searchInput === "") {
                         return (
                             <TouchableOpacity onPress={() => navigation.navigate('InnerChatInterface', {
-                                params: { name: item.name },
+                                params: item,
                             })}>
                                 <View style={{ margin: 30 }}>
                                     <Text style={styles.last_message}>
