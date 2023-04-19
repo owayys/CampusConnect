@@ -295,6 +295,7 @@ const EventsExtended= ({navigation, route}) => {
           <Text style={styles.eventDate}>{event.date}</Text>
           <Text style={styles.eventLocation}>{event.location}</Text>
           <Text style={styles.eventDescription}>{event.description}</Text>
+          <Text style={styles.eventDescription}>{event.time}</Text>
         </View>
         <View style={styles.buttonsContainer}>
           <TouchableOpacity style={[styles.button, styles.goingButton]}>

@@ -20,6 +20,7 @@ const Events= ({navigation}) => {
       description: 'Basketball',
       attendees: 12,
       image:"https://via.placeholder.com/150",
+      time:"3:00PM-5:00PM"
     },
     {
       id: 2,
@@ -29,6 +30,7 @@ const Events= ({navigation}) => {
       description: 'Career Fairr',
       attendees:11,
       image:"https://via.placeholder.com/150",
+      time:"3:00PM-5:00PM"
     },
     {
       id: 3,
@@ -38,6 +40,7 @@ const Events= ({navigation}) => {
       description: 'Come to Event',
       attendees: 10,
       image:"https://via.placeholder.com/150" ,
+      time:"3:00PM-5:00PM",
     },
   ];
   const [searchQuery, setSearchQuery] = useState('');
