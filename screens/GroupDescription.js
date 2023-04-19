@@ -261,48 +261,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
   },
-  daysTypo: {
-    fontSize: FontSize.size_mid,
-    textAlign: "center",
-    color: Color.skyblue_100,
-    fontFamily: FontFamily.robotoMedium,
-    fontWeight: "500",
-    textTransform: "capitalize",
-    letterSpacing: 1,
-    position: "absolute",
-  },
-  aGroupWhereTypo: {
-    height: 43,
-    width: 302,
-    alignItems: "flex-end",
-    display: "flex",
-    textAlign: "left",
-    color: Color.white,
-    fontFamily: FontFamily.robotoRegular,
-    fontSize: FontSize.size_xs,
-    textTransform: "capitalize",
-    letterSpacing: 1,
-    position: "absolute",
-  },
-  pm600PmTypo: {
-    color: Color.white,
-    fontFamily: FontFamily.robotoRegular,
-    fontSize: FontSize.size_xs,
-    left: 22,
-    textAlign: "center",
-    textTransform: "capitalize",
-    letterSpacing: 1,
-    position: "absolute",
-  },
-  editGroupLayout: {
-    height: 29,
-    position: "absolute",
-  },
-  editGroupLayout1: {
-    width: 100,
-    left: 316,
-    height: 29,
-  },
   imageIcon: {
     // top: 58,
     // left: 27,
@@ -315,20 +273,6 @@ const styles = StyleSheet.create({
     borderRadius: Border.br_31xl,
     width: responsiveScreenWidth(9),
     height: responsiveScreenWidth(9),
-    position: "absolute",
-  },
-  maskIcon: {
-    width: 20,
-    height: 20,
-  },
-  base: {
-    backgroundColor: Color.white,
-  },
-  groupDescriptionChild: {
-    top: 64,
-    left: 355,
-    width: 7,
-    height: 7,
     position: "absolute",
   },
   groupDescriptionItem: {
@@ -364,50 +308,6 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     letterSpacing: 1,
     position: "absolute",
-  },
-  days: {
-    left: 22,
-    top: 432,
-  },
-  timing: {
-    top: 495,
-    left: 22,
-  },
-  subject: {
-    top: 561,
-    left: 25,
-  },
-  description: {
-    top: 627,
-    left: 25,
-  },
-  location: {
-    top: 699,
-    left: 22,
-  },
-  name: {
-    top: 369,
-    left: 18,
-  },
-  aGroupWhere: {
-    top: 641,
-    left: 22,
-  },
-  libraryLawn: {
-    top: 698,
-    left: 25,
-  },
-  advancedProgramming: {
-    top: 596,
-  },
-  pm600Pm: {
-    top: 530,
-  },
-  apGroup: {
-    top: 403,
-  },
-  mondayWednesday: {
-    top: 464,
   },
   rectangleIcon: {
     // top: 192,
@@ -458,24 +358,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     // color: Color.white,
     letterSpacing: 1,
-  },
-  editParent: {
-    top: 371,
-  },
-  editGroup: {
-    top: 432,
-  },
-  editContainer: {
-    top: 493,
-  },
-  groupPressable: {
-    top: 554,
-  },
-  editParent1: {
-    top: 615,
-  },
-  editParent2: {
-    top: 695,
   },
   groupDescription: {
     backgroundColor: Color.gray_200,
@@ -580,11 +462,6 @@ const styles = StyleSheet.create({
     //fontSize: 14,
     fontSize: responsiveScreenFontSize(2),
     fontWeight: "bold",
-  },
-  detailsText: {
-    color: "#4EC6E0",
-    textDecorationLine: "underline",
-    marginTop: 16,
   },
   rectangle: {
     //top: responsiveScreenHeight(1),
