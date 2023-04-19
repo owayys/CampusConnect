@@ -19,12 +19,16 @@ import io from 'socket.io-client';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 
 const InnerChatInterface = ({route}) => {
+
+
+  const talking_to = route.params.params.name
+  console.log("Before", talking_to)
   const [message, setMessage] = useState('');
   const [msgHistory, setMsgHistory] = useState(
   [
-    {name : "shehryar khan", message : "hi!"},
+    {name : talking_to, message : "hi!"},
     {name : "jufe" , message : 'hello!'},
-    {name : "shehryar khan" , message : "kesa haiiiiiiiiiiiiiiii"},
+    {name : talking_to , message : "kesa haiiiiiiiiiiiiiiii"},
     {name : "jufe" , message : "busy w haazri aaj"},
     {name : "jufe" , message : "kya karun karna parta"},
     {name : "jufe" , message : "kya karun karna parta"},
@@ -41,13 +45,15 @@ const InnerChatInterface = ({route}) => {
   //   });
   // }, []);
 
+  console.log(route)
+  console.log("After", talking_to)
+  console.log(msgHistory)
 
   const handleSendMessage = () => {
     console.log(message)
     setMessage('')
   }
 
-  const talking_to = route.params.params.name
 
 
   return (
@@ -76,14 +82,14 @@ const InnerChatInterface = ({route}) => {
               data.name.toLowerCase() === talking_to.toLowerCase()
               ? 
                 <View style={styles.messageBubbleSender} key={index}>
-                  {console.log(data.name.toLowerCase(), talking_to.toLowerCase())}
+                  {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())}
                   <Text style={{color: 'black', position:'relative', textAlign: 'right'}}>{data.name}</Text>
                   <Text style={{color: 'black', position: 'relative', textAlign: 'right'}}>{data.message}</Text>
                 </View>
 
               : 
                 <View style={styles.messageBubbleReceiver} key={index}>
-                  {console.log(data.name.toLowerCase(), talking_to.toLowerCase())}
+                  {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())}
                   <Text style={{color: 'black', position:'relative', textAlign: 'left'}}>{data.name}</Text>
                   <Text style={{color: 'black', position: 'relative', textAlign: 'left'}}>{data.message}</Text>
                 </View>

@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     ScrollView,
     Image,
+    StatusBar
 } from 'react-native';
 
 const Events = ({ navigation }) => {
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#0E1936',
+        padding: 15
     },
     searchBar: {
         backgroundColor: '#1C2A4E',
@@ -133,16 +135,17 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 16,
         paddingVertical: 16,
-        margin: 16,
+        marginBottom: 16
     },
     heading: {
         fontSize: 24,
         fontWeight: 'bold',
         color: '#4EC6E0',
         marginLeft: 16,
+        paddingVertical: 12
     },
     eventsList: {
-        paddingHorizontal: 16,
+        paddingHorizontal: 0,
     },
     eventContainer: {
         backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -195,7 +198,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 12,
-        marginBottom: 16,
     },
     addButtonText: {
         fontSize: 18,

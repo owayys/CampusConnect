@@ -85,7 +85,7 @@ const OuterChatInterfaceGroups = ({route}) => {
            <Button 
              title="Personal Chats" 
              onPress={() => navigation.navigate("OuterChatInterface")}
-             style={{backgroundColor:'navy blue'}} 
+             style={{backgroundColor:'navy blue', }} 
              color={"#4ec6e0"}
            />
         </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     
     group_heading: {
         fontFamily: FontFamily.robotoSemibold,
-        top: 100,
+        top: 50,
         fontSize: FontSize.size_6xl,
         flex: 1, 
         alignSelf:"center",
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
 
     backButton: {
       fontFamily: FontFamily.robotoSemibold,
-      top: 720,
+      top: '92.5%',
       fontSize: FontSize.size_xl,
       flex: 1, 
       alignSelf:"center",
