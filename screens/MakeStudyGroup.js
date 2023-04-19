@@ -45,9 +45,12 @@ const MakeStudyGroup = () => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [items, setItems] = useState([
     {label: 'Apple', value: 'apple'},
     {label: 'Banana', value: 'banana'}
+    
   ]);
 
   const handleCreateGroup = () => {
@@ -73,6 +76,23 @@ const MakeStudyGroup = () => {
         console.error(error);
       });
   };
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setSelectedImage(result.uri);
+      }
+    } catch (error) {
+      console.log("Error selecting image", error);
+    }
+  };
+  
 
   return (
     
@@ -116,9 +136,14 @@ const MakeStudyGroup = () => {
         source={require("../assets/rectangle3.png")}
       />
       <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
-        <Image source={require("../assets/ic_add.png")} style={{ width: 50, height: 50, resizeMode: "contain" }} />
+        {selectedImage ? (
+          <Image source={{ uri: selectedImage }} style={{ right: 45, width: 295, height: 150, top: 56, resizeMode: "cover" }} />
+        ) : (
+          <Image source={require("../assets/ic_add.png")} style={{ width: 500, height: 500, resizeMode: "contain" }} />
+        )}
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
       </TouchableOpacity>
+
 
       <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>
       <Text style={[styles.subject, styles.subjectTypo]}>Select Subject:</Text>
@@ -360,7 +385,7 @@ const styles = StyleSheet.create({
     height: 27,
   },
   rectangle1: {
-    top: 322,
+    top: 330,
     left: 117,
     width: 255,
     height: 27,
