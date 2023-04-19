@@ -11,24 +11,58 @@ import {
     TouchableOpacity,
     TouchableHighlight,
     KeyboardAvoidingView,
+    ScrollView,
 
 } from "react-native";
+import { useEffect } from 'react';
+import io from 'socket.io-client';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 
 const InnerChatInterface = ({route}) => {
+
+
+  const talking_to = route.params.params.name
+  console.log("Before", talking_to)
   const [message, setMessage] = useState('');
+  const [msgHistory, setMsgHistory] = useState(
+  [
+    {name : talking_to, message : "hi!"},
+    {name : "jufe" , message : 'hello!'},
+    {name : talking_to , message : "kesa haiiiiiiiiiiiiiiii"},
+    {name : "jufe" , message : "busy w haazri aaj"},
+    {name : "jufe" , message : "kya karun karna parta"},
+    {name : "jufe" , message : "kya karun karna parta"},
+    {name : "jufe" , message : "kya karun karna parta"},
+    {name : "jufe" , message : "kya karun karna parta"},
+    {name : "jufe" , message : "kya karun karna parta"},
+    {name : "jufe" , message : "kya karun karna parta"},
+  ]);
+
+
+  // useEffect(() => {
+  //   socket.on('chat message', (data) => {
+  //     setMsgHistory((msgHistory) => [...msgHistory, data]);
+  //   });
+  // }, []);
+
+  console.log(route)
+  console.log("After", talking_to)
+  console.log(msgHistory)
 
   const handleSendMessage = () => {
-    // Code to send message
+    console.log(message)
+    setMessage('')
   }
 
-  const { current_user } = route.params
+
 
   return (
     <View style={styles.container}>
 
+
+
       <View style={{position: "absolute", left: 10, top: 10}}>
-        <Text style={styles.talkingTo}>{current_user}</Text>
+        <Text style={styles.talkingTo}>{talking_to}</Text>
         <Image
             style={styles.userImage}
             resizeMode="cover"
@@ -41,33 +75,83 @@ const InnerChatInterface = ({route}) => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardContainer}
       >
-        <TextInput
-          style={styles.input}
-          value={message}
-          onChangeText={setMessage}
-          placeholder="Enter your message"
-          // onSubmitEditing={handleSendMessage}
-        />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSendMessage}
-        >
-          <Text style={styles.buttonText}>Send</Text>
-        </TouchableOpacity>
+
+        <View style={styles.chatMessages}>
+          <ScrollView>
+            {msgHistory.map((data, index) => (
+              data.name.toLowerCase() === talking_to.toLowerCase()
+              ? 
+                <View style={styles.messageBubbleSender} key={index}>
+                  {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())}
+                  <Text style={{color: 'black', position:'relative', textAlign: 'right'}}>{data.name}</Text>
+                  <Text style={{color: 'black', position: 'relative', textAlign: 'right'}}>{data.message}</Text>
+                </View>
+
+              : 
+                <View style={styles.messageBubbleReceiver} key={index}>
+                  {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())}
+                  <Text style={{color: 'black', position:'relative', textAlign: 'left'}}>{data.name}</Text>
+                  <Text style={{color: 'black', position: 'relative', textAlign: 'left'}}>{data.message}</Text>
+                </View>
+            ))}
+          </ScrollView>
+        </View>
+        <View style={{alignItems: 'center',justifyContent: 'center',}}>
+          <TextInput
+            style={styles.input}
+            value={message}
+            onChangeText={setMessage}
+            placeholder="Enter your message"
+            onSubmitEditing={handleSendMessage}
+          />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={handleSendMessage}
+          >
+            <Text style={styles.buttonText}>Send</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+ 
+  messageBubbleSender: {
+    padding: 10,
+    borderRadius: 20,
+    marginBottom: 10,
+    backgroundColor: '#ADD8F6',
+    alignSelf: 'flex-end'
+  },
+
+  messageBubbleReceiver: {
+    padding: 10,
+    borderRadius: 20,
+    marginBottom: 10,
+    backgroundColor: '#E5E5E5',
+    alignSelf: 'flex-start',
+    paddingHorizontal: 50,
+  },
+
+  chatMessages: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    paddingVertical: 70,
+    top: 60,
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#E5E5E5',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
     backgroundColor: Color.gray_200,
     shadowColor: "rgba(24, 48, 63, 0.5)",
     shadowRadius:   100,
+    // maxWidth: '200%'
   },
   keyboardContainer: {
     flex: 1,
@@ -89,7 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    left:'57.5%',
+    left:'35%',
     width: 60,
     height:35,
     bottom: 38,

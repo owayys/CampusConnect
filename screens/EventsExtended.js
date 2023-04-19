@@ -270,116 +270,118 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
+    SafeAreaView,
+    ScrollView,
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    Image,
 } from 'react-native';
 
-const EventsExtended= ({navigation, route}) => {
-  const {event} = route.params;
+const EventsExtended = ({ navigation, route }) => {
+    const { event } = route.params;
+    var dateParts = event.event_date.split("-");
+    var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2), dateParts[2].substr(3, 2), dateParts[2].substr(6, 2), dateParts[2].substr(9, 2));
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <View style={styles.detailsContainer}>
-          <Image
-            source={{uri: event.image}}
-            style={styles.eventImage}
-            resizeMode="cover"
-          />
-          <Text style={styles.eventName}>{event.name}</Text>
-          <Text style={styles.eventDate}>{event.date}</Text>
-          <Text style={styles.eventLocation}>{event.location}</Text>
-          <Text style={styles.eventDescription}>{event.description}</Text>
-          <Text style={styles.eventDescription}>{event.time}</Text>
-        </View>
-        <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={[styles.button, styles.goingButton]}>
-            <Text style={styles.buttonText}>Going</Text>
-          </TouchableOpacity>
-          {/* <TouchableOpacity style={[styles.button, styles.interestedButton]}>
+    return (
+        <SafeAreaView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.content}>
+                <View style={styles.detailsContainer}>
+                    <Image
+                        source={{ uri: event.banner }}
+                        style={styles.eventImage}
+                        resizeMode="cover"
+                    />
+                    <Text style={styles.eventName}>{event.event_name}</Text>
+                    <Text style={styles.eventDate}>{jsDate.toDateString()}</Text>
+                    <Text style={styles.eventLocation}>{event.location}</Text>
+                    <Text style={styles.eventDescription}>{event.info}</Text>
+                    <Text style={styles.eventDescription}>{event.event_time}</Text>
+                </View>
+                <View style={styles.buttonsContainer}>
+                    <TouchableOpacity style={[styles.button, styles.goingButton]}>
+                        <Text style={styles.buttonText}>Going</Text>
+                    </TouchableOpacity>
+                    {/* <TouchableOpacity style={[styles.button, styles.interestedButton]}>
             <Text style={styles.buttonText}>Interested</Text>
           </TouchableOpacity> */}
-          <TouchableOpacity style={[styles.button, styles.notGoingButton]}>
-            <Text style={styles.buttonText}>Not Going</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+                    <TouchableOpacity style={[styles.button, styles.notGoingButton]}>
+                        <Text style={styles.buttonText}>Not Going</Text>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0E1936',
-  },
-  content: {
-    padding: 16,
-  },
-  detailsContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 8,
-    padding: 16,
-    marginBottom: 16,
-  },
-  eventName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4EC6E0',
-    marginBottom: 8,
-  },
-  eventDate: {
-    fontSize: 16,
-    color: 'white',
-    marginBottom: 4,
-  },
-  eventLocation: {
-    fontSize: 16,
-    color: 'white',
-    marginBottom: 4,
-  },
-  eventDescription: {
-    fontSize: 16,
-    color: 'white',
-    marginTop: 16,
-  },
-  buttonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  button: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 8,
-    padding: 16,
-    marginHorizontal: 4,
-  },
-  goingButton: {
-    backgroundColor: '#00C853',
-  },
-  interestedButton: {
-    backgroundColor: '#FFC107',
-  },
-  notGoingButton: {
-    backgroundColor: '#F44336',
-  },
-  buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  eventImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#0E1936',
+    },
+    content: {
+        padding: 16,
+    },
+    detailsContainer: {
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: 8,
+        padding: 16,
+        marginBottom: 16,
+    },
+    eventName: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#4EC6E0',
+        marginBottom: 8,
+    },
+    eventDate: {
+        fontSize: 16,
+        color: 'white',
+        marginBottom: 4,
+    },
+    eventLocation: {
+        fontSize: 16,
+        color: 'white',
+        marginBottom: 4,
+    },
+    eventDescription: {
+        fontSize: 16,
+        color: 'white',
+        marginTop: 16,
+    },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    button: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8,
+        padding: 16,
+        marginHorizontal: 4,
+    },
+    goingButton: {
+        backgroundColor: '#00C853',
+    },
+    interestedButton: {
+        backgroundColor: '#FFC107',
+    },
+    notGoingButton: {
+        backgroundColor: '#F44336',
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    eventImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 8,
+        marginBottom: 16,
+    },
 });
 
 export default EventsExtended;
