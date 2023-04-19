@@ -9,10 +9,16 @@ import {
   View,
 } from 'react-native';
 import { ListItem, Button, Avatar } from 'react-native-elements';
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
+import { useNavigation } from "@react-navigation/native";
 
 const StudyGroups = () => {
   const [search, setSearch] = useState('');
-
+  const navigation = useNavigation();
   const studyGroups = [
     {
       id: 1,
@@ -55,6 +61,7 @@ const StudyGroups = () => {
 
   const handleJoin = (groupId) => {
     // Handle the join action for the study group
+    //navigation.navigate('JoinGroup', { groupId });
   };
 
   const filterStudyGroups = studyGroups.filter((group) =>
@@ -107,28 +114,37 @@ const styles = StyleSheet.create({
   headingContainer: {
     alignItems: 'center',
     padding: 10,
+    //marginBottom: responsiveScreenHeight(1.2),
   },
   heading: {
     color: '#4EC6E0',
-    fontSize: 24,
+    //fontSize: 24,
+    fontSize: responsiveScreenFontSize(3),
     fontWeight: 'bold',
   },
   searchBar: {
     backgroundColor: '#1C2A4E',
     color: '#4EC6E0',
-    borderRadius: 8,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    margin: 16,
+    //borderRadius: 8,
+    borderRadius: responsiveScreenWidth(2),
+    //paddingHorizontal: 16,
+    paddingHorizontal: responsiveScreenWidth(4),
+    //paddingVertical: 16,
+    paddingVertical: responsiveScreenHeight(1.9),
+    //margin: 16,
+    margin: responsiveScreenWidth(4),
   },
   scrollView: {
-    paddingBottom: 20,
+    //paddingBottom: 20,
+    paddingBottom: responsiveScreenHeight(5),
   },
   listItemContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: 5,
-    marginBottom: 10,
-    marginHorizontal: 10,
+    borderRadius: responsiveScreenWidth(2),
+    //marginBottom: 10,
+    marginBottom: responsiveScreenHeight(1.2),
+    //marginHorizontal: 10,
+    marginHorizontal: responsiveScreenWidth(3),
   },
   listItemContent: {
     flex: 1,
@@ -136,7 +152,8 @@ const styles = StyleSheet.create({
   title: {
     color: '#4EC6E0',
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: responsiveScreenFontSize(2.4),
+    //fontSize:18,
   },
   details: {
     color: '#000',

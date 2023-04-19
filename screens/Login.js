@@ -233,13 +233,14 @@ const styles = StyleSheet.create({
     },
     passwordLayout: {
         // height: 48,
-        height: responsiveScreenHeight(5.6),
+        height: responsiveScreenHeight(6.2),
         backgroundColor: Color.gainsboro_200,
         width: "100%",
         borderRadius: Border.br_81xl,
         left: 0,
         position: "absolute",
-        padding: 15
+        padding: 15,
+        fontSize:responsiveScreenFontSize(2),
     },
     emailTypo: {
         color: Color.darkgray_200,
