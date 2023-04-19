@@ -8,10 +8,16 @@ import {
   TouchableOpacity,
   StyleSheet,
   FlatList,
+  ScrollView,
   Dimensions,
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
 
 const JoinRequest = ({ name, onAccept, onReject, image }) => {
   return (
@@ -38,6 +44,16 @@ const StudyGroupJoinRequests = () => {
     { id: '1', name: 'Asher Javaid', image: 'https://loremflickr.com/320/240' },
     { id: '2', name: 'Jaffer Iqbal', image: 'https://loremflickr.com/320/240' },
     { id: '3', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '4', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '5', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '6', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '7', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '8', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '9', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '10', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '11', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '12', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '13', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
   ]);
 
   const handleAccept = (id) => {
@@ -51,18 +67,19 @@ const StudyGroupJoinRequests = () => {
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Join Requests</Text>
-      <FlatList
-        data={requests}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <JoinRequest
-            name={item.name}
-            image={item.image}
-            onAccept={() => handleAccept(item.id)}
-            onReject={() => handleReject(item.id)}
-          />
-        )}
-      />
+      <View style={{height:responsiveScreenHeight(77),top:responsiveScreenHeight(0)}}>
+        <ScrollView>
+          {requests.map((item) => (
+            <JoinRequest
+              key={item.id}
+              name={item.name}
+              image={item.image}
+              onAccept={() => handleAccept(item.id)}
+              onReject={() => handleReject(item.id)}
+            />
+          ))}
+        </ScrollView>
+      </View>
     </SafeAreaView>
   );
 };
