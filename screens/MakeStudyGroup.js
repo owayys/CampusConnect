@@ -120,7 +120,7 @@ const MakeStudyGroup = () => {
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
       </TouchableOpacity>
 
-      <Text style={[styles.timing, styles.daysTypo]}>Timing:</Text>
+      <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>
       <Text style={[styles.subject, styles.subjectTypo]}>Select Subject:</Text>
       <Text style={[styles.days, styles.daysTypo]}>Days:</Text>
       <Text style={[styles.groupName, styles.daysTypo]}>Group name:</Text>
@@ -130,12 +130,14 @@ const MakeStudyGroup = () => {
           styles.rectangle,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
+
         ]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle1, styles.rectangleLayout]}
+        style={[styles.rectangle1, styles.rectangleLayout, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
@@ -144,6 +146,7 @@ const MakeStudyGroup = () => {
           styles.rectangle2,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
         ]}
         placeholder="..."
         keyboardType="default"
@@ -167,18 +170,18 @@ const MakeStudyGroup = () => {
         setValue={setValue}
         setItems={setItems}
       />
-      <Text style={[styles.location, styles.subjectTypo]}>Location:</Text>
+      <Text style={[styles.location, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>Location:</Text>
       <TextInput
-        style={[styles.rectangle4, styles.rectanglePosition]}
+        style={[styles.rectangle4, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle5, styles.rectanglePosition]}
+        style={[styles.rectangle5, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10}]}
         placeholder="..."
         keyboardType="default"
       />
-      <Text style={[styles.addDescription, styles.subjectTypo]}>
+      <Text style={[styles.addDescription, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>
         Add description:
       </Text>
       <TouchableOpacity
