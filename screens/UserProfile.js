@@ -94,49 +94,6 @@ const UserProfile = () => {
     }
   };
   
-
-
-  const Interests = () => {
-    const rows = [];
-    let row = [];
-  
-    for (let i = 0; i < studentInterests.length; i++) {
-      const interest = studentInterests[i];
-  
-      if (i % 3 === 0 && i !== 0) {
-        rows.push(
-          <View style={styles.row} key={i}>
-            {row}
-          </View>
-        );
-        row = [];
-      }
-  
-      row.push(
-        <View style={styles.interest} key={i}>
-          <Text style={styles.interestText}>{interest}</Text>
-        </View>
-      );
-    }
-  
-    if (row.length > 0) {
-      rows.push(
-        <View style={styles.row} key={studentInterests.length}>
-          {row}
-        </View>
-      );
-    }
-  
-    return <View style={styles.container1}>{rows}</View>;
-  };
-
-
-
-
-
-
-
-
   return (
     <View style={styles.userProfile}>
       <View style={styles.backButton}>
@@ -175,30 +132,27 @@ const UserProfile = () => {
           source={require("../assets/iconoutlinecalendar.png")}
         />
       </View>
-      {/* {Interests()} */}
 
-
-      {/* <View style={styles.container}> */}
-        <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
-          <View>
-            {renderInterests()}
-            {isAddingInterest ? (
-              <View style={styles.addInterestContainer}>
-                <TextInput
-                  style={styles.addInterestInput}
-                  placeholder="Type your interest here"
-                  value={newInterest}
-                  onChangeText={setNewInterest}
-                />
-                <TouchableOpacity style={styles.addButton} onPress={handleAddInterest}>
-                  <Text style={styles.addButtonText}>Accept</Text>
-                </TouchableOpacity>
-              </View>
-            ) : (
-              renderAddInterestButton()
-            )}
-          </View>
-        </TouchableWithoutFeedback>
+      <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
+        <View>
+          {renderInterests()}
+          {isAddingInterest ? (
+            <View style={styles.addInterestContainer}>
+              <TextInput
+                style={styles.addInterestInput}
+                placeholder="Type your interest here"
+                value={newInterest}
+                onChangeText={setNewInterest}
+              />
+              <TouchableOpacity style={styles.addButton} onPress={handleAddInterest}>
+                <Text style={styles.addButtonText}>Accept</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            renderAddInterestButton()
+          )}
+        </View>
+      </TouchableWithoutFeedback>
 
 
 
