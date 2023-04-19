@@ -6,6 +6,7 @@ import {
   View,
   Pressable,
   TouchableOpacity,
+  Button,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
@@ -13,8 +14,76 @@ import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
 const UserProfile = () => {
   const navigation = useNavigation();
 
+
+  const studentInterests = [
+    'Coding',
+    'Playing video games',
+    'Basketball',
+    'Drawing',
+    'Hiking',
+    'Reading',
+    'Singing',
+    'Cooking',
+    'Watching movies',
+    'Dancing',
+    'Traveling',
+    'Listening to music',
+  ];
+  
+
+
+  const Interests = () => {
+    const rows = [];
+    let row = [];
+  
+    for (let i = 0; i < studentInterests.length; i++) {
+      const interest = studentInterests[i];
+  
+      if (i % 3 === 0 && i !== 0) {
+        rows.push(
+          <View style={styles.row} key={i}>
+            {row}
+          </View>
+        );
+        row = [];
+      }
+  
+      row.push(
+        <View style={styles.interest} key={i}>
+          <Text style={styles.interestText}>{interest}</Text>
+        </View>
+      );
+    }
+  
+    if (row.length > 0) {
+      rows.push(
+        <View style={styles.row} key={studentInterests.length}>
+          {row}
+        </View>
+      );
+    }
+  
+    return <View style={styles.container}>{rows}</View>;
+  };
+
+
+
+
+
+
+
+
   return (
     <View style={styles.userProfile}>
+      <View style={styles.backButton}>
+           <Button 
+             title="My Chats" 
+             onPress={() => navigation.navigate("OuterChatInterface")}
+             style={{backgroundColor:'navy blue'}} 
+             color={"#4ec6e0"}
+           />
+      </View>
+      
       <Image
         style={styles.imageIcon}
         resizeMode="cover"
@@ -42,7 +111,8 @@ const UserProfile = () => {
           source={require("../assets/iconoutlinecalendar.png")}
         />
       </View>
-      <View style={styles.interests}>
+      {Interests()}
+      {/* <View style={styles.interests}>
         <View
           style={[
             styles.rectangle,
@@ -71,7 +141,7 @@ const UserProfile = () => {
         <Text style={[styles.reading, styles.gymTypo]}>Reading</Text>
         <View style={[styles.rectangle6, styles.rectangleLayout1]} />
         <Text style={[styles.longWalks, styles.gymTypo]}>Long Walks</Text>
-      </View>
+      </View> */}
       <Image
         style={[styles.userProfileChild, styles.userLayout]}
         resizeMode="cover"
@@ -180,6 +250,40 @@ const UserProfile = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 15, // Add horizontal padding
+  },
+
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  interest: {
+    backgroundColor: '#4ec6e0',
+    borderRadius: 12,
+    padding: 7.5,
+    paddingVertical: 10,
+    flexBasis: '30%',
+    alignItems: 'center',
+    top: 340
+  },
+  interestText: {
+    fontSize: 14,
+  },
+
+  backButton: {
+    fontFamily: FontFamily.robotoSemibold,
+    top: 720,
+    fontSize: FontSize.size_xl,
+    flex: 1, 
+    alignSelf:"center",
+    textTransform: "capitalize",
+    color: Color.white,
+    letterSpacing: 2,
+    position: "absolute",
+    width:"55%",
+  },
   mt2: {
     marginTop: 2,
   },
