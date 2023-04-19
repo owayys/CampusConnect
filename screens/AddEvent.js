@@ -252,6 +252,7 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { useNavigation } from "@react-navigation/native";
 
 const AddEvent = () => {
     const [name, setName] = useState('');
@@ -264,6 +265,8 @@ const AddEvent = () => {
     const [showTimePicker, setShowTimePicker] = useState(false)
     const [imageSource, setImageSource] = useState(null);
     const [imageURL, setImageURL] = useState('')
+    const navigation = useNavigation();
+
 
     const selectImage = async () => {
         if (imageURL) return
@@ -377,6 +380,8 @@ const AddEvent = () => {
         } catch (e) {
             console.log(e)
         }
+        navigation.navigate('Events', {
+            screen: 'Events'})
     };
 
     return (

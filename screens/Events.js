@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -66,9 +66,13 @@ const Events = ({ navigation }) => {
             console.log(e)
         }
     }
-    React.useEffect(() => {
-        getEvents()
-    }, [])
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+          getEvents()
+        });
+    
+        return unsubscribe;
+      }, [navigation]);
 
     const filteredEvents = events.filter(event =>
         event.event_name.toLowerCase().includes(searchQuery.toLowerCase()),
