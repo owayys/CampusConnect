@@ -221,7 +221,7 @@ const App = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       captureLocation();
-    }, 20000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
