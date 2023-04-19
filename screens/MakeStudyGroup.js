@@ -82,11 +82,15 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <View style={styles.iconoutlinemessageCircle}>
+      <TouchableOpacity
+        style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
+        activeOpacity={0.2}
+        onPress={() => navigation.navigate("OuterChatInterface")}
+      >
         <Image
           style={styles.maskIcon}
           resizeMode="cover"
-          source={require("../assets/mask.png")}
+          source={require("../assets/chat_icon1.png")}
         />
         <TouchableOpacity
           style={styles.basePosition}
@@ -99,12 +103,7 @@ const MakeStudyGroup = () => {
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
         </TouchableOpacity>
-      </View>
-      <Image
-        style={styles.makeStudyGroupChild}
-        resizeMode="cover"
-        source={require("../assets/ellipse-5.png")}
-      />
+      </TouchableOpacity>
       <Image
         style={styles.makeStudyGroupItem}
         resizeMode="cover"
