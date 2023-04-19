@@ -237,168 +237,245 @@
 
 // export default AddEvent;
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
+    SafeAreaView,
+    ScrollView,
+    View,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    StyleSheet,
+    Image,
+    Pressable
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 const AddEvent = () => {
-  const [name, setName] = useState('');
-  const [image, setImage] = useState('');
-  const [date, setDate] = useState('');
-  const [location, setLocation] = useState('');
-  const [description, setDescription] = useState('');
-  const [timing, setTiming] = useState('');
-  const [imageSource, setImageSource] = useState(null);
+    const [name, setName] = useState('');
+    const [image, setImage] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [showPicker, setShowPicker] = useState(false)
+    const [location, setLocation] = useState('');
+    const [description, setDescription] = useState('');
+    const [timing, setTiming] = useState(new Date());
+    const [showTimePicker, setShowTimePicker] = useState(false)
+    const [imageSource, setImageSource] = useState(null);
 
-  const selectImage = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      alert('Sorry, we need camera roll permissions to make this work!');
-      return;
-    }
-  
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-    if (!result.cancelled) {
-  
-      setImageSource(result.assets[0].uri)
-    }
-  };
-  const handleSubmit = () => {
-    // Handle form submission logic here
-  };
+    const selectImage = async () => {
+        const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== 'granted') {
+            alert('Sorry, we need camera roll permissions to make this work!');
+            return;
+        }
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.heading}>Add Event</Text>
-        <TouchableOpacity style={styles.selectImageButton} onPress={selectImage}>
-          <Text style={styles.selectImageButtonText}>Select Image from Gallery</Text>
-        </TouchableOpacity>
-        {imageSource && (
-          <Image
-            source={{uri:imageSource}}
-            style={styles.selectedImage}
-            resizeMode="cover"
-          />
-        )}
-        <TextInput
-          style={styles.input}
-          placeholder="Event Name"
-          value={name}
-          onChangeText={setName}
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
-        />
-        {/* <TextInput
+        const result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+        if (!result.cancelled) {
+
+            setImageSource(result.assets[0].uri)
+        }
+    };
+
+    const togglePicker = () => {
+        setShowPicker(!showPicker)
+    }
+
+    const onDateChange = ({ type }, selectedDate) => {
+        if (type === 'set') {
+            const currentDate = selectedDate
+            console.log(currentDate)
+            setDate(currentDate)
+            setShowPicker(false)
+        } else {
+            togglePicker
+        }
+    }
+
+    const onTimeChange = ({ type }, selectedTime) => {
+        if (type === 'set') {
+            const currentTime = selectedTime
+            console.log(currentTime)
+            setTiming(currentTime)
+            setShowTimePicker(false)
+        } else {
+            setShowTimePicker(!showTimePicker)
+        }
+    }
+
+    const handleSubmit = async () => {
+        console.log(name, date.toISOString().split('T')[0], location, description, timing.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }))
+
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/event/create",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        soc_id: 'soc_id',
+                        event_name: name,
+                        event_date: date.toISOString().split('T')[0],
+                        event_time: timing.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }),
+                        location: location,
+                        banner: '',
+                        info: description
+                    }),
+                }
+            );
+
+            const data = await response.json();
+            console.log(data)
+        } catch (e) {
+            console.log(e)
+        }
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+            <ScrollView contentContainerStyle={styles.content}>
+                <Text style={styles.heading}>Add Event</Text>
+                <TouchableOpacity style={styles.selectImageButton} onPress={selectImage}>
+                    <Text style={styles.selectImageButtonText}>Select Image from Gallery</Text>
+                </TouchableOpacity>
+                {imageSource && (
+                    <Image
+                        source={{ uri: imageSource }}
+                        style={styles.selectedImage}
+                        resizeMode="cover"
+                    />
+                )}
+                <TextInput
+                    style={styles.input}
+                    placeholder="Event Name"
+                    value={name}
+                    onChangeText={setName}
+                    placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                />
+                {/* <TextInput
           style={styles.input}
           placeholder="Image URL"
           value={image}
           onChangeText={setImage}
           placeholderTextColor="rgba(255, 255, 255, 0.5)"
         /> */}
-        <TextInput
-          style={styles.input}
-          placeholder="Date"
-          value={date}
-          onChangeText={setDate}
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Location"
-          value={location}
-          onChangeText={setLocation}
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Description"
-          value={description}
-          onChangeText={setDescription}
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Timing"
-          value={timing}
-          onChangeText={setTiming}
-          placeholderTextColor="rgba(255, 255, 255, 0.5)"
-        />
-        <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-          <Text style={styles.submitButtonText}>Submit</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </SafeAreaView>
-  );
+                {showPicker && <DateTimePicker
+                    value={date}
+                    mode='date'
+                    display='spinner'
+                    onChange={onDateChange}
+                />}
+                <Pressable onPress={togglePicker}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Date"
+                        value={date.toDateString()}
+                        onChangeText={setDate}
+                        placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                        editable={false}
+                    />
+                </Pressable>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Location"
+                    value={location}
+                    onChangeText={setLocation}
+                    placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Description"
+                    value={description}
+                    onChangeText={setDescription}
+                    placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                />
+                {showTimePicker && <DateTimePicker
+                    value={date}
+                    mode='time'
+                    display='spinner'
+                    onChange={onTimeChange}
+                />}
+                <Pressable onPress={() => setShowTimePicker(true)}>
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Timing"
+                        value={timing.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}
+                        onChangeText={setTiming}
+                        placeholderTextColor="rgba(255, 255, 255, 0.5)"
+                        editable={false}
+                    />
+                </Pressable>
+
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                    <Text style={styles.submitButtonText}>Submit</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </SafeAreaView>
+    );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0E1936',
-  },
-  content: {
-    padding: 16,
-  },
-  heading: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#4EC6E0',
-    marginBottom: 16,
-  },
-  input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 8,
-    color: 'white',
-    fontSize: 16,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    marginBottom: 16,
-  },
-  submitButton: {
-    backgroundColor: '#4EC6E0',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 12,
-  },
-  submitButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#0E1936',
-  },
-  selectImageButton: {
-    backgroundColor: '#4EC6E0',
-    borderRadius: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 12,
-    marginBottom: 16,
-  },
-  selectImageButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#0E1936',
-  },
-  selectedImage: {
-    width: '100%',
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#0E1936',
+    },
+    content: {
+        padding: 16,
+    },
+    heading: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: '#4EC6E0',
+        marginBottom: 16,
+    },
+    input: {
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: 8,
+        color: 'white',
+        fontSize: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        marginBottom: 16,
+    },
+    submitButton: {
+        backgroundColor: '#4EC6E0',
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 12,
+    },
+    submitButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#0E1936',
+    },
+    selectImageButton: {
+        backgroundColor: '#4EC6E0',
+        borderRadius: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingVertical: 12,
+        marginBottom: 16,
+    },
+    selectImageButtonText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#0E1936',
+    },
+    selectedImage: {
+        width: '100%',
+        height: 200,
+        borderRadius: 8,
+        marginBottom: 16,
+    },
 });
 
 export default AddEvent;
