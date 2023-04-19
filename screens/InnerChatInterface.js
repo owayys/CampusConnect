@@ -26,6 +26,18 @@ const InnerChatInterface = ({ route }) => {
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
             setUsername(value);
+            setMsgHistory([
+                { name: talking_to, message: "hi!" },
+                { name: value, message: 'hello!' },
+                { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
+                { name: value, message: "busy w haazri aaj" },
+                { name: value, message: "kya karun karna parta" },
+                { name: value, message: "kya karun karna parta" },
+                { name: value, message: "kya karun karna parta" },
+                { name: value, message: "kya karun karna parta" },
+                { name: value, message: "kya karun karna parta" },
+                { name: value, message: "kya karun karna parta" },
+            ])
             socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
         });
 
