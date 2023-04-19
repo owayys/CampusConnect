@@ -90,7 +90,7 @@ const HomeScreen = ({ route }) => {
 
     React.useEffect(() => {
         getSched()
-    })
+    },[])
 
     return (
         <ScrollView>
@@ -131,7 +131,7 @@ const HomeScreen = ({ route }) => {
                     source={require("../assets/ellipse-5.png")}
                 />
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("EnterSchedule", { name: name })}
+                    onPress={() => navigation.navigate("EnterSchedule")}
                     style={{
                         position: "absolute",
                         top: responsiveScreenHeight(47),

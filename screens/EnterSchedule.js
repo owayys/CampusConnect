@@ -3,7 +3,6 @@ import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 const COURSES = [
   { id: 'csc101', name: 'Introduction to Computer Science' },
   { id: 'mat101', name: 'Calculus I' },
