@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     color: '#4EC6E0',
     borderRadius: 8,
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 16,
     margin: 16,
   },
   heading: {
