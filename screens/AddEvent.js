@@ -247,7 +247,8 @@ import {
     TouchableOpacity,
     StyleSheet,
     Image,
-    Pressable
+    Pressable,
+    Platform
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
@@ -262,8 +263,14 @@ const AddEvent = () => {
     const [timing, setTiming] = useState(new Date());
     const [showTimePicker, setShowTimePicker] = useState(false)
     const [imageSource, setImageSource] = useState(null);
+    const [imageURL, setImageURL] = useState('')
 
     const selectImage = async () => {
+        if (imageURL) return
+
+        console.log('image')
+        setImageURL('')
+
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
             alert('Sorry, we need camera roll permissions to make this work!');
@@ -276,11 +283,33 @@ const AddEvent = () => {
             aspect: [4, 3],
             quality: 1,
         });
-        if (!result.cancelled) {
-
+        // console.log(result)
+        if (!result.canceled) {
             setImageSource(result.assets[0].uri)
+
+            let imageFile = {
+                uri: result.assets[0].uri,
+                type: `${String(result.assets[0].uri.split('/').slice(-1)).split('.')[0]}/${result.assets[0].uri.split('.').slice(-1)}`,
+                name: `${result.assets[0].uri.split('/').slice(-1)}`
+            }
+
+            handleUpload(imageFile)
         }
     };
+
+    const handleUpload = (image) => {
+        const bannerData = new FormData()
+        bannerData.append('file', image)
+        bannerData.append('upload_preset', 'CampusConnect')
+        bannerData.append('cloud_name', 'owaysCloud')
+
+        fetch('https://api.cloudinary.com/v1_1/owaysCloud/image/upload', {
+            method: 'POST',
+            body: bannerData,
+        })
+            .then((res) => res.json())
+            .then((data) => setImageURL(data.url))
+    }
 
     const togglePicker = () => {
         setShowPicker(!showPicker)
@@ -297,6 +326,11 @@ const AddEvent = () => {
         }
     }
 
+    const confirmIOSdate = () => {
+        setDate(date)
+        togglePicker
+    }
+
     const onTimeChange = ({ type }, selectedTime) => {
         if (type === 'set') {
             const currentTime = selectedTime
@@ -308,10 +342,16 @@ const AddEvent = () => {
         }
     }
 
+    const confirmIOStime = () => {
+        setTiming(timing)
+        setShowTimePicker(false)
+    }
+
     const handleSubmit = async () => {
-        console.log(name, date.toISOString().split('T')[0], location, description, timing.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }))
+        if (!imageURL) return
 
         try {
+            console.log(imageURL)
             const response = await fetch(
                 "https://campusconnect.herokuapp.com/api/event/create",
                 {
@@ -326,7 +366,7 @@ const AddEvent = () => {
                         event_date: date.toISOString().split('T')[0],
                         event_time: timing.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false }),
                         location: location,
-                        banner: '',
+                        banner: imageURL,
                         info: description
                     }),
                 }
@@ -344,7 +384,7 @@ const AddEvent = () => {
             <ScrollView contentContainerStyle={styles.content}>
                 <Text style={styles.heading}>Add Event</Text>
                 <TouchableOpacity style={styles.selectImageButton} onPress={selectImage}>
-                    <Text style={styles.selectImageButtonText}>Select Image from Gallery</Text>
+                    <Text style={styles.selectImageButtonText}>{imageURL ? `Uploaded` : `Select Image from Gallery`}</Text>
                 </TouchableOpacity>
                 {imageSource && (
                     <Image
@@ -372,7 +412,21 @@ const AddEvent = () => {
                     mode='date'
                     display='spinner'
                     onChange={onDateChange}
+                    style={styles.datePicker}
                 />}
+
+                {showPicker && Platform.OS === 'ios' &&
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                        <TouchableOpacity style={[styles.submitButton]} onPress={togglePicker}>
+                            <Text>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.submitButton]} onPress={confirmIOSdate}>
+                            <Text>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
+
+
                 <Pressable onPress={togglePicker}>
                     <TextInput
                         style={styles.input}
@@ -381,6 +435,7 @@ const AddEvent = () => {
                         onChangeText={setDate}
                         placeholderTextColor="rgba(255, 255, 255, 0.5)"
                         editable={false}
+                        onPressIn={togglePicker}
                     />
                 </Pressable>
                 <TextInput
@@ -403,6 +458,18 @@ const AddEvent = () => {
                     display='spinner'
                     onChange={onTimeChange}
                 />}
+
+                {showTimePicker && Platform.OS === 'ios' &&
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                        <TouchableOpacity style={[styles.submitButton]} onPress={setShowTimePicker(false)}>
+                            <Text>Cancel</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[styles.submitButton]} onPress={confirmIOStime}>
+                            <Text>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
+                }
+
                 <Pressable onPress={() => setShowTimePicker(true)}>
                     <TextInput
                         style={styles.input}
@@ -414,8 +481,8 @@ const AddEvent = () => {
                     />
                 </Pressable>
 
-                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                    <Text style={styles.submitButtonText}>Submit</Text>
+                <TouchableOpacity style={styles.submitButton} onPress = { handleSubmit }>
+                    <Text style={imageURL ? styles.submitButtonText : [styles.submitButtonText, { opacity: 0.3 }]}>Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
@@ -476,6 +543,10 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 16,
     },
+    datePicker: {
+        height: 120,
+        margin: -10
+    }
 });
 
 export default AddEvent;
