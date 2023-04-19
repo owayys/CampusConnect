@@ -252,7 +252,7 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { useNavigation } from "@react-navigation/native";
+import { withTheme } from 'react-native-elements';
 
 const AddEvent = () => {
     const [name, setName] = useState('');
@@ -417,15 +417,15 @@ const AddEvent = () => {
                     mode='date'
                     display='spinner'
                     onChange={onDateChange}
-                    style={styles.datePicker}
+                    style={styles.datetimePicker}
                 />}
 
                 {showPicker && Platform.OS === 'ios' &&
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <TouchableOpacity style={[styles.submitButton]} onPress={togglePicker}>
+                        <TouchableOpacity style={[styles.submitButton, styles.pickerButton]} onPress={togglePicker}>
                             <Text>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.submitButton]} onPress={confirmIOSdate}>
+                        <TouchableOpacity style={[styles.submitButton, styles.pickerButton]} onPress={confirmIOSdate}>
                             <Text>Confirm</Text>
                         </TouchableOpacity>
                     </View>
@@ -462,14 +462,15 @@ const AddEvent = () => {
                     mode='time'
                     display='spinner'
                     onChange={onTimeChange}
+                    style={styles.datetimePicker}
                 />}
 
                 {showTimePicker && Platform.OS === 'ios' &&
                     <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                        <TouchableOpacity style={[styles.submitButton]} onPress={setShowTimePicker(false)}>
+                        <TouchableOpacity style={[styles.submitButton, styles.pickerButton]} onPress={setShowTimePicker(false)}>
                             <Text>Cancel</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={[styles.submitButton]} onPress={confirmIOStime}>
+                        <TouchableOpacity style={[styles.submitButton, styles.pickerButton]} onPress={confirmIOStime}>
                             <Text>Confirm</Text>
                         </TouchableOpacity>
                     </View>
@@ -483,6 +484,7 @@ const AddEvent = () => {
                         onChangeText={setTiming}
                         placeholderTextColor="rgba(255, 255, 255, 0.5)"
                         editable={false}
+                        onPressIn={setShowTimePicker(true)}
                     />
                 </Pressable>
 
@@ -548,9 +550,13 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         marginBottom: 16,
     },
-    datePicker: {
+    datetimePicker: {
+        color: 'white',
         height: 120,
         margin: -10
+    },
+    pickerButton: {
+        paddingHorizontal: 20
     }
 });
 
