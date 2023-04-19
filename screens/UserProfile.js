@@ -7,9 +7,13 @@ import {
   Pressable,
   TouchableOpacity,
   Button,
+  TextInput,
+  TouchableWithoutFeedback,
+
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
+import { useState } from "react";
 
 const UserProfile = () => {
   const navigation = useNavigation();
@@ -29,6 +33,66 @@ const UserProfile = () => {
     'Traveling',
     'Listening to music',
   ];
+
+
+  const [interests, setInterests] = useState(
+  [
+    'Coding',
+    'Playing video games',
+    'Basketball',
+    'Drawing',
+  ]);
+
+  const [newInterest, setNewInterest] = useState('');
+  const [isAddingInterest, setIsAddingInterest] = useState(false);
+
+  const handleAddInterest = () => {
+    if (newInterest !== '') {
+      if (interests.length >= 6) {
+        setIsAddingInterest(false);
+        return;
+      }
+      setInterests([...interests, newInterest]);
+      setNewInterest('');
+    }
+    setIsAddingInterest(false);
+  };
+
+  const renderInterests = () => {
+    const rows = [];
+    for (let i = 0; i < interests.length; i += 3) {
+      const row = (
+        <View style={styles.interestsRow} key={i}>
+          {interests.slice(i, i + 3).map((interest, index) => (
+            <View style={styles.interest} key={index}>
+              <Text>{interest}</Text>
+            </View>
+          ))}
+        </View>
+      );
+      rows.push(row);
+    }
+    return rows;
+  };
+  
+  const renderAddInterestButton = () => {
+    if (interests.length >= 6) {
+      return (
+        <View style={styles.addInterestButtonDisabled}>
+          <Text style={styles.addInterestButtonText}>You can't add more interests</Text>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={styles.addInterestButton}
+          onPress={() => setIsAddingInterest(true)}
+        >
+          <Text style={styles.addInterestButtonText}>Add interest</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
   
 
 
@@ -63,7 +127,7 @@ const UserProfile = () => {
       );
     }
   
-    return <View style={styles.container}>{rows}</View>;
+    return <View style={styles.container1}>{rows}</View>;
   };
 
 
@@ -111,37 +175,35 @@ const UserProfile = () => {
           source={require("../assets/iconoutlinecalendar.png")}
         />
       </View>
-      {Interests()}
-      {/* <View style={styles.interests}>
-        <View
-          style={[
-            styles.rectangle,
-            styles.rectangleLayout2,
-            styles.rectangleLayout3,
-          ]}
-        />
-        <Text style={[styles.football, styles.gymTypo]}>Football</Text>
-        <View style={[styles.rectangle1, styles.rectangleLayout1]} />
-        <Text style={[styles.gym, styles.gymTypo]}>Gym</Text>
-        <View style={[styles.rectangle2, styles.rectangleLayout]} />
-        <View style={[styles.rectangle3, styles.rectangleLayout]} />
-        <Pressable style={[styles.editProfileParent, styles.rectangleLayout2]}>
-          <Text style={[styles.editProfile, styles.gymTypo]}>Edit Profile</Text>
-          <View style={styles.rectangle4} />
-        </Pressable>
-        <Text style={[styles.cooking, styles.gymTypo]}>Cooking</Text>
-        <Text style={[styles.chess, styles.gymTypo]}>Chess</Text>
-        <View
-          style={[
-            styles.rectangle5,
-            styles.rectangleLayout2,
-            styles.rectangleLayout3,
-          ]}
-        />
-        <Text style={[styles.reading, styles.gymTypo]}>Reading</Text>
-        <View style={[styles.rectangle6, styles.rectangleLayout1]} />
-        <Text style={[styles.longWalks, styles.gymTypo]}>Long Walks</Text>
-      </View> */}
+      {/* {Interests()} */}
+
+
+      {/* <View style={styles.container}> */}
+        <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
+          <View>
+            {renderInterests()}
+            {isAddingInterest ? (
+              <View style={styles.addInterestContainer}>
+                <TextInput
+                  style={styles.addInterestInput}
+                  placeholder="Type your interest here"
+                  value={newInterest}
+                  onChangeText={setNewInterest}
+                />
+                <TouchableOpacity style={styles.addButton} onPress={handleAddInterest}>
+                  <Text style={styles.addButtonText}>Accept</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              renderAddInterestButton()
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+
+
+
+
+
       <Image
         style={[styles.userProfileChild, styles.userLayout]}
         resizeMode="cover"
@@ -250,8 +312,60 @@ const UserProfile = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container1: {
     paddingHorizontal: 15, // Add horizontal padding
+  },
+
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#ffffff',
+  },
+  interestsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 16,
+  },
+  interest: {
+    backgroundColor: '#f0f0f0',
+    padding: 8,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  addInterestButton: {
+    backgroundColor: '#2c3e50',
+    padding: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 500,
+  },
+  addInterestButtonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+  },
+  addInterestContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 500,
+  },
+  addInterestInput: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+    padding: 8,
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  addButton: {
+    backgroundColor: '#2c3e50',
+    padding: 8,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  addButtonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
   },
 
   row: {
