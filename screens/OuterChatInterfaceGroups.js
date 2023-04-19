@@ -88,7 +88,7 @@ const OuterChatInterfaceGroups = ({route}) => {
              style={{backgroundColor:'navy blue'}} 
              color={"#4ec6e0"}
            />
-          </View>
+        </View>
       </View>
     );
 
