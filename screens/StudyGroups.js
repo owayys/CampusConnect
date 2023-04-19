@@ -73,6 +73,13 @@ const StudyGroups = () => {
       <StatusBar barStyle="light-content" />
       <View style={styles.headingContainer}>
         <Text style={styles.heading}>Study Groups</Text>
+        <Button
+          title="Make New Group"
+          onPress={()=>{navigation.navigate('MakeStudyGroup', {
+            screen: 'MakeStudyGroup'
+        })}}
+          buttonStyle={styles.newGroupButton}
+        />
       </View>
       <TextInput
         style={styles.searchBar}
@@ -157,6 +164,18 @@ const styles = StyleSheet.create({
   },
   details: {
     color: '#000',
+  },
+  headingContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  newGroupButton: {
+    backgroundColor: '#4EC6E0',
+    borderRadius: responsiveScreenWidth(2),
+    paddingHorizontal: responsiveScreenWidth(3),
+    paddingVertical: responsiveScreenHeight(0.8),
   },
 });
 

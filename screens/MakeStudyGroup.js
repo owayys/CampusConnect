@@ -45,9 +45,12 @@ const MakeStudyGroup = () => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const [items, setItems] = useState([
     {label: 'Apple', value: 'apple'},
     {label: 'Banana', value: 'banana'}
+    
   ]);
 
   const handleCreateGroup = () => {
@@ -73,6 +76,23 @@ const MakeStudyGroup = () => {
         console.error(error);
       });
   };
+
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setSelectedImage(result.uri);
+      }
+    } catch (error) {
+      console.log("Error selecting image", error);
+    }
+  };
+  
 
   return (
     
@@ -116,11 +136,16 @@ const MakeStudyGroup = () => {
         source={require("../assets/rectangle3.png")}
       />
       <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
-        <Image source={require("../assets/ic_add.png")} style={{ width: 50, height: 50, resizeMode: "contain" }} />
+        {selectedImage ? (
+          <Image source={{ uri: selectedImage }} style={{ right: 45, width: 295, height: 150, top: 56, resizeMode: "cover" }} />
+        ) : (
+          <Image source={require("../assets/ic_add.png")} style={{ width: 500, height: 500, resizeMode: "contain" }} />
+        )}
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
       </TouchableOpacity>
 
-      <Text style={[styles.timing, styles.daysTypo]}>Timing:</Text>
+
+      <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>
       <Text style={[styles.subject, styles.subjectTypo]}>Select Subject:</Text>
       <Text style={[styles.days, styles.daysTypo]}>Days:</Text>
       <Text style={[styles.groupName, styles.daysTypo]}>Group name:</Text>
@@ -130,12 +155,14 @@ const MakeStudyGroup = () => {
           styles.rectangle,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
+
         ]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle1, styles.rectangleLayout]}
+        style={[styles.rectangle1, styles.rectangleLayout, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
@@ -144,6 +171,7 @@ const MakeStudyGroup = () => {
           styles.rectangle2,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
         ]}
         placeholder="..."
         keyboardType="default"
@@ -167,18 +195,18 @@ const MakeStudyGroup = () => {
         setValue={setValue}
         setItems={setItems}
       />
-      <Text style={[styles.location, styles.subjectTypo]}>Location:</Text>
+      <Text style={[styles.location, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>Location:</Text>
       <TextInput
-        style={[styles.rectangle4, styles.rectanglePosition]}
+        style={[styles.rectangle4, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle5, styles.rectanglePosition]}
+        style={[styles.rectangle5, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10}]}
         placeholder="..."
         keyboardType="default"
       />
-      <Text style={[styles.addDescription, styles.subjectTypo]}>
+      <Text style={[styles.addDescription, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>
         Add description:
       </Text>
       <TouchableOpacity
@@ -357,7 +385,7 @@ const styles = StyleSheet.create({
     height: 27,
   },
   rectangle1: {
-    top: 322,
+    top: 330,
     left: 117,
     width: 255,
     height: 27,

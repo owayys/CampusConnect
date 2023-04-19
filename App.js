@@ -24,7 +24,6 @@ import ForumsTabPostSettings from "./screens/ForumsTabPostSettings";
 import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
 import InnerChatInterface from "./screens/InnerChatInterface";
-import io from 'socket.io-client';
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
 
@@ -40,7 +39,9 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const socket = io('https://campusconnect.herokuapp.com/');
+// const socket = io('https://campusconnect.herokuapp.com/');
+
+import socket from "./util/socket";
 
 const captureLocation = async () => {
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -187,6 +188,7 @@ function HomeTabs() {
         <Tab.Screen
           name="InnerChatInterface"
           component={InnerChatInterface}
+        //   children={()=><InnerChatInterface socket={socket}/>}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
     </Tab.Navigator>
