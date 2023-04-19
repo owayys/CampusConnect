@@ -250,6 +250,7 @@ import {
     Pressable,
     Platform
 } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from 'expo-image-picker'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { withTheme } from 'react-native-elements';
@@ -377,11 +378,13 @@ const AddEvent = () => {
 
             const data = await response.json();
             console.log(data)
+            navigation.navigate('Events', {
+                screen: 'Events'
+            })
         } catch (e) {
             console.log(e)
         }
-        navigation.navigate('Events', {
-            screen: 'Events'})
+
     };
 
     return (
@@ -457,6 +460,7 @@ const AddEvent = () => {
                     onChangeText={setDescription}
                     placeholderTextColor="rgba(255, 255, 255, 0.5)"
                 />
+
                 {showTimePicker && <DateTimePicker
                     value={date}
                     mode='time'
@@ -484,11 +488,11 @@ const AddEvent = () => {
                         onChangeText={setTiming}
                         placeholderTextColor="rgba(255, 255, 255, 0.5)"
                         editable={false}
-                        onPressIn={setShowTimePicker(true)}
+                        onPressIn={() => setShowTimePicker(true)}
                     />
                 </Pressable>
 
-                <TouchableOpacity style={styles.submitButton} onPress = { handleSubmit }>
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
                     <Text style={imageURL ? styles.submitButtonText : [styles.submitButtonText, { opacity: 0.3 }]}>Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
