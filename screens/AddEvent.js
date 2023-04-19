@@ -266,6 +266,9 @@ const AddEvent = () => {
     const [imageURL, setImageURL] = useState('')
 
     const selectImage = async () => {
+        if (imageURL) return
+
+        console.log('image')
         setImageURL('')
 
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -345,6 +348,8 @@ const AddEvent = () => {
     }
 
     const handleSubmit = async () => {
+        if (!imageURL) return
+
         try {
             console.log(imageURL)
             const response = await fetch(
@@ -378,7 +383,7 @@ const AddEvent = () => {
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.content}>
                 <Text style={styles.heading}>Add Event</Text>
-                <TouchableOpacity style={styles.selectImageButton} onPress={() => { selectImage }}>
+                <TouchableOpacity style={styles.selectImageButton} onPress={selectImage}>
                     <Text style={styles.selectImageButtonText}>{imageURL ? `Uploaded` : `Select Image from Gallery`}</Text>
                 </TouchableOpacity>
                 {imageSource && (
@@ -476,7 +481,7 @@ const AddEvent = () => {
                     />
                 </Pressable>
 
-                <TouchableOpacity style={styles.submitButton} {...imageURL ? onPress = { handleSubmit } : onPress = {}}>
+                <TouchableOpacity style={styles.submitButton} onPress = { handleSubmit }>
                     <Text style={imageURL ? styles.submitButtonText : [styles.submitButtonText, { opacity: 0.3 }]}>Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
