@@ -23,7 +23,7 @@ const JoinRequest = ({ name, onAccept, onReject, image }) => {
   return (
     <View style={styles.requestContainer}>
       <Image source={{ uri: image }} style={styles.profileImage} />
-      <Text style={styles.requestText}>{name}</Text>
+      <Text style={styles.requestText}>{name.length > 20 ? name.substring(0, 20) + '...' : name}</Text>
       <TouchableOpacity onPress={onAccept}>
         <View style={styles.acceptButton}>
           <Icon name="checkmark" size={20} color="green" />
@@ -43,7 +43,7 @@ const StudyGroupJoinRequests = () => {
   const [requests, setRequests] = useState([
     { id: '1', name: 'Asher Javaid', image: 'https://loremflickr.com/320/240' },
     { id: '2', name: 'Jaffer Iqbal', image: 'https://loremflickr.com/320/240' },
-    { id: '3', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
+    { id: '3', name: 'My name is a big ass name it is too long', image: 'https://loremflickr.com/320/240' },
     { id: '4', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
     { id: '5', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
     { id: '6', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
@@ -68,7 +68,7 @@ const StudyGroupJoinRequests = () => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.heading}>Join Requests</Text>
       <View style={{height:responsiveScreenHeight(77),top:responsiveScreenHeight(0)}}>
-        <ScrollView>
+        <ScrollView >
           {requests.map((item) => (
             <JoinRequest
               key={item.id}
