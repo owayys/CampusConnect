@@ -19,9 +19,16 @@ import {
   responsiveScreenWidth,
   responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserProfile = () => {
   const navigation = useNavigation();
+  const [username, setUsername] = useState("");
+
+  AsyncStorage.getItem("username").then((value) => {
+    setUsername(value);
+    console.log(value);
+});
 
   const user_name = "Ahmed Luqman"
   const description = "A CS Junior, who loves playing football and chess!!!"
@@ -120,7 +127,7 @@ const UserProfile = () => {
         source={require("../assets/image20.png")}
       />
       <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
-        {user_name}
+        {username}
       </Text>
       <Text
         style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
