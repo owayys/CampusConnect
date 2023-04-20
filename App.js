@@ -24,6 +24,7 @@ import ForumsTabPostSettings from "./screens/ForumsTabPostSettings";
 import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
 import InnerChatInterface from "./screens/InnerChatInterface";
+import SocialsTwo from "./screens/SocialsTwo";
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
 
@@ -74,7 +75,7 @@ function HomeTabs() {
           </View> 
         )
         }}/>
-      <Tab.Screen name="Socials" component={Socials} options={{ 
+      <Tab.Screen name="Socials" component={SocialsTwo} options={{ 
         headerShown: false,
         tabBarIcon:({focused})=>(
           <View>
