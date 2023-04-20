@@ -84,7 +84,7 @@ const OuterChatInterfaceGroups = ({route}) => {
         <View style={styles.backButton}>
            <Button 
              title="Personal Chats" 
-             onPress={() => navigation.navigate("OuterChatInterfaceTwo")}
+             onPress={() => navigation.navigate("OuterChatInterface")}
              style={{backgroundColor:'navy blue', }} 
              color={"#4ec6e0"}
            />

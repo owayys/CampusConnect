@@ -66,19 +66,17 @@ const InnerChatInterface = ({ route }) => {
                 { name: value, message: "kya karun karna parta" },
                 { name: value, message: "kya karun karna parta" },
                 { name: value, message: "kya karun karna parta" },
-
-                // message: hello2
             ])
-            socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
+            socket.emit("joinRoom", { username: value, room: route.params.params.chatroom_id })
         });
 
+        socket.on("message", (message) => {
+            console.log(message)
+        })
     }, [])
 
-    socket.off("message").on("message", (rec_message) => {
-        console.log("ye hai message", rec_message)
-        const newMsg = {name : rec_message.user, message: rec_message.message}
-        setMsgHistory([...msgHistory, newMsg])
-    })
+    const talking_to = route.params.params.name
+    const isSendButtonDisabled = newMessage.length === 0;
 
 
     console.log()
@@ -116,15 +114,13 @@ const InnerChatInterface = ({ route }) => {
 
     const handleSendMessage = () => {
         console.log(newMessage)
-        socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
+        socket.emit("chatMessage", newMessage)
+        setNewMessage('');
     }
 
     return (
         <View style={styles.container}>
-
-
-
-            <View style={{ position: "absolute", left: 10, top: 10 }}>
+            <View style={{ position: "absolute", left: 0, top: 1, alignContent: 'center' }}>
                 <Text style={styles.talkingTo}>{talking_to}</Text>
                 <Image
                     style={styles.userImage}
@@ -133,23 +129,21 @@ const InnerChatInterface = ({ route }) => {
                 />
             </View>
 
-
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.keyboardContainer}
             >
-
                 <View style={styles.chatMessages}>
                     <ScrollView ref={scrollViewRef}>
                         {msgHistory.map((data, index) => (
                             <View style={data.name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
-                                {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
                                 <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.name}</Text>
                                 <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.message}</Text>
                             </View>
                         ))}
                     </ScrollView>
                 </View>
+
                 <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                     <TextInput
                         style={styles.input}
@@ -159,8 +153,9 @@ const InnerChatInterface = ({ route }) => {
                         onSubmitEditing={handleSendMessage}
                     />
                     <TouchableOpacity
-                        style={styles.button}
+                        style={[styles.button, isSendButtonDisabled && styles.disabledButton]}
                         onPress={handleSendMessage}
+                        disabled={isSendButtonDisabled}
                     >
                         <Text style={styles.buttonText}>Send</Text>
                     </TouchableOpacity>
@@ -170,12 +165,14 @@ const InnerChatInterface = ({ route }) => {
     );
 };
 
+
 const styles = StyleSheet.create({
 
     messageBubbleSender: {
         padding: 10,
         borderRadius: 20,
         marginBottom: 10,
+        // paddingBottom: 20,
         backgroundColor: '#ADD8F6',
         alignSelf: 'flex-end'
     },
@@ -184,6 +181,9 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 20,
         marginBottom: 10,
+        // paddingBottom: 20,
+        position: 'relative',
+        // bottom: 10,
         backgroundColor: '#E5E5E5',
         alignSelf: 'flex-start',
         paddingHorizontal: 50,
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
 
     userImage: {
         top: 45,
-        left: 18,
+        left: 0,
         width: 110,
         height: 95,
         borderRadius: Border.br_11xl,

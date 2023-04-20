@@ -177,10 +177,8 @@ const styles = StyleSheet.create({
   imageIcon1: {
     // bottom:195,
     // left: 20,
-    // width: 65,
-    // height: 65,
-    width: responsiveScreenWidth(17),
-    height: responsiveScreenWidth(17),
+    width: 65,
+    height: 65,
     borderRadius: Border.br_11xl,
     //position: "absolute",
 },
