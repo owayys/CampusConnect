@@ -24,10 +24,12 @@ import {
 } from "react-native-responsive-dimensions";
 import DateTimePicker from '@react-native-community/datetimepicker'
 import SelectDropdown from 'react-native-select-dropdown'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const MakeStudyGroup = () => {
     const navigation = useNavigation();
+    const [user, setUser] = React.useState()
     const [groupName, setGroupName] = React.useState("");
     const [subject, setSubject] = React.useState("");
     const [location, setLocation] = React.useState("");
@@ -40,6 +42,11 @@ const MakeStudyGroup = () => {
     const [dropdownVals, setDropdownVals] = useState(["Select a day..."]);
     const [courses, setCourses] = useState([])
     const [filled, setFilled] = useState(groupName && subject && location && description && day && imageURL && timing)
+
+    AsyncStorage.getItem("userid").then((value) => {
+        setUser(value);
+        console.log(value);
+    });
 
     React.useEffect(() => {
         setFilled(groupName && subject && location && description && day && imageURL && timing)
@@ -158,6 +165,7 @@ const MakeStudyGroup = () => {
                         'Content-Type': 'application/json'
                     }),
                     body: JSON.stringify({
+                        s_id: user,
                         group_name: groupName, 
                         group_icon: imageURL, 
                         c_id: subject, 
