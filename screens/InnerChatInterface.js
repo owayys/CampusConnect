@@ -27,7 +27,7 @@ const InnerChatInterface = ({ route }) => {
     const [newMessage, setNewMessage] = useState('');
     const [msgHistory, setMsgHistory] = useState([]);
 
-    const talking_to = route.params.params.name
+    const talking_to = route.params.params.s_name
 
     const fetchMessages = async() => {
         console.log(route.params.params.chatroom_id)
@@ -73,7 +73,7 @@ const InnerChatInterface = ({ route }) => {
 
 
     console.log()
-    console.log("Before", talking_to)
+    console.log("Before", route.params.params)
     console.log()
 
     
