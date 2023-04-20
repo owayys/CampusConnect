@@ -12,48 +12,61 @@ import {
     TouchableHighlight,
     KeyboardAvoidingView,
     ScrollView,
-
+    scrollViewRef
 } from "react-native";
-import { useRef, useEffect } from 'react';
+import { useEffect,useRef } from 'react';
 import socket from '../util/socket';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const InnerChatInterface = ({ route }) => {
     const [username, setUsername] = useState('')
+    const [user, setUser] = useState()
     const [sock, setSock] = useState(null)
+
+    const [newMessage, setNewMessage] = useState('');
+    const [msgHistory, setMsgHistory] = useState([]);
 
     const talking_to = route.params.params.name
 
-    const scrollViewRef = useRef(null);
+    const fetchMessages = async() => {
+        console.log(route.params.params.chatroom_id)
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/chatroom/message/get",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: route.params.params.chatroom_id
+                    }),
+                }
+            );
 
-
+            const data = await response.json();
+            setMsgHistory(data.messages)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    
+    useEffect(() => {
+        fetchMessages()
+    }, [user])
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
             setUsername(value);
-            setMsgHistory([
-                { name: talking_to, message: "hi!" },
-                { name: value, message: 'hello!' },
-                { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
-                { name: value, message: "busy w haazri aaj" },
-                { name: value, message: "kya karun karna parta" },
-                { name: value, message: "kya karun karna parta" },
-                { name: value, message: "kya karun karna parta" },
-                { name: value, message: "kya karun karna parta" },
-                { name: value, message: "kya karun karna parta" },
-                { name: value, message: "kya karun karna parta" },
-
-                // message: hello2
-            ])
             socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
         });
-
+        AsyncStorage.getItem("userid").then((value) => {
+            setUser(value);
+        });
     }, [])
 
     socket.off("message").on("message", (rec_message) => {
         console.log("ye hai message", rec_message)
-        const newMsg = {name : rec_message.user, message: rec_message.message}
+        const newMsg = {s_name : rec_message.user, content: rec_message.message}
         setMsgHistory([...msgHistory, newMsg])
     })
 
@@ -62,39 +75,32 @@ const InnerChatInterface = ({ route }) => {
     console.log("Before", talking_to)
     console.log()
 
-    const [newMessage, setNewMessage] = useState('');
-    const [msgHistory, setMsgHistory] = useState([]);
+    
 
-
-
-    useEffect(() => {
-        if (scrollViewRef.current) {
-          scrollViewRef.current.scrollToEnd({ animated: true });
+    const sendMessage = async() => {
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/chatroom/message/send",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: route.params.params.chatroom_id,
+                        s_id: user,
+                        content: newMessage
+                    }),
+                }
+            );
+            const data = await response.json();
+            console.log(data)
+        } catch (err) {
+            console.log(err);
         }
-      },[msgHistory]);
-  
-    useEffect(() => {
-        // setMsgHistory([
-        //   { name: talking_to, message: 'hi!' },
-        //   { name: username, message: 'hello!' },
-        //   { name: talking_to, message: 'kesa haiiiiiiiiiiiiiiii' },
-        //   { name: username, message: 'busy w haazri aaj' },
-        //   { name: username, message: 'kya karun karna parta' },
-        //   { name: username, message: 'kya karun karna parta' },
-        //   { name: username, message: 'kya karun karna parta' },
-        //   { name: username, message: 'kya karun karna parta' },
-        //   { name: username, message: 'kya karun karna parta' },
-        //   { name: username, message: 'kya karun karna parta' },
-        // ]);
-
-        // FETCH IN SET MSG HISTORY
-
-    }, [talking_to]);
-
+    }
     const handleSendMessage = () => {
         console.log(newMessage)
+        sendMessage()
         socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
-        setNewMessage("")
     }
 
     return (
@@ -120,10 +126,10 @@ const InnerChatInterface = ({ route }) => {
                 <View style={styles.chatMessages}>
                     <ScrollView ref={scrollViewRef}>
                         {msgHistory.map((data, index) => (
-                            <View style={data.name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
+                            <View style={data.s_name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
                                 {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
-                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.name}</Text>
-                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.message}</Text>
+                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.s_name}</Text>
+                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.content}</Text>
                             </View>
                         ))}
                     </ScrollView>
