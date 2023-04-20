@@ -133,6 +133,7 @@ const HomeScreen = ({ route }) => {
                         placeholder="Search..."
                         keyboardType="default"
                         autoCapitalize="none"
+                        placeholderTextColor="#ffff"
                     />
                     <Image
                         style={styles.groupIcon}
