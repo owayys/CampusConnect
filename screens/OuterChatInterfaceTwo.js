@@ -123,7 +123,7 @@ const filterIndivChats = indivChats.filter((p) =>
          */}
         <Button
           title="Group Chats"
-          onPress={()=>{navigation.navigate('OuterChatInterfaceGroups')}}
+          onPress={()=>{navigation.navigate('OuterChatInterFaceGroupsTwo')}}
           buttonStyle={styles.newGroupButton}
         />
       </View>

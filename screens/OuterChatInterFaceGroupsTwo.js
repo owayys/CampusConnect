@@ -114,7 +114,7 @@ const filterIndivChats = indivChats.filter((p) =>
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.headingContainer}>
-      <Text style={styles.heading}>Direct Messages</Text>
+      <Text style={styles.heading}>Group Chats</Text>
       {/* <Image
           style={styles.imageIcon}
           resizeMode="cover"
@@ -122,15 +122,15 @@ const filterIndivChats = indivChats.filter((p) =>
         />
          */}
         <Button
-          title="Group Chats"
-          onPress={()=>{navigation.navigate('OuterChatInterfaceGroups')}}
+          title="Direct Messages"
+          onPress={()=>{navigation.navigate('OuterChatInterfaceTwo')}}
           buttonStyle={styles.newGroupButton}
         />
       </View>
       
       <TextInput
         style={styles.searchBar}
-        placeholder="Search Private Chats..."
+        placeholder="Search Group Chats..."
         value={search}
         onChangeText={setSearch}
         placeholderTextColor="#ffff"
