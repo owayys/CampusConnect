@@ -27,8 +27,11 @@ const HomeScreen = ({ route }) => {
     const [sched, setSched] = useState([])
     const navigation = useNavigation();
     if (route.params !== undefined) {
-        const { name } = route.params;
+        const { name,flag } = route.params;
         AsyncStorage.setItem("username", name);
+        AsyncStorage.setItem("flag", flag);
+        
+        console.log("HELLO",flag)
     }
     AsyncStorage.getItem("username").then((value) => {
         setUsername(value);

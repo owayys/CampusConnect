@@ -40,9 +40,9 @@ const Login = () => {
     function validateEmail(email) {
         const username = email.split('@')[0];
         if (username.length === 8 && /^\d+$/.test(username)) {
-          return 0;
+          return "0";
         }
-        return 1;
+        return "1";
       }
 
     const handleLogin = async () => {
@@ -58,7 +58,7 @@ const Login = () => {
                     body: JSON.stringify({
                         email: username,
                         password: password,
-                        soc_flag: tempFlag,
+                        soc_flag: 0,
                     }),
                 }
             );
@@ -68,7 +68,7 @@ const Login = () => {
                 //console.log(data.name)
                 navigation.navigate("HomeScreen", {
                     screen: "Home",
-                    params: { name: data.name },
+                    params: { name: data.name, flag:tempFlag },
                 });
             } else {
                 console.log("Error");
