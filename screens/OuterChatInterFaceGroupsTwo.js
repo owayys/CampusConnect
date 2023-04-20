@@ -20,7 +20,11 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const OuterChatInterface = () => {
+const OuterChatInterface = ({route}) => {
+
+  console.log(route.params.params)
+  const groupChats = route.params.params
+
   const [search, setSearch] = useState('');
   const navigation = useNavigation();
   const indivChats = [
@@ -136,11 +140,11 @@ const filterIndivChats = indivChats.filter((p) =>
         placeholderTextColor="#ffff"
       />
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {filterIndivChats.map((p) => (
+        {groupChats.map((p) => (
           <ListItem
-            key={p.chatroom_id}
+            key={p.groupName}
             containerStyle={styles.listItemContainer}
-            onPress={()=>{console.log("clicked")}}
+            onPress={()=>{navigation.navigate('InnerChatInterfaceGroups', {params : p})}}
           >
             <Image
                 style={styles.imageIcon1}
@@ -149,7 +153,7 @@ const filterIndivChats = indivChats.filter((p) =>
                 source={{uri:p.icon}}
             />
             <ListItem.Content style={styles.listItemContent}>
-              <ListItem.Title style={styles.title}>{p.name}</ListItem.Title>
+              <ListItem.Title style={styles.title}>{p.groupName}</ListItem.Title>
               <Text style={styles.details}>
                 {p.content}
               </Text>
