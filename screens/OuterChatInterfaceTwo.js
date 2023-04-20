@@ -72,31 +72,37 @@ const OuterChatInterface = () => {
 
     const groupChats = [
         {
+            chatroom_id: 1,
             groupName: "AP",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",
         },
         {
+            chatroom_id: 2,
             groupName: "SE",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",
         },
         {
+            chatroom_id: 3,
             groupName: "NetSec",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",
         },
         {
+            chatroom_id: 4,
             groupName: "Blockchain",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",
         },
         {
+            chatroom_id: 5,
             groupName: "Topics",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",
         },
         {
+            chatroom_id: 6,
             groupName: "Something",
             content: "wowowowoww",
             icon: "https://loremflickr.com/320/240",

@@ -52,7 +52,7 @@ const InnerChatInterface = ({ route }) => {
     
     useEffect(() => {
         fetchMessages()
-    }, [user])
+    }, [talking_to])
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
@@ -62,7 +62,7 @@ const InnerChatInterface = ({ route }) => {
         AsyncStorage.getItem("userid").then((value) => {
             setUser(value);
         });
-    }, [])
+    }, [talking_to])
 
     socket.off("message").on("message", (rec_message) => {
         console.log("ye hai message", rec_message)
