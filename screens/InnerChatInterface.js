@@ -23,6 +23,8 @@ const InnerChatInterface = ({ route }) => {
     const [username, setUsername] = useState('')
     const [sock, setSock] = useState(null)
 
+    const talking_to = route.params.params.name
+
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
             setUsername(value);
@@ -49,10 +51,9 @@ const InnerChatInterface = ({ route }) => {
     // console.log(route.params.params.name)
     // console.log(socket)
 
-    const talking_to = route.params.params.name
     console.log()
     console.log("Before", talking_to)
-    console.log("Before", msgHistory)
+    // console.log("Before", msgHistory)
     console.log()
     const [newMessage, setNewMessage] = useState('');
     const [msgHistory, setMsgHistory] = useState([]);
