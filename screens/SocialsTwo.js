@@ -104,11 +104,22 @@ const StudyGroups = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.headingContainer}>
-      <Text style={styles.heading}>Add Friends</Text>
-      <Image
+      {/* <Text style={styles.heading}>Add Friends</Text> */}
+      {/* <Image
           style={styles.imageIcon}
           resizeMode="cover"
           source={require("../assets/image21.png")}
+        />
+         */}
+         <Button
+          title="View Requests"
+          onPress={()=>{navigation.navigate('FriendRequests')}}
+          buttonStyle={styles.newGroupButton1}
+        />
+        <Button
+          title="My Friends"
+          onPress={()=>{navigation.navigate('ViewFriends')}}
+          buttonStyle={styles.newGroupButton}
         />
       </View>
       
@@ -217,6 +228,12 @@ const styles = StyleSheet.create({
   },
   newGroupButton: {
     backgroundColor: '#4EC6E0',
+    borderRadius: responsiveScreenWidth(2),
+    paddingHorizontal: responsiveScreenWidth(3),
+    paddingVertical: responsiveScreenHeight(0.8),
+  },
+  newGroupButton1: {
+    backgroundColor: "#DF910C",
     borderRadius: responsiveScreenWidth(2),
     paddingHorizontal: responsiveScreenWidth(3),
     paddingVertical: responsiveScreenHeight(0.8),

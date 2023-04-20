@@ -25,6 +25,8 @@ import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
 import InnerChatInterface from "./screens/InnerChatInterface";
 import SocialsTwo from "./screens/SocialsTwo";
+import FriendRequest from "./screens/FriendRequests";
+import ViewFriends from "./screens/ViewFriends";
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
 
@@ -124,6 +126,16 @@ function HomeTabs() {
       <Tab.Screen
           name="SGJoinReq"
           component={StudyGroupJoinRequests}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="FriendRequests"
+          component={FriendRequest}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+         <Tab.Screen
+          name="ViewFriends"
+          component={ViewFriends}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
         <Tab.Screen
