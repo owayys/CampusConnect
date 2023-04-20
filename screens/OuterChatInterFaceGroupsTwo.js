@@ -20,65 +20,85 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const StudyGroups = () => {
+const OuterChatInterface = () => {
   const [search, setSearch] = useState('');
   const navigation = useNavigation();
-  const people = [
+  const indivChats = [
     {
-      id:1,
-      name: "Shehryar Khan",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 1,
+        name: "Shehryar Khan",
+        icon: "https://loremflickr.com/320/240",
+        content: "Heyyy",
     },
     {
-      id:2,
-      name: "Asher",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 2,
+        name: "Asher",
+        icon: "https://loremflickr.com/320/240",
+        content: "Wow",
     },
     {
-      id:3,
-      name: "Luqman",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 3,
+        name: "Luqman",
+        icon: "https://loremflickr.com/320/240",
+        content: "!gsb",
     },
     {
-      id:4,
-      name: "owais",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 4,
+        name: "owais",
+        icon: "https://loremflickr.com/320/240",
+        content: "asdadadaw",
     },
     {
-      id:5,
-      name: "jufe-pulpy",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 5,
+        name: "jufe-pulpy",
+        icon: "https://loremflickr.com/320/240",
+        content: "adadadadadadadadad",
     },
     {
-      id:6,
-      name: "jaid",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 6,
+        name: "jaid",
+        icon: "https://loremflickr.com/320/240",
+        content: "adadadadadadadadad",
     },
     {
-      id:7,
-      name: "jufe-pulpy",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
+        chatroom_id: 7,
+        name: "jufe-pulpy",
+    icon: "https://loremflickr.com/320/240",
+        content: "adadadadadadadadad",
     },
-    {
-      id:8,
-      name: "jufe-pulpy",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
-    },
-    {
-      id:9,
-      name: "jufe-pulpy",
-      image: "https://via.placeholder.com/150",
-      interests: ["Anime", "Coding"],
-    },
-  ];
+]
+
+const getData = async () => {
+    try {
+        const value = await AsyncStorage.getItem('userid')
+        if (value !== null) {
+            console.log(value)
+            s_id = parseInt(value)
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/chatroom/get",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        s_id: s_id,
+                        isStudyGroup: 0,
+                    }),
+                }
+            );
+
+            const data = await response.json();
+            setData(data.chatrooms)
+        }
+    } catch (e) {
+        console.log(e)
+    }
+}
+React.useEffect(() => {
+    getData()
+}, [])
   
   const [username, setUsername] = useState("");
   AsyncStorage.getItem("username").then((value) => {
@@ -86,17 +106,7 @@ const StudyGroups = () => {
     console.log(value);
 });
 
-
-  const handleAddFriend = (groupId) => {
-    // Handle the join action for the study group
-    //navigation.navigate('JoinGroup', { groupId });
-    console.log("clicky clicky")
-  };
-
-  // const filterStudyGroups = studyGroups.filter((group) =>
-  //   group.name.toLowerCase().includes(search.toLowerCase())
-  // );
-  const filterPeople = people.filter((p) =>
+const filterIndivChats = indivChats.filter((p) =>
   p.name.toLowerCase().includes(search.toLowerCase())
 );
 
@@ -104,53 +114,49 @@ const StudyGroups = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.headingContainer}>
-      {/* <Text style={styles.heading}>Add Friends</Text> */}
+      <Text style={styles.heading}>Group Chats</Text>
       {/* <Image
           style={styles.imageIcon}
           resizeMode="cover"
           source={require("../assets/image21.png")}
         />
          */}
-         <Button
-          title="View Requests"
-          onPress={()=>{navigation.navigate('FriendRequests')}}
-          buttonStyle={styles.newGroupButton1}
-        />
         <Button
-          title="My Friends"
-          onPress={()=>{navigation.navigate('ViewFriends')}}
+          title="Direct Messages"
+          onPress={()=>{navigation.navigate('OuterChatInterfaceTwo')}}
           buttonStyle={styles.newGroupButton}
         />
       </View>
       
       <TextInput
         style={styles.searchBar}
-        placeholder="Search people..."
+        placeholder="Search Group Chats..."
         value={search}
         onChangeText={setSearch}
         placeholderTextColor="#ffff"
       />
       <ScrollView contentContainerStyle={styles.scrollView}>
-        {filterPeople.map((p) => (
+        {filterIndivChats.map((p) => (
           <ListItem
-            key={p.id}
+            key={p.chatroom_id}
             containerStyle={styles.listItemContainer}
+            onPress={()=>{console.log("clicked")}}
           >
             <Image
                 style={styles.imageIcon1}
                 resizeMode="cover"
                 // source={require("../assets/image22.png")}
-                source={{uri:p.image}}
+                source={{uri:p.icon}}
             />
             <ListItem.Content style={styles.listItemContent}>
               <ListItem.Title style={styles.title}>{p.name}</ListItem.Title>
               <Text style={styles.details}>
-                {p.interests}
+                {p.content}
               </Text>
             </ListItem.Content>
-            <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#0E1936', padding: 10 }} onPress={() => handleAddFriend(p.id)}>
+            {/* <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#0E1936', padding: 10 }} onPress={() => handleAddFriend(p.id)}>
               <Text style={{ color: '#fff', textAlign: 'center' }}>Add Friend</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </ListItem>
         ))}
       </ScrollView>
@@ -179,8 +185,8 @@ const styles = StyleSheet.create({
     // left: 20,
     // width: 65,
     // height: 65,
-    width: responsiveScreenWidth(17),
-    height: responsiveScreenWidth(17),
+    width: responsiveScreenWidth(11),
+    height: responsiveScreenWidth(11),
     borderRadius: Border.br_11xl,
     //position: "absolute",
 },
@@ -201,8 +207,8 @@ const styles = StyleSheet.create({
     paddingBottom: responsiveScreenHeight(5),
   },
   listItemContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.5)',
-    borderRadius: responsiveScreenWidth(7),
+    backgroundColor: 'rgba(255, 255, 255, 0.01)',
+    borderRadius: responsiveScreenWidth(3),
     //marginBottom: 10,
     marginBottom: responsiveScreenHeight(1.2),
     //marginHorizontal: 10,
@@ -212,13 +218,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   title: {
-    color: '#4EC6E0',
+    // color: '#4EC6E0',
+    color:"white",
     fontWeight: 'bold',
     fontSize: responsiveScreenFontSize(2.4),
     //fontSize:18,
   },
   details: {
-    color: '#000',
+    // color: '#000',
+    color:"white",
   },
   headingContainer: {
     flexDirection: 'row',
@@ -321,5 +329,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudyGroups;
+export default OuterChatInterface;
 

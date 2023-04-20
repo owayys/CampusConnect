@@ -22,6 +22,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = ({ route }) => {
     console.log(route);
+    const [user, setUser] = useState("");
     const [username, setUsername] = useState("");
     const [sched, setSched] = useState([])
     const navigation = useNavigation();
@@ -33,6 +34,49 @@ const HomeScreen = ({ route }) => {
         setUsername(value);
         console.log(value);
     });
+    AsyncStorage.getItem("userid").then((value) => {
+        setUser(value);
+        console.log(value);
+    });
+
+
+    const [currDay, setCurrDay] = React.useState("MONDAY");
+
+    const getSched = async () => {
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/course/enrolled/get",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        s_id: user
+                    })
+                }
+            );
+
+            const data = await response.json();
+            console.log(data)
+            console.log(data.courses.filter(x => x.class_day === "MONDAY"))
+            setSched(data.courses)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    React.useEffect(() => {
+        getSched()
+    }, [user])
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getSched()
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
 
     //   const courses = [
@@ -65,32 +109,7 @@ const HomeScreen = ({ route }) => {
         "Sun": []
     }
 
-    const getSched = async () => {
-        try {
-            const response = await fetch(
-                "https://campusconnect.herokuapp.com/api/sched/get",
-                {
-                    method: "GET",
-                    headers: new Headers({
-                        accept: 'application/json',
-                        'Content-Type': 'application/json'
-                    })
-                }
-            );
 
-            const data = await response.json();
-            console.log(data.schedule.filter(x => x.class_day === "MONDAY"))
-            setSched(data.schedule)
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const [currDay, setCurrDay] = React.useState("MONDAY");
-
-    React.useEffect(() => {
-        getSched()
-    },[])
 
     return (
         <ScrollView>
@@ -120,16 +139,16 @@ const HomeScreen = ({ route }) => {
                 <Text style={[styles.welcomeBack, styles.campusAtALayout]}>
                     Welcome back, {username}!
                 </Text>
-                <Image
+                {/* <Image
                     style={styles.iconoutlinebell}
                     resizeMode="cover"
                     source={require("../assets/iconoutlinebell.png")}
-                />
-                <Image
+                /> */}
+                {/* <Image
                     style={[styles.homeScreenChild, styles.homeLayout]}
                     resizeMode="cover"
                     source={require("../assets/ellipse-5.png")}
-                />
+                /> */}
                 <TouchableOpacity
                     onPress={() => navigation.navigate("EnterSchedule")}
                     style={{
@@ -208,7 +227,7 @@ const HomeScreen = ({ route }) => {
                         return (
                             <TouchableOpacity key={index}
                                 style={[styles.button, currDay === day && styles.activeButton]}
-                                onPress={() => { setCurrDay(day);}}
+                                onPress={() => { setCurrDay(day); }}
                             >
                                 <Text style={styles.buttonText}>{day.slice(0, 3)}</Text>
                             </TouchableOpacity>
@@ -221,7 +240,7 @@ const HomeScreen = ({ route }) => {
                     <TouchableOpacity
                         style={styles.basePosition}
                         activeOpacity={0.2}
-                        onPress={() => navigation.navigate("OuterChatInterface")}
+                        onPress={() => navigation.navigate("OuterChatInterfaceTwo")}
                     >
                         <Image
                             style={styles.chatIcon}
@@ -300,7 +319,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         // top: 56,
         top: responsiveScreenHeight(6.8),
-        left: responsiveScreenWidth(80),
+        left: responsiveScreenWidth(85),
     },
     home03IconLayout: {
         // height: 24,
@@ -547,7 +566,7 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     homeScreenItem: {
-        left: responsiveScreenWidth(83.5),
+        left: responsiveScreenWidth(88.5),
     },
     button: {
         flex: 1,
