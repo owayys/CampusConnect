@@ -28,7 +28,7 @@ const UserProfile = () => {
   AsyncStorage.getItem("username").then((value) => {
     setUsername(value);
     console.log(value);
-});
+  });
 
   const user_name = "Ahmed Luqman"
   const description = "A CS Junior, who loves playing football and chess!!!"
@@ -112,76 +112,76 @@ const UserProfile = () => {
   return (
     <View style={styles.userProfile}>
       <ScrollView>
-      <View style={styles.backButton}>
-        <Button
-          title="My Chats"
-          onPress={() => navigation.navigate("OuterChatInterface")}
-          style={{ backgroundColor: "navy blue" }}
-          color={"#4ec6e0"}
-        />
-      </View>
-
-      <Image
-        style={styles.imageIcon}
-        resizeMode="cover"
-        source={require("../assets/image20.png")}
-      />
-      <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
-        {username}
-      </Text>
-      <Text
-        style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
-      >
-        {description}
-      </Text>
-      <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
-      <Text style={[styles.myInterests, styles.myProfileTypo]}>
-        My Interests
-      </Text>
-      <View style={styles.gradYear}>
-        <Text style={[styles.graduation2024, styles.forum1Typo]}>
-          Graduation: {grad_year}
-        </Text>
-        <Image
-          style={styles.iconoutlinecalendar}
-          resizeMode="cover"
-          source={require("../assets/iconoutlinecalendar.png")}
-        />
-      </View>
-
-      <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
-        <View>
-          {renderInterests()}
-          {isAddingInterest ? (
-            <View style={styles.addInterestContainer}>
-              <TextInput
-                style={styles.addInterestInput}
-                placeholder="Type your interest here"
-                value={newInterest}
-                onChangeText={setNewInterest}
-              />
-              <TouchableOpacity
-                style={styles.addButton}
-                onPress={handleAddInterest}
-              >
-                <Text style={styles.addButtonText}>Accept</Text>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            renderAddInterestButton()
-          )}
+        <View style={styles.backButton}>
+          <Button
+            title="Log Out"
+            onPress={() => navigation.navigate("Login")}
+            style={{ backgroundColor: "navy blue" }}
+            color={"#4ec6e0"}
+          />
         </View>
-      </TouchableWithoutFeedback>
-      <Image
-        style={[styles.userProfileChild, styles.userLayout]}
-        resizeMode="cover"
-        source={require("../assets/vector-1.png")}
-      />
-      <Image
-        style={[styles.userProfileItem, styles.userLayout]}
-        resizeMode="cover"
-        source={require("../assets/vector-1.png")}
-      />
+
+        <Image
+          style={styles.imageIcon}
+          resizeMode="cover"
+          source={require("../assets/image20.png")}
+        />
+        <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
+          {username}
+        </Text>
+        <Text
+          style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
+        >
+          {description}
+        </Text>
+        <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
+        <Text style={[styles.myInterests, styles.myProfileTypo]}>
+          My Interests
+        </Text>
+        <View style={styles.gradYear}>
+          <Text style={[styles.graduation2024, styles.forum1Typo]}>
+            Graduation: {grad_year}
+          </Text>
+          <Image
+            style={styles.iconoutlinecalendar}
+            resizeMode="cover"
+            source={require("../assets/iconoutlinecalendar.png")}
+          />
+        </View>
+
+        <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
+          <View>
+            {renderInterests()}
+            {isAddingInterest ? (
+              <View style={styles.addInterestContainer}>
+                <TextInput
+                  style={styles.addInterestInput}
+                  placeholder="Type your interest here"
+                  value={newInterest}
+                  onChangeText={setNewInterest}
+                />
+                <TouchableOpacity
+                  style={styles.addButton}
+                  onPress={handleAddInterest}
+                >
+                  <Text style={styles.addButtonText}>Accept</Text>
+                </TouchableOpacity>
+              </View>
+            ) : (
+              renderAddInterestButton()
+            )}
+          </View>
+        </TouchableWithoutFeedback>
+        <Image
+          style={[styles.userProfileChild, styles.userLayout]}
+          resizeMode="cover"
+          source={require("../assets/vector-1.png")}
+        />
+        <Image
+          style={[styles.userProfileItem, styles.userLayout]}
+          resizeMode="cover"
+          source={require("../assets/vector-1.png")}
+        />
       </ScrollView>
     </View>
   );
