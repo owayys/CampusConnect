@@ -8,52 +8,54 @@ import {
   TouchableOpacity,
   Button,
   TextInput,
+  ScrollView,
   TouchableWithoutFeedback,
-
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
 import { useState } from "react";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
 
 const UserProfile = () => {
   const navigation = useNavigation();
 
-
   const studentInterests = [
-    'Coding',
-    'Playing video games',
-    'Basketball',
-    'Drawing',
-    'Hiking',
-    'Reading',
-    'Singing',
-    'Cooking',
-    'Watching movies',
-    'Dancing',
-    'Traveling',
-    'Listening to music',
+    "Coding",
+    "Playing video games",
+    "Basketball",
+    "Drawing",
+    "Hiking",
+    "Reading",
+    "Singing",
+    "Cooking",
+    "Watching movies",
+    "Dancing",
+    "Traveling",
+    "Listening to music",
   ];
 
-
-  const [interests, setInterests] = useState(
-  [
-    'Coding',
-    'Playing video games',
-    'Basketball',
-    'Drawing',
+  const [interests, setInterests] = useState([
+    "Coding",
+    "Playing video games",
+    "Basketball",
+    "Drawing",
   ]);
 
-  const [newInterest, setNewInterest] = useState('');
+  const [newInterest, setNewInterest] = useState("");
   const [isAddingInterest, setIsAddingInterest] = useState(false);
 
   const handleAddInterest = () => {
-    if (newInterest !== '') {
+    if (newInterest !== "") {
       if (interests.length >= 6) {
         setIsAddingInterest(false);
         return;
       }
       setInterests([...interests, newInterest]);
-      setNewInterest('');
+      setNewInterest("");
     }
     setIsAddingInterest(false);
   };
@@ -74,12 +76,14 @@ const UserProfile = () => {
     }
     return rows;
   };
-  
+
   const renderAddInterestButton = () => {
     if (interests.length >= 6) {
       return (
         <View style={styles.addInterestButtonDisabled}>
-          <Text style={styles.addInterestButtonText}>You can't add more interests</Text>
+          <Text style={styles.addInterestButtonText}>
+            You can't add more interests
+          </Text>
         </View>
       );
     } else {
@@ -93,18 +97,19 @@ const UserProfile = () => {
       );
     }
   };
-  
+
   return (
     <View style={styles.userProfile}>
+      <ScrollView>
       <View style={styles.backButton}>
-           <Button 
-             title="My Chats" 
-             onPress={() => navigation.navigate("OuterChatInterface")}
-             style={{backgroundColor:'navy blue'}} 
-             color={"#4ec6e0"}
-           />
+        <Button
+          title="My Chats"
+          onPress={() => navigation.navigate("OuterChatInterface")}
+          style={{ backgroundColor: "navy blue" }}
+          color={"#4ec6e0"}
+        />
       </View>
-      
+
       <Image
         style={styles.imageIcon}
         resizeMode="cover"
@@ -144,7 +149,10 @@ const UserProfile = () => {
                 value={newInterest}
                 onChangeText={setNewInterest}
               />
-              <TouchableOpacity style={styles.addButton} onPress={handleAddInterest}>
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={handleAddInterest}
+              >
                 <Text style={styles.addButtonText}>Accept</Text>
               </TouchableOpacity>
             </View>
@@ -153,11 +161,6 @@ const UserProfile = () => {
           )}
         </View>
       </TouchableWithoutFeedback>
-
-
-
-
-
       <Image
         style={[styles.userProfileChild, styles.userLayout]}
         resizeMode="cover"
@@ -168,99 +171,7 @@ const UserProfile = () => {
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
-      <View style={styles.st}>
-        <View style={styles.iconsHead}>
-          <TouchableOpacity
-            style={[styles.home, styles.homeFlexBox]}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("ForumsTab")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/home03.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text
-                style={[styles.forum1Typo, styles.text3Typo, styles.forum1Clr]}
-              >
-                Forum
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.homeFlexBox}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("Events")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/iconoutlinespeaker.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.text3Typo, styles.forum1Clr]}>Events</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.homeFlexBox}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("Socials")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/box.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={styles.forum1Clr}>Social</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.homeFlexBox}>
-            <TouchableOpacity
-              style={styles.home03Icon}
-              activeOpacity={0.2}
-              onPress={() => navigation.navigate("StudyGroups")}
-            >
-              <Image
-                style={styles.icon}
-                resizeMode="cover"
-                source={require("../assets/iconoutlinebookopen.png")}
-              />
-            </TouchableOpacity>
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.forum1Typo, styles.forum1Clr]}>
-                <Text style={styles.study}>Study</Text>
-                <Text style={styles.text3Typo}>{` `}</Text>
-                <Text style={styles.study}>Group</Text>
-              </Text>
-            </View>
-            <Image
-              style={[styles.home03Icon, styles.mt2]}
-              resizeMode="cover"
-              source={require("../assets/piggybank02.png")}
-            />
-          </View>
-          <TouchableOpacity
-            style={[styles.more, styles.homeFlexBox]}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("UserProfile")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/morehorizontal.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text
-                style={[styles.profile, styles.forum1Typo, styles.text3Typo]}
-              >
-                Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -273,68 +184,68 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   },
   interestsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginTop: 16,
   },
   interest: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 8,
     borderRadius: 8,
     marginBottom: 8,
   },
   addInterestButton: {
-    backgroundColor: '#2c3e50',
+    backgroundColor: "#2c3e50",
     padding: 16,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 500,
   },
   addInterestButtonText: {
-    color: '#ffffff',
-    fontWeight: 'bold',
+    color: "#ffffff",
+    fontWeight: "bold",
   },
   addInterestContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginTop: 500,
   },
   addInterestInput: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 8,
     borderRadius: 8,
     marginRight: 8,
   },
   addButton: {
-    backgroundColor: '#2c3e50',
+    backgroundColor: "#2c3e50",
     padding: 8,
     borderRadius: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   addButtonText: {
-    color: '#ffffff',
-    fontWeight: 'bold',
+    color: "#ffffff",
+    fontWeight: "bold",
   },
 
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 10,
   },
   interest: {
-    backgroundColor: '#4ec6e0',
+    backgroundColor: "#4ec6e0",
     borderRadius: 12,
     padding: 7.5,
     paddingVertical: 10,
-    flexBasis: '30%',
-    alignItems: 'center',
-    top: 340
+    flexBasis: "30%",
+    alignItems: "center",
+    top: 340,
   },
   interestText: {
     fontSize: 14,
@@ -344,13 +255,13 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoSemibold,
     top: 720,
     fontSize: FontSize.size_xl,
-    flex: 1, 
-    alignSelf:"center",
+    flex: 1,
+    alignSelf: "center",
     textTransform: "capitalize",
     color: Color.white,
     letterSpacing: 2,
     position: "absolute",
-    width:"55%",
+    width: "55%",
   },
   mt2: {
     marginTop: 2,
@@ -619,7 +530,7 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    height: 838,
+    height: responsiveScreenHeight(100),
     overflow: "hidden",
     width: "100%",
   },
