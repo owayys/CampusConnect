@@ -123,8 +123,7 @@ const EnterSchedule = () => {
                 setError("Error occured!")
             }
             navigation.navigate('HomeScreen', {
-                screen: 'HomeScreen'
-            })
+              screen: 'Home'})
         } catch (e) {
             console.log(e)
         }
