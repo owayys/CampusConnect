@@ -144,7 +144,7 @@ const filterIndivChats = indivChats.filter((p) =>
           <ListItem
             key={p.groupName}
             containerStyle={styles.listItemContainer}
-            onPress={()=>{navigation.navigate('InnerChatInterfaceGroups', {params : p})}}
+            onPress={()=>{navigation.navigate('InnerChatInterfaceGroups', {screen:'InnerChatInterfaceGroups',params : p})}}
           >
             <Image
                 style={styles.imageIcon1}
