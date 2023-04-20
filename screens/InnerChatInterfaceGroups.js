@@ -113,20 +113,21 @@ const InnerChatInterfaceGroups = ({route}) => {
 
     <View style={styles.container}> 
 
-        <View style={{
-                backgroundColor: '#ADD8F6',
-                borderRadius: 10,
-                padding: 20,
-                margin: 20,
-                position: 'absolute',
-                top: -190,
-                width: '90%',
-                height:300,
-            }}>
-          <View style={{position: "absolute", left: 10, top: 10}}>
-            <Text style={styles.talkingTo} >{route.params.params.groupName.toUpperCase()}</Text>
-          </View>
-        </View>
+    <View style={{
+      backgroundColor: '#ADD8F6',
+      borderRadius: 10,
+      padding: 20,
+      margin: 20,
+      position: 'absolute',
+      top: -190,
+      width: '90%',
+      height: 300,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+    }}>
+      <Text style={styles.talkingTo}>{route.params.params.groupName.toUpperCase()}</Text>
+    </View>
 
 
 
@@ -198,17 +199,15 @@ const styles = StyleSheet.create({
 
   talkingTo: {
     fontFamily: FontFamily.robotoSemibold,
-    // textTransform: "capitalize",
     color: Color.gray_200,
     letterSpacing: 1,
-    position: "absolute",
-    margin: 80,
-    
-    left: -35,
-    top: 100,
     fontSize: 40,
+    textAlign: 'center',
+    position: 'absolute',
+    bottom: '20%',
+    left: 0,
+    right: 0,
   },
-
   
   userImage: {
     top: 45,
