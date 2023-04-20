@@ -101,6 +101,7 @@ const InnerChatInterface = ({ route }) => {
     const handleSendMessage = () => {
         console.log(newMessage)
         sendMessage()
+        setNewMessage("")
         socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
     }
 
