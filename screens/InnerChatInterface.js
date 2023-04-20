@@ -27,12 +27,6 @@ const InnerChatInterface = ({ route }) => {
 
     const scrollViewRef = useRef(null);
 
-    useEffect(() => {
-      if (scrollViewRef.current) {
-        scrollViewRef.current.scrollToEnd({ animated: true });
-      }
-    },[msgHistory]);
-
 
 
     useEffect(() => {
@@ -72,6 +66,13 @@ const InnerChatInterface = ({ route }) => {
     const [msgHistory, setMsgHistory] = useState([]);
 
 
+
+    useEffect(() => {
+        if (scrollViewRef.current) {
+          scrollViewRef.current.scrollToEnd({ animated: true });
+        }
+      },[msgHistory]);
+  
     useEffect(() => {
         // setMsgHistory([
         //   { name: talking_to, message: 'hi!' },
