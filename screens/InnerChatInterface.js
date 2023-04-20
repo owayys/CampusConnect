@@ -22,6 +22,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const InnerChatInterface = ({ route }) => {
     const [username, setUsername] = useState('')
     const [sock, setSock] = useState(null)
+    const [newMessage, setNewMessage] = useState('');
+    const [msgHistory, setMsgHistory] = useState([]);
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
@@ -38,58 +40,27 @@ const InnerChatInterface = ({ route }) => {
                 { name: value, message: "kya karun karna parta" },
                 { name: value, message: "kya karun karna parta" },
             ])
-            socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
+            socket.emit("joinRoom", { username: value, room: route.params.params.chatroom_id })
         });
 
         socket.on("message", (message) => {
             console.log(message)
         })
-
     }, [])
-    // console.log(route.params.params.name)
-    // console.log(socket)
 
     const talking_to = route.params.params.name
-    // console.log("Before", talking_to)
-    const [newMessage, setNewMessage] = useState('');
-    const [msgHistory, setMsgHistory] = useState(
-        [
-            { name: talking_to, message: "hi!" },
-            { name: "Owais Ahsan", message: 'hello!' },
-            { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
-            { name: "Owais Ahsan", message: "busy w haazri aaj" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-        ]);
+    const isSendButtonDisabled = newMessage.length === 0;
 
-
-    // useEffect(() => {
-    //   socket.on('chat message', (data) => {
-    //     setMsgHistory((msgHistory) => [...msgHistory, data]);
-    //   });
-    // }, []);
-
-    // console.log(route)
-    // console.log("After", talking_to)
-    // console.log(msgHistory)
 
     const handleSendMessage = () => {
-        // console.log(message)
+        console.log(newMessage)
         socket.emit("chatMessage", newMessage)
+        setNewMessage('');
     }
-
-
 
     return (
         <View style={styles.container}>
-
-
-
-            <View style={{ position: "absolute", left: 10, top: 10 }}>
+            <View style={{ position: "absolute", left: 0, top: 1, alignContent: 'center' }}>
                 <Text style={styles.talkingTo}>{talking_to}</Text>
                 <Image
                     style={styles.userImage}
@@ -98,23 +69,21 @@ const InnerChatInterface = ({ route }) => {
                 />
             </View>
 
-
             <KeyboardAvoidingView
                 behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                 style={styles.keyboardContainer}
             >
-
                 <View style={styles.chatMessages}>
                     <ScrollView>
                         {msgHistory.map((data, index) => (
                             <View style={data.name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
-                                {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
                                 <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.name}</Text>
                                 <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.message}</Text>
                             </View>
                         ))}
                     </ScrollView>
                 </View>
+
                 <View style={{ alignItems: 'center', justifyContent: 'center', }}>
                     <TextInput
                         style={styles.input}
@@ -124,8 +93,9 @@ const InnerChatInterface = ({ route }) => {
                         onSubmitEditing={handleSendMessage}
                     />
                     <TouchableOpacity
-                        style={styles.button}
+                        style={[styles.button, isSendButtonDisabled && styles.disabledButton]}
                         onPress={handleSendMessage}
+                        disabled={isSendButtonDisabled}
                     >
                         <Text style={styles.buttonText}>Send</Text>
                     </TouchableOpacity>
@@ -135,12 +105,14 @@ const InnerChatInterface = ({ route }) => {
     );
 };
 
+
 const styles = StyleSheet.create({
 
     messageBubbleSender: {
         padding: 10,
         borderRadius: 20,
         marginBottom: 10,
+        // paddingBottom: 20,
         backgroundColor: '#ADD8F6',
         alignSelf: 'flex-end'
     },
@@ -149,6 +121,9 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 20,
         marginBottom: 10,
+        // paddingBottom: 20,
+        position: 'relative',
+        // bottom: 10,
         backgroundColor: '#E5E5E5',
         alignSelf: 'flex-start',
         paddingHorizontal: 50,
@@ -217,7 +192,7 @@ const styles = StyleSheet.create({
 
     userImage: {
         top: 45,
-        left: 18,
+        left: 0,
         width: 110,
         height: 95,
         borderRadius: Border.br_11xl,
