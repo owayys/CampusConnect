@@ -14,7 +14,7 @@ import {
     ScrollView,
 
 } from "react-native";
-import { useEffect } from 'react';
+import { useEffect,useRef } from 'react';
 import socket from '../util/socket';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,6 +24,8 @@ const InnerChatInterface = ({ route }) => {
     const [sock, setSock] = useState(null)
 
     const talking_to = route.params.params.name
+
+    const scrollViewRef = useRef(null);
 
     // const getCourses = async () => {
     //     try {
@@ -88,6 +90,13 @@ const InnerChatInterface = ({ route }) => {
 
 
     useEffect(() => {
+        if (scrollViewRef.current) {
+          scrollViewRef.current.scrollToEnd({ animated: true });
+        }
+      },[msgHistory]);
+
+
+    useEffect(() => {
         // setMsgHistory([
         //   { name: talking_to, message: 'hi!' },
         //   { name: username, message: 'hello!' },
@@ -131,7 +140,7 @@ const InnerChatInterface = ({ route }) => {
             >
 
                 <View style={styles.chatMessages}>
-                    <ScrollView>
+                    <ScrollView ref={scrollViewRef}>
                         {msgHistory.map((data, index) => (
                             <View style={data.name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
                                 {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
