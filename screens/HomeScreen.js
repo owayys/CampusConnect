@@ -66,10 +66,17 @@ const HomeScreen = ({ route }) => {
             console.log(e)
         }
     }
-
     React.useEffect(() => {
         getSched()
     }, [user])
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getSched()
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
 
     //   const courses = [
@@ -132,16 +139,16 @@ const HomeScreen = ({ route }) => {
                 <Text style={[styles.welcomeBack, styles.campusAtALayout]}>
                     Welcome back, {username}!
                 </Text>
-                <Image
+                {/* <Image
                     style={styles.iconoutlinebell}
                     resizeMode="cover"
                     source={require("../assets/iconoutlinebell.png")}
-                />
-                <Image
+                /> */}
+                {/* <Image
                     style={[styles.homeScreenChild, styles.homeLayout]}
                     resizeMode="cover"
                     source={require("../assets/ellipse-5.png")}
-                />
+                /> */}
                 <TouchableOpacity
                     onPress={() => navigation.navigate("EnterSchedule")}
                     style={{
@@ -233,7 +240,7 @@ const HomeScreen = ({ route }) => {
                     <TouchableOpacity
                         style={styles.basePosition}
                         activeOpacity={0.2}
-                        onPress={() => navigation.navigate("OuterChatInterface")}
+                        onPress={() => navigation.navigate("OuterChatInterfaceTwo")}
                     >
                         <Image
                             style={styles.chatIcon}
@@ -312,7 +319,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         // top: 56,
         top: responsiveScreenHeight(6.8),
-        left: responsiveScreenWidth(80),
+        left: responsiveScreenWidth(85),
     },
     home03IconLayout: {
         // height: 24,
@@ -559,7 +566,7 @@ const styles = StyleSheet.create({
         position: "absolute",
     },
     homeScreenItem: {
-        left: responsiveScreenWidth(83.5),
+        left: responsiveScreenWidth(88.5),
     },
     button: {
         flex: 1,

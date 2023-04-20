@@ -123,7 +123,7 @@ const filterIndivChats = indivChats.filter((p) =>
          */}
         <Button
           title="Group Chats"
-          onPress={()=>{navigation.navigate('OuterChatInterfaceGroups')}}
+          onPress={()=>{navigation.navigate('OuterChatInterFaceGroupsTwo')}}
           buttonStyle={styles.newGroupButton}
         />
       </View>
@@ -141,7 +141,7 @@ const filterIndivChats = indivChats.filter((p) =>
             key={p.chatroom_id}
             containerStyle={styles.listItemContainer}
             //onPress={navigation.navigate('InnerChatInterface',{id:p.chatroom_id})}
-            onPress={()=>console.log("clicked")}
+            onPress={() => navigation.navigate('InnerChatInterface', {params: p})}
           >
             <Image
                 style={styles.imageIcon1}
