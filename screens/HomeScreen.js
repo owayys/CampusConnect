@@ -233,7 +233,7 @@ const HomeScreen = ({ route }) => {
                     <TouchableOpacity
                         style={styles.basePosition}
                         activeOpacity={0.2}
-                        onPress={() => navigation.navigate("OuterChatInterface")}
+                        onPress={() => navigation.navigate("OuterChatInterfaceTwo")}
                     >
                         <Image
                             style={styles.chatIcon}
