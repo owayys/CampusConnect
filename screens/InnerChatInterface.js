@@ -25,6 +25,31 @@ const InnerChatInterface = ({ route }) => {
 
     const talking_to = route.params.params.name
 
+    // const getCourses = async () => {
+    //     try {
+    //         const response = await fetch(
+    //             "https://campusconnect.herokuapp.com/api/course/getAll",
+    //             {
+    //                 method: "GET",
+    //                 headers: new Headers({
+    //                     accept: 'application/json',
+    //                     'Content-Type': 'application/json'
+    //                 })
+    //             }
+    //         );
+
+    //         const data = await response.json();
+    //         console.log(data.schedule)
+    //         let tempCourses = data.schedule.map((item) => {
+    //             return { id: item.c_id, name: `${item.c_name} S${item.c_section}` }
+    //         })
+    //         console.log(tempCourses)
+    //         setCourses(tempCourses)
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
+
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
             setUsername(value);
@@ -43,8 +68,10 @@ const InnerChatInterface = ({ route }) => {
             socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
         });
 
-        socket.on("message", (message) => {
-            console.log(message)
+        socket.on("message", (rec_message) => {
+            console.log("ye hai message", rec_message)
+            const newMsg = {name : rec_message.user, message: rec_message.message}
+            setMsgHistory([...msgHistory, newMsg])
         })
 
     }, [])
@@ -72,35 +99,6 @@ const InnerChatInterface = ({ route }) => {
         ]);
       }, [talking_to]);
 
-    // const [msgHistory, setMsgHistory] = useState(
-    //     [
-    //         { name: talking_to, message: "hi!" },
-    //         { name: "Owais Ahsan", message: 'hello!' },
-    //         { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
-    //         { name: "Owais Ahsan", message: "busy w haazri aaj" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
-    //     ]);
-
-    useEffect(() => {
-        setMsgHistory([
-          { name: talking_to, message: 'hi!' },
-          { name: username, message: 'hello!' },
-          { name: talking_to, message: 'kesa haiiiiiiiiiiiiiiii' },
-          { name: username, message: 'busy w haazri aaj' },
-          { name: username, message: 'kya karun karna parta' },
-          { name: username, message: 'kya karun karna parta' },
-          { name: username, message: 'kya karun karna parta' },
-          { name: username, message: 'kya karun karna parta' },
-          { name: username, message: 'kya karun karna parta' },
-          { name: username, message: 'kya karun karna parta' },
-        ]);
-      }, [talking_to]);
-
     // useEffect(() => {
     //   socket.on('chat message', (data) => {
     //     setMsgHistory((msgHistory) => [...msgHistory, data]);
@@ -112,8 +110,8 @@ const InnerChatInterface = ({ route }) => {
     // console.log(msgHistory)
 
     const handleSendMessage = () => {
-        // console.log(message)
-        socket.emit("chatMessage", newMessage)
+        console.log(newMessage)
+        socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
     }
 
 
