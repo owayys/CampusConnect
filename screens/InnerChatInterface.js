@@ -18,7 +18,6 @@ import { useEffect,useRef } from 'react';
 import socket from '../util/socket';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Chatroom from '../components/Chatroom/Chatroom';
 
 const InnerChatInterface = ({ route }) => {
     const [username, setUsername] = useState('')
@@ -30,31 +29,30 @@ const InnerChatInterface = ({ route }) => {
 
     const talking_to = route.params.params.name
 
+    const fetchMessages = async() => {
+        console.log(route.params.params.chatroom_id)
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/chatroom/message/get",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: route.params.params.chatroom_id
+                    }),
+                }
+            );
 
-    // const fetchMessages = async() => {
-    //     console.log(route.params.params.chatroom_id)
-    //     try {
-    //         const response = await fetch(
-    //             "https://campusconnect.herokuapp.com/api/chatroom/message/get",
-    //             {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({
-    //                     chat_id: route.params.params.chatroom_id
-    //                 }),
-    //             }
-    //         );
-
-    //         const data = await response.json();
-    //         setMsgHistory(data.messages)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
+            const data = await response.json();
+            setMsgHistory(data.messages)
+        } catch (e) {
+            console.log(e)
+        }
+    }
     
-    // useEffect(() => {
-    //     fetchMessages()
-    // }, [user])
+    useEffect(() => {
+        fetchMessages()
+    }, [user])
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
@@ -66,54 +64,93 @@ const InnerChatInterface = ({ route }) => {
         });
     }, [])
 
-    // socket.off("message").on("message", (rec_message) => {
-    //     console.log("ye hai message", rec_message)
-    //     const newMsg = {s_name : rec_message.user, content: rec_message.message}
-    //     setMsgHistory([...msgHistory, newMsg])
-    // })
+    socket.off("message").on("message", (rec_message) => {
+        console.log("ye hai message", rec_message)
+        const newMsg = {s_name : rec_message.user, content: rec_message.message}
+        setMsgHistory([...msgHistory, newMsg])
+    })
 
 
-    // console.log()
-    // console.log("Before", talking_to)
-    // console.log()
+    console.log()
+    console.log("Before", talking_to)
+    console.log()
 
     
 
-    // const sendMessage = async() => {
-    //     try {
-    //         const response = await fetch(
-    //             "https://campusconnect.herokuapp.com/api/chatroom/message/send",
-    //             {
-    //                 method: "POST",
-    //                 headers: { "Content-Type": "application/json" },
-    //                 body: JSON.stringify({
-    //                     chat_id: route.params.params.chatroom_id,
-    //                     s_id: user,
-    //                     content: newMessage
-    //                 }),
-    //             }
-    //         );
-    //         const data = await response.json();
-    //         console.log(data)
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    // }
-    // const handleSendMessage = () => {
-    //     console.log(newMessage)
-    //     sendMessage()
-    //     socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
-    // }
-
-    props = {
-        username: username,
-        user: user,
-        talking_to: talking_to,
-        chatroom_id: route.params.params.chatroom_id
+    const sendMessage = async() => {
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/chatroom/message/send",
+                {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: route.params.params.chatroom_id,
+                        s_id: user,
+                        content: newMessage
+                    }),
+                }
+            );
+            const data = await response.json();
+            console.log(data)
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    const handleSendMessage = () => {
+        console.log(newMessage)
+        sendMessage()
+        socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
     }
 
     return (
-        <Chatroom props={props} key={route.params.params.chatroom_id} />
+        <View style={styles.container}>
+
+
+
+            <View style={{ position: "absolute", left: 10, top: 10 }}>
+                <Text style={styles.talkingTo}>{talking_to}</Text>
+                <Image
+                    style={styles.userImage}
+                    resizeMode="cover"
+                    source={require("../assets/image19.png")}
+                />
+            </View>
+
+
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={styles.keyboardContainer}
+            >
+
+                <View style={styles.chatMessages}>
+                    <ScrollView ref={scrollViewRef}>
+                        {msgHistory.map((data, index) => (
+                            <View style={data.s_name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
+                                {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
+                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.s_name}</Text>
+                                <Text style={{ color: 'black', position: 'relative', textAlign: 'right' }}>{data.content}</Text>
+                            </View>
+                        ))}
+                    </ScrollView>
+                </View>
+                <View style={{ alignItems: 'center', justifyContent: 'center', }}>
+                    <TextInput
+                        style={styles.input}
+                        value={newMessage}
+                        onChangeText={setNewMessage}
+                        placeholder="Enter your message"
+                        onSubmitEditing={handleSendMessage}
+                    />
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={handleSendMessage}
+                    >
+                        <Text style={styles.buttonText}>Send</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
+        </View>
     );
 };
 

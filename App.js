@@ -29,6 +29,7 @@ import FriendRequest from "./screens/FriendRequests";
 import ViewFriends from "./screens/ViewFriends";
 import OuterChatInterfaceTwo from "./screens/OuterChatInterfaceTwo";
 import OuterChatInterFaceGroupsTwo from "./screens/OuterChatInterFaceGroupsTwo";
+import InnerChatInterfaceGroups from "./screens/InnerChatInterfaceGroups";
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
 
@@ -216,6 +217,12 @@ function HomeTabs() {
         //   children={()=><InnerChatInterface socket={socket}/>}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
+        <Tab.Screen
+          name="InnerChatInterfaceGroups"
+          component={InnerChatInterfaceGroups}
+        //   children={()=><InnerChatInterface socket={socket}/>}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
     </Tab.Navigator>
   );
 
@@ -373,7 +380,12 @@ const App = () => {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="InnerChatInterface11"
+              name="InnerChatInterface"
+              component={HomeTabs}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="InnerChatInterfaceGroups"
               component={HomeTabs}
               options={{ headerShown: false }}
             />
