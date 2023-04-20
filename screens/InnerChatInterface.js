@@ -14,7 +14,7 @@ import {
     ScrollView,
 
 } from "react-native";
-import { useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import socket from '../util/socket';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -25,30 +25,15 @@ const InnerChatInterface = ({ route }) => {
 
     const talking_to = route.params.params.name
 
-    // const getCourses = async () => {
-    //     try {
-    //         const response = await fetch(
-    //             "https://campusconnect.herokuapp.com/api/course/getAll",
-    //             {
-    //                 method: "GET",
-    //                 headers: new Headers({
-    //                     accept: 'application/json',
-    //                     'Content-Type': 'application/json'
-    //                 })
-    //             }
-    //         );
+    const scrollViewRef = useRef(null);
 
-    //         const data = await response.json();
-    //         console.log(data.schedule)
-    //         let tempCourses = data.schedule.map((item) => {
-    //             return { id: item.c_id, name: `${item.c_name} S${item.c_section}` }
-    //         })
-    //         console.log(tempCourses)
-    //         setCourses(tempCourses)
-    //     } catch (e) {
-    //         console.log(e)
-    //     }
-    // }
+    useEffect(() => {
+      if (scrollViewRef.current) {
+        scrollViewRef.current.scrollToEnd({ animated: true });
+      }
+    },[msgHistory]);
+
+
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
@@ -108,6 +93,7 @@ const InnerChatInterface = ({ route }) => {
     const handleSendMessage = () => {
         console.log(newMessage)
         socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
+        setNewMessage("")
     }
 
     return (
@@ -131,7 +117,7 @@ const InnerChatInterface = ({ route }) => {
             >
 
                 <View style={styles.chatMessages}>
-                    <ScrollView>
+                    <ScrollView ref={scrollViewRef}>
                         {msgHistory.map((data, index) => (
                             <View style={data.name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
                                 {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
