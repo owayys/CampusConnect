@@ -51,6 +51,7 @@ const MakeStudyGroup = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [imgsources, setImgSources] = useState(null);
 
   const [items, setItems] = useState([
     {label: 'Apple', value: 'apple'},
@@ -138,17 +139,17 @@ const MakeStudyGroup = () => {
       <Image
         style={styles.rectangleIcon}
         resizeMode="cover"
-        source={require("../assets/rectangle3.png")}
+        source={require("../assets/ic_add.png")}
       />
-      {/* <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
+      <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
         {selectedImage ? (
           <Image source={{ uri: selectedImage }} style={{ right: 45, width: 295, height: 150, top: 56, resizeMode: "cover" }} />
         ) : (
           <Image source={require("../assets/ic_add.png")} style={{ width: 500, height: 500, resizeMode: "contain" }} />
         )}
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
-      </TouchableOpacity> */}
-      <TouchableOpacity
+      </TouchableOpacity>
+      {/* <TouchableOpacity
                     onPress={selectImage}
                     style={{
                         position: "absolute",
@@ -173,7 +174,7 @@ const MakeStudyGroup = () => {
                         resizeMode="cover"
                         source={require("../assets/plus-box-outline.png")}
                     />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
 
       <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>
@@ -366,6 +367,7 @@ const styles = StyleSheet.create({
     width: 296,
     borderRadius: Border.br_3xs,
     position: "absolute",
+    //backgroundColor:"white"
   },
 
   addDisplayPicture: {
