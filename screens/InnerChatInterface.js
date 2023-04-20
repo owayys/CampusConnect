@@ -44,7 +44,8 @@ const InnerChatInterface = ({ route }) => {
             );
 
             const data = await response.json();
-            setMsgHistory(data.messages)
+            if (data.messages) setMsgHistory(data.messages)
+            else setMsgHistory([])
         } catch (e) {
             console.log(e)
         }
