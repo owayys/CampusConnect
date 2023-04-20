@@ -28,17 +28,7 @@ const InnerChatInterface = ({ route }) => {
     const [msgHistory, setMsgHistory] = useState([]);
 
     const talking_to = route.params.params.name
-    useEffect(() => {
-        setMsgHistory([])
-        fetchMessages()
-    }, [talking_to])
-    const scrollViewRef = useRef(null);
 
-    useEffect(() => {
-      if (scrollViewRef.current) {
-        scrollViewRef.current.scrollToEnd({ animated: true });
-      }
-    },[msgHistory]);
     const fetchMessages = async() => {
         console.log(route.params.params.chatroom_id)
         try {
@@ -60,6 +50,9 @@ const InnerChatInterface = ({ route }) => {
         }
     }
     
+    useEffect(() => {
+        fetchMessages()
+    }, [user])
 
     useEffect(() => {
         AsyncStorage.getItem("username").then((value) => {
@@ -106,7 +99,6 @@ const InnerChatInterface = ({ route }) => {
     }
     const handleSendMessage = () => {
         console.log(newMessage)
-        setNewMessage("")
         sendMessage()
         socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
     }

@@ -10,6 +10,7 @@ import {
     Image,
     StatusBar
 } from 'react-native';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Events = ({ navigation }) => {
     const exampleEvents = [
@@ -46,6 +47,11 @@ const Events = ({ navigation }) => {
     ];
     const [searchQuery, setSearchQuery] = useState('');
     const [events, setEvents] = useState([]);
+    const [flag, setflag] = useState("0");
+     AsyncStorage.getItem("flag").then((value) => {
+        setflag(value);
+        console.log("inside event",value);
+    });
 
     const getEvents = async () => {
         try {
@@ -112,12 +118,17 @@ const Events = ({ navigation }) => {
                 placeholder="Search events"
                 placeholderTextColor="#4EC6E0"
             />
-            <TouchableOpacity
+            {
+                flag==1 && (
+                    <TouchableOpacity
                 style={styles.addButton}
                 onPress={() => navigation.navigate('AddEvent')}
             >
                 <Text style={styles.addButtonText}>Add Event</Text>
             </TouchableOpacity>
+                )
+            }
+            
             <Text style={styles.heading}>Events</Text>
             <ScrollView contentContainerStyle={styles.eventsList}>
                 {filteredEvents.map(renderEvent)}

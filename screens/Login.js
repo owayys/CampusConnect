@@ -37,10 +37,19 @@ const Login = () => {
         }
     }
 
+    function validateEmail(email) {
+        const username = email.split('@')[0];
+        if (username.length === 8 && /^\d+$/.test(username)) {
+          return "0";
+        }
+        return "1";
+      }
+
     const handleLogin = async () => {
         try {
             console.log(username);
             console.log(password);
+            const tempFlag = validateEmail(username);
             const response = await fetch(
                 "https://campusconnect.herokuapp.com/api/auth/login",
                 {
@@ -59,7 +68,7 @@ const Login = () => {
                 //console.log(data.name)
                 navigation.navigate("HomeScreen", {
                     screen: "Home",
-                    params: { name: data.name },
+                    params: { name: data.name, flag:tempFlag },
                 });
             } else {
                 console.log("Error");
