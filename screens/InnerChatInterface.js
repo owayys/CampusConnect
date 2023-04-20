@@ -50,22 +50,55 @@ const InnerChatInterface = ({ route }) => {
     // console.log(socket)
 
     const talking_to = route.params.params.name
-    // console.log("Before", talking_to)
+    console.log()
+    console.log("Before", talking_to)
+    console.log("Before", msgHistory)
+    console.log()
     const [newMessage, setNewMessage] = useState('');
-    const [msgHistory, setMsgHistory] = useState(
-        [
-            { name: talking_to, message: "hi!" },
-            { name: "Owais Ahsan", message: 'hello!' },
-            { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
-            { name: "Owais Ahsan", message: "busy w haazri aaj" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
-            { name: "Owais Ahsan", message: "kya karun karna parta" },
+    const [msgHistory, setMsgHistory] = useState([]);
+    useEffect(() => {
+        setMsgHistory([
+          { name: talking_to, message: 'hi!' },
+          { name: username, message: 'hello!' },
+          { name: talking_to, message: 'kesa haiiiiiiiiiiiiiiii' },
+          { name: username, message: 'busy w haazri aaj' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
         ]);
+      }, [talking_to]);
 
+    // const [msgHistory, setMsgHistory] = useState(
+    //     [
+    //         { name: talking_to, message: "hi!" },
+    //         { name: "Owais Ahsan", message: 'hello!' },
+    //         { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
+    //         { name: "Owais Ahsan", message: "busy w haazri aaj" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //         { name: "Owais Ahsan", message: "kya karun karna parta" },
+    //     ]);
+
+    useEffect(() => {
+        setMsgHistory([
+          { name: talking_to, message: 'hi!' },
+          { name: username, message: 'hello!' },
+          { name: talking_to, message: 'kesa haiiiiiiiiiiiiiiii' },
+          { name: username, message: 'busy w haazri aaj' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+          { name: username, message: 'kya karun karna parta' },
+        ]);
+      }, [talking_to]);
 
     // useEffect(() => {
     //   socket.on('chat message', (data) => {
