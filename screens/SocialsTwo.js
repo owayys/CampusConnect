@@ -104,6 +104,7 @@ const StudyGroups = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="light-content" />
       <View style={styles.headingContainer}>
+      <Text style={styles.heading}>Add Friends</Text>
       <Image
           style={styles.imageIcon}
           resizeMode="cover"
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
     // height: 38,
     // position: "absolute",
     // top: responsiveScreenHeight(6.2),
-    left: responsiveScreenWidth(5),
+    //left: responsiveScreenWidth(5),
     borderRadius: Border.br_31xl,
     width: responsiveScreenWidth(12),
     height: responsiveScreenWidth(12),
