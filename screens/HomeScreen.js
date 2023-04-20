@@ -22,7 +22,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeScreen = ({ route }) => {
     console.log(route);
-    const [user, setUser] = useState("");
+    const [user, setUser] = useState();
     const [username, setUsername] = useState("");
     const [sched, setSched] = useState([])
     const navigation = useNavigation();
@@ -43,6 +43,7 @@ const HomeScreen = ({ route }) => {
     const [currDay, setCurrDay] = React.useState("MONDAY");
 
     const getSched = async () => {
+        if (!user) return
         try {
             const response = await fetch(
                 "https://campusconnect.herokuapp.com/api/course/enrolled/get",
