@@ -22,6 +22,15 @@ import {
 
 const UserProfile = () => {
   const navigation = useNavigation();
+<<<<<<< Updated upstream
+=======
+  const [username, setUsername] = useState("");
+
+  AsyncStorage.getItem("username").then((value) => {
+    setUsername(value);
+    console.log(value);
+  });
+>>>>>>> Stashed changes
 
   const user_name = "Ahmed Luqman"
   const description = "A CS Junior, who loves playing football and chess!!!"
@@ -135,6 +144,7 @@ const UserProfile = () => {
   return (
     <View style={styles.userProfile}>
       <ScrollView>
+<<<<<<< Updated upstream
   
         <Image
           style={styles.imageIcon}
@@ -175,6 +185,45 @@ const UserProfile = () => {
         )}
 
   
+=======
+        <View style={styles.backButton}>
+          <Button
+            title="Log Out"
+            onPress={() => navigation.navigate("Login")}
+            style={{ backgroundColor: "navy blue" }}
+            color={"#4ec6e0"}
+          />
+        </View>
+
+        <Image
+          style={styles.imageIcon}
+          resizeMode="cover"
+          source={require("../assets/image20.png")}
+        />
+        <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
+          {username}
+        </Text>
+        <Text
+          style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
+        >
+          {description}
+        </Text>
+        <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
+        <Text style={[styles.myInterests, styles.myProfileTypo]}>
+          My Interests
+        </Text>
+        <View style={styles.gradYear}>
+          <Text style={[styles.graduation2024, styles.forum1Typo]}>
+            Graduation: {grad_year}
+          </Text>
+          <Image
+            style={styles.iconoutlinecalendar}
+            resizeMode="cover"
+            source={require("../assets/iconoutlinecalendar.png")}
+          />
+        </View>
+
+>>>>>>> Stashed changes
         <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
           <View>
             {renderInterests()}
