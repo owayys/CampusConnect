@@ -15,6 +15,11 @@ import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
 import DropDownPicker from 'react-native-dropdown-picker';
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
 
 const selectImage = async () => {
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -102,7 +107,7 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
         activeOpacity={0.2}
         onPress={() => navigation.navigate("OuterChatInterface")}
@@ -123,7 +128,7 @@ const MakeStudyGroup = () => {
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
         </TouchableOpacity>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Image
         style={styles.makeStudyGroupItem}
         resizeMode="cover"
@@ -135,14 +140,40 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/rectangle3.png")}
       />
-      <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
+      {/* <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
         {selectedImage ? (
           <Image source={{ uri: selectedImage }} style={{ right: 45, width: 295, height: 150, top: 56, resizeMode: "cover" }} />
         ) : (
           <Image source={require("../assets/ic_add.png")} style={{ width: 500, height: 500, resizeMode: "contain" }} />
         )}
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+      <TouchableOpacity
+                    onPress={selectImage}
+                    style={{
+                        position: "absolute",
+                        top: responsiveScreenHeight(6.8),
+                        //left: 330,
+                        left: responsiveScreenWidth(84.6),
+                        //width: 33,
+                        width: responsiveScreenWidth(8.4),
+                        //height: 33,
+                        height: responsiveScreenWidth(8.4),
+                    }}
+                >
+                    <Image
+                        style={{
+                            tintColor: "white",
+                            //width: 33,
+                            width: responsiveScreenWidth(8.4),
+                            //height: 33,
+                            height: responsiveScreenWidth(8.4),
+                            // backgroundColor:"#ffffff"
+                        }}
+                        resizeMode="cover"
+                        source={require("../assets/plus-box-outline.png")}
+                    />
+                </TouchableOpacity>
 
 
       <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>

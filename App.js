@@ -243,6 +243,16 @@ const App = () => {
             // initialRouteName="OuterChatInterface"
             screenOptions={{ headerShown: false }}
           > 
+          <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+          <Stack.Screen
+              name="HomeScreen"
+              component={HomeTabs}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="OuterChatInterfaceGroups"
               component={HomeTabs}
@@ -266,11 +276,6 @@ const App = () => {
             <Stack.Screen
               name="StudyGroupAdminPanel"
               component={HomeTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -340,11 +345,6 @@ const App = () => {
             />
             <Stack.Screen
               name="ForumsTab"
-              component={HomeTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="HomeScreen"
               component={HomeTabs}
               options={{ headerShown: false }}
             />
