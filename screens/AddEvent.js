@@ -268,6 +268,11 @@ const AddEvent = () => {
     const [imageURL, setImageURL] = useState('')
     const navigation = useNavigation();
 
+    const [filled, setFilled] = useState(name && date && location && description && imageURL && timing)
+
+    React.useEffect(() => {
+        setFilled(name && date && location && description && imageURL && timing)
+    }, [name, date, location, description, imageURL, timing])
 
     const selectImage = async () => {
         if (imageURL) return
@@ -352,7 +357,7 @@ const AddEvent = () => {
     }
 
     const handleSubmit = async () => {
-        if (!imageURL) return
+        if (!filled) return
 
         try {
             console.log(imageURL)
@@ -493,7 +498,7 @@ const AddEvent = () => {
                 </Pressable>
 
                 <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                    <Text style={imageURL ? styles.submitButtonText : [styles.submitButtonText, { opacity: 0.3 }]}>Submit</Text>
+                    <Text style={filled ? styles.submitButtonText : [styles.submitButtonText, { opacity: 0.3 }]}>Submit</Text>
                 </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>

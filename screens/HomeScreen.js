@@ -66,10 +66,17 @@ const HomeScreen = ({ route }) => {
             console.log(e)
         }
     }
-
     React.useEffect(() => {
         getSched()
     }, [user])
+
+    React.useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getSched()
+        });
+
+        return unsubscribe;
+    }, [navigation]);
 
 
     //   const courses = [
