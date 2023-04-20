@@ -13,44 +13,17 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Events = ({ navigation }) => {
-    const exampleEvents = [
-        {
-            id: 1,
-            name: 'Basketball Championship',
-            date: '2023-05-18',
-            location: 'Sports Complex',
-            description: 'Basketball',
-            attendees: 12,
-            image: "https://via.placeholder.com/150",
-            time: "3:00PM-5:00PM"
-        },
-        {
-            id: 2,
-            name: 'Career Fair',
-            date: '2023-06-10',
-            location: 'SDSB',
-            description: 'Career Fairr',
-            attendees: 11,
-            image: "https://via.placeholder.com/150",
-            time: "3:00PM-5:00PM"
-        },
-        {
-            id: 3,
-            name: 'Khokha Stalls',
-            date: '2023-07-05',
-            location: 'Khokha',
-            description: 'Come to Event',
-            attendees: 10,
-            image: "https://via.placeholder.com/150",
-            time: "3:00PM-5:00PM",
-        },
-    ];
+    const [user, setUser] = useState()
+    AsyncStorage.getItem("userid").then((value) => {
+        setUser(value)
+    });
+
     const [searchQuery, setSearchQuery] = useState('');
     const [events, setEvents] = useState([]);
     const [flag, setflag] = useState("0");
-     AsyncStorage.getItem("flag").then((value) => {
+    AsyncStorage.getItem("flag").then((value) => {
         setflag(value);
-        console.log("inside event",value);
+        console.log("inside event", value);
     });
 
     const getEvents = async () => {
@@ -97,9 +70,10 @@ const Events = ({ navigation }) => {
             />
             <View style={styles.eventContent}>
                 <Text style={styles.eventName}>{event.event_name}</Text>
-                <View style={styles.attendanceContainer}>
-                    <Text style={styles.attendanceText}>{event.attendees} Going</Text>
-                </View>
+                    <View style={styles.attendanceContainer}>
+                        <Text style={styles.attendanceText}>{event.attendees} Going</Text>
+                    </View>
+
                 <TouchableOpacity onPress={() => navigation.navigate('EventsExtended', {
                     screen: 'EventsExtend', params: { event }
                 })}>
@@ -119,16 +93,16 @@ const Events = ({ navigation }) => {
                 placeholderTextColor="#4EC6E0"
             />
             {
-                flag==1 && (
+                flag == 1 && (
                     <TouchableOpacity
-                style={styles.addButton}
-                onPress={() => navigation.navigate('AddEvent')}
-            >
-                <Text style={styles.addButtonText}>Add Event</Text>
-            </TouchableOpacity>
+                        style={styles.addButton}
+                        onPress={() => navigation.navigate('AddEvent')}
+                    >
+                        <Text style={styles.addButtonText}>Add Event</Text>
+                    </TouchableOpacity>
                 )
             }
-            
+
             <Text style={styles.heading}>Events</Text>
             <ScrollView contentContainerStyle={styles.eventsList}>
                 {filteredEvents.map(renderEvent)}
