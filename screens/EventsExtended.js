@@ -279,10 +279,12 @@ import {
     Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from "@react-navigation/native";
 
 
 const EventsExtended = ({ navigation, route }) => {
     const { event } = route.params;
+    
     var dateParts = event.event_date.split("-");
     var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2), dateParts[2].substr(3, 2), dateParts[2].substr(6, 2), dateParts[2].substr(9, 2));
     const [user, setUser] = React.useState()
@@ -313,6 +315,9 @@ const EventsExtended = ({ navigation, route }) => {
         } catch (e) {
             console.log(e)
         }
+        navigation.navigate('Events', {
+            screen: 'Events'
+        })
     }
 
     return (
