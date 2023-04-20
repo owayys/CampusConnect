@@ -24,7 +24,10 @@ import ForumsTabPostSettings from "./screens/ForumsTabPostSettings";
 import ForumsTab from "./screens/ForumsTab";
 import HomeScreen from "./screens/HomeScreen";
 import InnerChatInterface from "./screens/InnerChatInterface";
-import io from 'socket.io-client';
+import SocialsTwo from "./screens/SocialsTwo";
+import FriendRequest from "./screens/FriendRequests";
+import ViewFriends from "./screens/ViewFriends";
+import OuterChatInterfaceTwo from "./screens/OuterChatInterfaceTwo";
 import * as Location from 'expo-location';
 import  {useEffect}  from 'react';
 
@@ -40,7 +43,9 @@ import {
 
 const Tab = createBottomTabNavigator();
 
-const socket = io('https://campusconnect.herokuapp.com/');
+// const socket = io('https://campusconnect.herokuapp.com/');
+
+import socket from "./util/socket";
 
 const captureLocation = async () => {
   let { status } = await Location.requestForegroundPermissionsAsync();
@@ -73,7 +78,7 @@ function HomeTabs() {
           </View> 
         )
         }}/>
-      <Tab.Screen name="Socials" component={Socials} options={{ 
+      <Tab.Screen name="Socials" component={SocialsTwo} options={{ 
         headerShown: false,
         tabBarIcon:({focused})=>(
           <View>
@@ -122,6 +127,21 @@ function HomeTabs() {
       <Tab.Screen
           name="SGJoinReq"
           component={StudyGroupJoinRequests}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="FriendRequests"
+          component={FriendRequest}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+        <Tab.Screen
+          name="OuterChatInterfaceTwo"
+          component={OuterChatInterfaceTwo}
+          options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
+        />
+         <Tab.Screen
+          name="ViewFriends"
+          component={ViewFriends}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
         <Tab.Screen
@@ -187,6 +207,7 @@ function HomeTabs() {
         <Tab.Screen
           name="InnerChatInterface"
           component={InnerChatInterface}
+        //   children={()=><InnerChatInterface socket={socket}/>}
           options={{ tabBarButton: () => null, tabBarVisible: false,headerShown: false }}
         />
     </Tab.Navigator>
@@ -240,6 +261,16 @@ const App = () => {
             // initialRouteName="OuterChatInterface"
             screenOptions={{ headerShown: false }}
           > 
+          <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{ headerShown: false }}
+            />
+          <Stack.Screen
+              name="HomeScreen"
+              component={HomeTabs}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="OuterChatInterfaceGroups"
               component={HomeTabs}
@@ -263,11 +294,6 @@ const App = () => {
             <Stack.Screen
               name="StudyGroupAdminPanel"
               component={HomeTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Login"
-              component={Login}
               options={{ headerShown: false }}
             />
             <Stack.Screen
@@ -337,11 +363,6 @@ const App = () => {
             />
             <Stack.Screen
               name="ForumsTab"
-              component={HomeTabs}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="HomeScreen"
               component={HomeTabs}
               options={{ headerShown: false }}
             />

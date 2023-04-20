@@ -39,7 +39,7 @@ const JoinRequest = ({ name, onAccept, onReject, image }) => {
 };
 
 
-const StudyGroupJoinRequests = () => {
+const FriendRequests = () => {
   const [requests, setRequests] = useState([
     { id: '1', name: 'Asher Javaid', image: 'https://loremflickr.com/320/240' },
     { id: '2', name: 'Jaffer Iqbal', image: 'https://loremflickr.com/320/240' },
@@ -58,15 +58,17 @@ const StudyGroupJoinRequests = () => {
 
   const handleAccept = (id) => {
     setRequests(requests.filter((request) => request.id !== id));
+     //add changes to db
   };
 
   const handleReject = (id) => {
     setRequests(requests.filter((request) => request.id !== id));
+    //add changes to db
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>Join Requests</Text>
+      <Text style={styles.heading}>Friend Requests</Text>
       <View style={{height:responsiveScreenHeight(77),top:responsiveScreenHeight(0)}}>
         <ScrollView >
           {requests.map((item) => (
@@ -132,5 +134,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudyGroupJoinRequests;
+export default FriendRequests;
 

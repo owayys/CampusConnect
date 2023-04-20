@@ -15,6 +15,11 @@ import { Color, FontFamily, FontSize, Border } from "../GlobalStyles";
 import { useState } from "react";
 import * as ImagePicker from 'expo-image-picker'
 import DropDownPicker from 'react-native-dropdown-picker';
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
 
 const selectImage = async () => {
   const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -45,9 +50,13 @@ const MakeStudyGroup = () => {
 
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imgsources, setImgSources] = useState(null);
+
   const [items, setItems] = useState([
     {label: 'Apple', value: 'apple'},
     {label: 'Banana', value: 'banana'}
+    
   ]);
 
   const handleCreateGroup = () => {
@@ -74,6 +83,23 @@ const MakeStudyGroup = () => {
       });
   };
 
+  const selectImage = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.cancelled) {
+        setSelectedImage(result.uri);
+      }
+    } catch (error) {
+      console.log("Error selecting image", error);
+    }
+  };
+  
+
   return (
     
     <View style={styles.makeStudyGroup}>
@@ -82,7 +108,7 @@ const MakeStudyGroup = () => {
         resizeMode="cover"
         source={require("../assets/image21.png")}
       />
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={[styles.iconoutlinemessageCircle, styles.home03IconLayout]}
         activeOpacity={0.2}
         onPress={() => navigation.navigate("OuterChatInterface")}
@@ -103,7 +129,7 @@ const MakeStudyGroup = () => {
             onPress={() => navigation.navigate("OuterChatInterface")}
           />
         </TouchableOpacity>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <Image
         style={styles.makeStudyGroupItem}
         resizeMode="cover"
@@ -113,14 +139,45 @@ const MakeStudyGroup = () => {
       <Image
         style={styles.rectangleIcon}
         resizeMode="cover"
-        source={require("../assets/rectangle3.png")}
+        source={require("../assets/ic_add.png")}
       />
       <TouchableOpacity style={[styles.addDisplayPicture, {flexDirection: 'row'}]} onPress={selectImage}>
-        <Image source={require("../assets/ic_add.png")} style={{ width: 50, height: 50, resizeMode: "contain" }} />
+        {selectedImage ? (
+          <Image source={{ uri: selectedImage }} style={{ right: 45, width: 295, height: 150, top: 56, resizeMode: "cover" }} />
+        ) : (
+          <Image source={require("../assets/ic_add.png")} style={{ width: 500, height: 500, resizeMode: "contain" }} />
+        )}
         <Text style={{ marginLeft: 5, color: Color.gray_400 }}>Add Display Picture</Text>
       </TouchableOpacity>
+      {/* <TouchableOpacity
+                    onPress={selectImage}
+                    style={{
+                        position: "absolute",
+                        top: responsiveScreenHeight(6.8),
+                        //left: 330,
+                        left: responsiveScreenWidth(84.6),
+                        //width: 33,
+                        width: responsiveScreenWidth(8.4),
+                        //height: 33,
+                        height: responsiveScreenWidth(8.4),
+                    }}
+                >
+                    <Image
+                        style={{
+                            tintColor: "white",
+                            //width: 33,
+                            width: responsiveScreenWidth(8.4),
+                            //height: 33,
+                            height: responsiveScreenWidth(8.4),
+                            // backgroundColor:"#ffffff"
+                        }}
+                        resizeMode="cover"
+                        source={require("../assets/plus-box-outline.png")}
+                    />
+                </TouchableOpacity> */}
 
-      <Text style={[styles.timing, styles.daysTypo]}>Timing:</Text>
+
+      <Text style={[styles.timing, styles.daysTypo,]}>Timing:</Text>
       <Text style={[styles.subject, styles.subjectTypo]}>Select Subject:</Text>
       <Text style={[styles.days, styles.daysTypo]}>Days:</Text>
       <Text style={[styles.groupName, styles.daysTypo]}>Group name:</Text>
@@ -130,12 +187,14 @@ const MakeStudyGroup = () => {
           styles.rectangle,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
+
         ]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle1, styles.rectangleLayout]}
+        style={[styles.rectangle1, styles.rectangleLayout, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
@@ -144,6 +203,7 @@ const MakeStudyGroup = () => {
           styles.rectangle2,
           styles.rectangleLayout,
           styles.rectanglePosition1,
+          { color: Color.gray_400, paddingLeft: 10 }
         ]}
         placeholder="..."
         keyboardType="default"
@@ -167,18 +227,18 @@ const MakeStudyGroup = () => {
         setValue={setValue}
         setItems={setItems}
       />
-      <Text style={[styles.location, styles.subjectTypo]}>Location:</Text>
+      <Text style={[styles.location, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>Location:</Text>
       <TextInput
-        style={[styles.rectangle4, styles.rectanglePosition]}
+        style={[styles.rectangle4, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10 }]}
         placeholder="..."
         keyboardType="default"
       />
       <TextInput
-        style={[styles.rectangle5, styles.rectanglePosition]}
+        style={[styles.rectangle5, styles.rectanglePosition, { color: Color.gray_400, paddingLeft: 10}]}
         placeholder="..."
         keyboardType="default"
       />
-      <Text style={[styles.addDescription, styles.subjectTypo]}>
+      <Text style={[styles.addDescription, styles.subjectTypo, { color: Color.gray_400, paddingLeft: 10 }]}>
         Add description:
       </Text>
       <TouchableOpacity
@@ -307,6 +367,7 @@ const styles = StyleSheet.create({
     width: 296,
     borderRadius: Border.br_3xs,
     position: "absolute",
+    //backgroundColor:"white"
   },
 
   addDisplayPicture: {
@@ -357,7 +418,7 @@ const styles = StyleSheet.create({
     height: 27,
   },
   rectangle1: {
-    top: 322,
+    top: 330,
     left: 117,
     width: 255,
     height: 27,

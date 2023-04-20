@@ -24,6 +24,7 @@ const GroupDescription = () => {
 
   //sample props that you can pass to this component
   const groupDescriptionSampleProps = {
+    id:1,
     name: "AP Group",
     days: "Monday, Wednesday",
     timing: "5:00PM-6:00PM",

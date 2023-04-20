@@ -19,27 +19,18 @@ import {
   responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
 
-const JoinRequest = ({ name, onAccept, onReject, image }) => {
+const ViewAFriend = ({ name, image }) => {
   return (
     <View style={styles.requestContainer}>
+         <Text style={styles.requestText}>{name.length > 28 ? name.substring(0, 28) + '...' : name}</Text>
       <Image source={{ uri: image }} style={styles.profileImage} />
-      <Text style={styles.requestText}>{name.length > 20 ? name.substring(0, 20) + '...' : name}</Text>
-      <TouchableOpacity onPress={onAccept}>
-        <View style={styles.acceptButton}>
-          <Icon name="checkmark" size={20} color="green" />
-        </View>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={onReject}>
-        <View style={styles.rejectButton}>
-          <Icon name="close" size={20} color="red" />
-        </View>
-      </TouchableOpacity>
     </View>
   );
 };
 
 
-const StudyGroupJoinRequests = () => {
+const ViewFriends = () => {
+    //need to get these from db
   const [requests, setRequests] = useState([
     { id: '1', name: 'Asher Javaid', image: 'https://loremflickr.com/320/240' },
     { id: '2', name: 'Jaffer Iqbal', image: 'https://loremflickr.com/320/240' },
@@ -56,26 +47,16 @@ const StudyGroupJoinRequests = () => {
     { id: '13', name: 'Pulpy', image: 'https://loremflickr.com/320/240' },
   ]);
 
-  const handleAccept = (id) => {
-    setRequests(requests.filter((request) => request.id !== id));
-  };
-
-  const handleReject = (id) => {
-    setRequests(requests.filter((request) => request.id !== id));
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.heading}>Join Requests</Text>
+      <Text style={styles.heading}>My Friends</Text>
       <View style={{height:responsiveScreenHeight(77),top:responsiveScreenHeight(0)}}>
         <ScrollView >
           {requests.map((item) => (
-            <JoinRequest
+            <ViewAFriend
               key={item.id}
               name={item.name}
               image={item.image}
-              onAccept={() => handleAccept(item.id)}
-              onReject={() => handleReject(item.id)}
             />
           ))}
         </ScrollView>
@@ -132,5 +113,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudyGroupJoinRequests;
+export default ViewFriends;
 

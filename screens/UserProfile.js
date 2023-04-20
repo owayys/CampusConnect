@@ -7,95 +7,125 @@ import {
   Pressable,
   TouchableOpacity,
   Button,
+  TextInput,
+  ScrollView,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
+import { useState } from "react";
+import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+} from "react-native-responsive-dimensions";
 
 const UserProfile = () => {
   const navigation = useNavigation();
 
+  const user_name = "Ahmed Luqman"
+  const description = "A CS Junior, who loves playing football and chess!!!"
+  const grad_year = "2024"
 
   const studentInterests = [
-    'Coding',
-    'Playing video games',
-    'Basketball',
-    'Drawing',
-    'Hiking',
-    'Reading',
-    'Singing',
-    'Cooking',
-    'Watching movies',
-    'Dancing',
-    'Traveling',
-    'Listening to music',
+    "Coding",
+    "Playing video games",
+    "Basketball",
+    "Drawing",
+    "Hiking",
+    "Reading",
+    "Singing",
+    "Cooking",
+    "Watching movies",
+    "Dancing",
+    "Traveling",
+    "Listening to music",
   ];
-  
 
+  const [interests, setInterests] = useState([
+    "Coding",
+    "Playing video games",
+    "Basketball",
+    "Drawing",
+  ]);
 
-  const Interests = () => {
-    const rows = [];
-    let row = [];
-  
-    for (let i = 0; i < studentInterests.length; i++) {
-      const interest = studentInterests[i];
-  
-      if (i % 3 === 0 && i !== 0) {
-        rows.push(
-          <View style={styles.row} key={i}>
-            {row}
-          </View>
-        );
-        row = [];
+  const [newInterest, setNewInterest] = useState("");
+  const [isAddingInterest, setIsAddingInterest] = useState(false);
+
+  const handleAddInterest = () => {
+    if (newInterest !== "") {
+      if (interests.length >= 6) {
+        setIsAddingInterest(false);
+        return;
       }
-  
-      row.push(
-        <View style={styles.interest} key={i}>
-          <Text style={styles.interestText}>{interest}</Text>
-        </View>
-      );
+      setInterests([...interests, newInterest]);
+      setNewInterest("");
     }
-  
-    if (row.length > 0) {
-      rows.push(
-        <View style={styles.row} key={studentInterests.length}>
-          {row}
-        </View>
-      );
-    }
-  
-    return <View style={styles.container}>{rows}</View>;
+    setIsAddingInterest(false);
   };
 
+  const renderInterests = () => {
+    const rows = [];
+    for (let i = 0; i < interests.length; i += 3) {
+      const row = (
+        <View style={styles.interestsRow} key={i}>
+          {interests.slice(i, i + 3).map((interest, index) => (
+            <View style={styles.interest} key={index}>
+              <Text>{interest}</Text>
+            </View>
+          ))}
+        </View>
+      );
+      rows.push(row);
+    }
+    return rows;
+  };
 
-
-
-
-
-
+  const renderAddInterestButton = () => {
+    if (interests.length >= 6) {
+      return (
+        <View style={styles.addInterestButtonDisabled}>
+          <Text style={styles.addInterestButtonText}>
+            You can't add more interests
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <TouchableOpacity
+          style={styles.addInterestButton}
+          onPress={() => setIsAddingInterest(true)}
+        >
+          <Text style={styles.addInterestButtonText}>Add interest</Text>
+        </TouchableOpacity>
+      );
+    }
+  };
 
   return (
     <View style={styles.userProfile}>
+      <ScrollView>
       <View style={styles.backButton}>
-           <Button 
-             title="My Chats" 
-             onPress={() => navigation.navigate("OuterChatInterface")}
-             style={{backgroundColor:'navy blue'}} 
-             color={"#4ec6e0"}
-           />
+        <Button
+          title="My Chats"
+          onPress={() => navigation.navigate("OuterChatInterface")}
+          style={{ backgroundColor: "navy blue" }}
+          color={"#4ec6e0"}
+        />
       </View>
-      
+
       <Image
         style={styles.imageIcon}
         resizeMode="cover"
         source={require("../assets/image20.png")}
       />
       <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
-        Ahmed Luqman
+        {user_name}
       </Text>
       <Text
         style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
       >
-        A CS Junior, who loves playing football and chess!!!
+        {description}
       </Text>
       <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
       <Text style={[styles.myInterests, styles.myProfileTypo]}>
@@ -103,7 +133,7 @@ const UserProfile = () => {
       </Text>
       <View style={styles.gradYear}>
         <Text style={[styles.graduation2024, styles.forum1Typo]}>
-          Graduation: 2024
+          Graduation: {grad_year}
         </Text>
         <Image
           style={styles.iconoutlinecalendar}
@@ -111,37 +141,30 @@ const UserProfile = () => {
           source={require("../assets/iconoutlinecalendar.png")}
         />
       </View>
-      {Interests()}
-      {/* <View style={styles.interests}>
-        <View
-          style={[
-            styles.rectangle,
-            styles.rectangleLayout2,
-            styles.rectangleLayout3,
-          ]}
-        />
-        <Text style={[styles.football, styles.gymTypo]}>Football</Text>
-        <View style={[styles.rectangle1, styles.rectangleLayout1]} />
-        <Text style={[styles.gym, styles.gymTypo]}>Gym</Text>
-        <View style={[styles.rectangle2, styles.rectangleLayout]} />
-        <View style={[styles.rectangle3, styles.rectangleLayout]} />
-        <Pressable style={[styles.editProfileParent, styles.rectangleLayout2]}>
-          <Text style={[styles.editProfile, styles.gymTypo]}>Edit Profile</Text>
-          <View style={styles.rectangle4} />
-        </Pressable>
-        <Text style={[styles.cooking, styles.gymTypo]}>Cooking</Text>
-        <Text style={[styles.chess, styles.gymTypo]}>Chess</Text>
-        <View
-          style={[
-            styles.rectangle5,
-            styles.rectangleLayout2,
-            styles.rectangleLayout3,
-          ]}
-        />
-        <Text style={[styles.reading, styles.gymTypo]}>Reading</Text>
-        <View style={[styles.rectangle6, styles.rectangleLayout1]} />
-        <Text style={[styles.longWalks, styles.gymTypo]}>Long Walks</Text>
-      </View> */}
+
+      <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
+        <View>
+          {renderInterests()}
+          {isAddingInterest ? (
+            <View style={styles.addInterestContainer}>
+              <TextInput
+                style={styles.addInterestInput}
+                placeholder="Type your interest here"
+                value={newInterest}
+                onChangeText={setNewInterest}
+              />
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={handleAddInterest}
+              >
+                <Text style={styles.addButtonText}>Accept</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            renderAddInterestButton()
+          )}
+        </View>
+      </TouchableWithoutFeedback>
       <Image
         style={[styles.userProfileChild, styles.userLayout]}
         resizeMode="cover"
@@ -152,121 +175,81 @@ const UserProfile = () => {
         resizeMode="cover"
         source={require("../assets/vector-1.png")}
       />
-      <View style={styles.st}>
-        <View style={styles.iconsHead}>
-          <TouchableOpacity
-            style={[styles.home, styles.homeFlexBox]}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("ForumsTab")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/home03.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text
-                style={[styles.forum1Typo, styles.text3Typo, styles.forum1Clr]}
-              >
-                Forum
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.homeFlexBox}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("Events")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/iconoutlinespeaker.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.text3Typo, styles.forum1Clr]}>Events</Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.homeFlexBox}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("Socials")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/box.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={styles.forum1Clr}>Social</Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.homeFlexBox}>
-            <TouchableOpacity
-              style={styles.home03Icon}
-              activeOpacity={0.2}
-              onPress={() => navigation.navigate("StudyGroups")}
-            >
-              <Image
-                style={styles.icon}
-                resizeMode="cover"
-                source={require("../assets/iconoutlinebookopen.png")}
-              />
-            </TouchableOpacity>
-            <View style={[styles.forum, styles.mt2]}>
-              <Text style={[styles.forum1Typo, styles.forum1Clr]}>
-                <Text style={styles.study}>Study</Text>
-                <Text style={styles.text3Typo}>{` `}</Text>
-                <Text style={styles.study}>Group</Text>
-              </Text>
-            </View>
-            <Image
-              style={[styles.home03Icon, styles.mt2]}
-              resizeMode="cover"
-              source={require("../assets/piggybank02.png")}
-            />
-          </View>
-          <TouchableOpacity
-            style={[styles.more, styles.homeFlexBox]}
-            activeOpacity={0.2}
-            onPress={() => navigation.navigate("UserProfile")}
-          >
-            <Image
-              style={styles.home03Icon}
-              resizeMode="cover"
-              source={require("../assets/morehorizontal.png")}
-            />
-            <View style={[styles.forum, styles.mt2]}>
-              <Text
-                style={[styles.profile, styles.forum1Typo, styles.text3Typo]}
-              >
-                Profile
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  container1: {
     paddingHorizontal: 15, // Add horizontal padding
   },
 
+  container: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: "#ffffff",
+  },
+  interestsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 16,
+  },
+  interest: {
+    backgroundColor: "#f0f0f0",
+    padding: 8,
+    borderRadius: 8,
+    marginBottom: 8,
+  },
+  addInterestButton: {
+    backgroundColor: "#2c3e50",
+    padding: 16,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 500,
+  },
+  addInterestButtonText: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+  addInterestContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 500,
+  },
+  addInterestInput: {
+    flex: 1,
+    backgroundColor: "#f0f0f0",
+    padding: 8,
+    borderRadius: 8,
+    marginRight: 8,
+  },
+  addButton: {
+    backgroundColor: "#2c3e50",
+    padding: 8,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addButtonText: {
+    color: "#ffffff",
+    fontWeight: "bold",
+  },
+
   row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginBottom: 10,
   },
   interest: {
-    backgroundColor: '#4ec6e0',
+    backgroundColor: "#4ec6e0",
     borderRadius: 12,
     padding: 7.5,
     paddingVertical: 10,
-    flexBasis: '30%',
-    alignItems: 'center',
-    top: 340
+    flexBasis: "30%",
+    alignItems: "center",
+    top: 340,
   },
   interestText: {
     fontSize: 14,
@@ -276,13 +259,13 @@ const styles = StyleSheet.create({
     fontFamily: FontFamily.robotoSemibold,
     top: 720,
     fontSize: FontSize.size_xl,
-    flex: 1, 
-    alignSelf:"center",
+    flex: 1,
+    alignSelf: "center",
     textTransform: "capitalize",
     color: Color.white,
     letterSpacing: 2,
     position: "absolute",
-    width:"55%",
+    width: "55%",
   },
   mt2: {
     marginTop: 2,
@@ -551,7 +534,7 @@ const styles = StyleSheet.create({
     elevation: 100,
     shadowOpacity: 1,
     flex: 1,
-    height: 838,
+    height: responsiveScreenHeight(100),
     overflow: "hidden",
     width: "100%",
   },
