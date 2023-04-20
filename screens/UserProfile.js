@@ -1,5 +1,11 @@
 import * as React from "react";
 import {
+  responsiveScreenHeight,
+  responsiveScreenWidth,
+  responsiveScreenFontSize,
+  responsiveHeight,
+} from "react-native-responsive-dimensions";
+import {
   Image,
   StyleSheet,
   Text,
@@ -14,11 +20,6 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { Color, FontFamily, FontSize, Border, Padding } from "../GlobalStyles";
 import { useState } from "react";
-import {
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  responsiveScreenFontSize,
-} from "react-native-responsive-dimensions";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserProfile = () => {
@@ -214,7 +215,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 500,
+    top: responsiveHeight(58),
+    width: responsiveScreenWidth(100),
+    fontSize: responsiveScreenFontSize(1.7),
+    // marginTop: 500
   },
   addInterestButtonText: {
     color: "#ffffff",
@@ -273,6 +277,9 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
     position: "absolute",
     width: "55%",
+    top: responsiveHeight(80),
+    width: responsiveScreenWidth(100),
+    fontSize: responsiveScreenFontSize(1.7),
   },
   mt2: {
     marginTop: 2,
