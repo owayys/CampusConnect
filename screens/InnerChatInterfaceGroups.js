@@ -29,7 +29,9 @@ const InnerChatInterfaceGroups = ({route}) => {
   const [newMessage, setNewMessage] = useState('');
   const [msgHistory, setMsgHistory] = useState([]);
 
-  const talking_to = route.params.params.groupName
+  const talking_to = route.params.params.group_name
+
+  console.log(route)
 
   const fetchMessages = async() => {
       console.log(route.params.params.chatroom_id)
@@ -40,7 +42,7 @@ const InnerChatInterfaceGroups = ({route}) => {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                      chat_id: route.params.params.chatroom_id
+                      chat_id: route.params.params.chat_id
                   }),
               }
           );
@@ -59,7 +61,7 @@ const InnerChatInterfaceGroups = ({route}) => {
   useEffect(() => {
       AsyncStorage.getItem("username").then((value) => {
           setUsername(value);
-          socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
+          socket.emit("joinRoom", {username: value, room: route.params.params.chat_id})
       });
       AsyncStorage.getItem("userid").then((value) => {
           setUser(value);
@@ -87,7 +89,7 @@ const InnerChatInterfaceGroups = ({route}) => {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify({
-                      chat_id: route.params.params.chatroom_id,
+                      chat_id: route.params.params.chat_id,
                       s_id: user,
                       content: newMessage
                   }),
@@ -102,7 +104,7 @@ const InnerChatInterfaceGroups = ({route}) => {
   const handleSendMessage = () => {
       console.log(newMessage)
       sendMessage()
-      socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
+      socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chat_id})
   }
 
 
@@ -123,7 +125,7 @@ const InnerChatInterfaceGroups = ({route}) => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-        <Text style={styles.talkingTo}>{route.params.params.groupName.toUpperCase()}</Text>
+        <Text style={styles.talkingTo}>{route.params.params.group_name.toUpperCase()}</Text>
       </View>
 
 
