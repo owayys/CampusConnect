@@ -74,10 +74,13 @@ const StudyGroups = () => {
             const response = await fetch(
                 "https://campusconnect.herokuapp.com/api/group/getAll",
                 {
-                    method: "GET",
+                    method: "POST",
                     headers: new Headers({
                         accept: 'application/json',
                         'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        s_id: user
                     })
                 }
             );
@@ -85,6 +88,7 @@ const StudyGroups = () => {
             const data = await response.json();
             console.log(data)
             if(data.groups) setGroups(data.groups)
+            else setGroups([])
         } catch (e) {
             console.log(e)
         }
