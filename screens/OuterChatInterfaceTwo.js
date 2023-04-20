@@ -22,7 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const OuterChatInterface = () => {
     const [search, setSearch] = useState('');
-    // const [chatrooms, setChatrooms] = useState([])
+    const [chatrooms, setChatrooms] = useState([])
     const [groups, setGroups] = useState([])
     const navigation = useNavigation();
     const indivChats = [
@@ -139,7 +139,40 @@ const OuterChatInterface = () => {
     }
     React.useEffect(() => {
         getGroups()
-    }, [])
+    }, [navigation])
+
+    const getChatrooms = async () => {
+        try {
+            const value = await AsyncStorage.getItem('userid')
+            if (value !== null) {
+                console.log(value)
+                s_id = parseInt(value)
+                const response = await fetch(
+                    "https://campusconnect.herokuapp.com/api/chatroom/get",
+                    {
+                        method: "POST",
+                        headers: new Headers({
+                            accept: 'application/json',
+                            'Content-Type': 'application/json'
+                        }),
+                        body: JSON.stringify({
+                            s_id: s_id,
+                            isStudyGroup: 0
+                        }),
+                    }
+                );
+
+                const data = await response.json();
+                console.log(data)
+                setChatrooms(data.chatrooms)
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+    React.useEffect(() => {
+        getChatrooms()
+    }, [navigation])
 
     const [username, setUsername] = useState("");
     AsyncStorage.getItem("username").then((value) => {
@@ -147,8 +180,8 @@ const OuterChatInterface = () => {
         console.log(value);
     });
 
-    const filterIndivChats = indivChats.filter((p) =>
-        p.name.toLowerCase().includes(search.toLowerCase())
+    const filterIndivChats = chatrooms.filter((p) =>
+        p.s_name.toLowerCase().includes(search.toLowerCase())
     );
 
     return (
@@ -188,12 +221,12 @@ const OuterChatInterface = () => {
                             style={styles.imageIcon1}
                             resizeMode="cover"
                             // source={require("../assets/image22.png")}
-                            source={{ uri: p.icon }}
+                            source={{ uri: "https://loremflickr.com/320/240" }}
                         />
                         <ListItem.Content style={styles.listItemContent}>
-                            <ListItem.Title style={styles.title}>{p.name}</ListItem.Title>
+                            <ListItem.Title style={styles.title}>{p.s_name}</ListItem.Title>
                             <Text style={styles.details}>
-                                {p.content}
+                                {p.content ? p.content : "No messages yet"}
                             </Text>
                         </ListItem.Content>
                         {/* <TouchableOpacity style={{ borderRadius: 10, backgroundColor: '#0E1936', padding: 10 }} onPress={() => handleAddFriend(p.id)}>

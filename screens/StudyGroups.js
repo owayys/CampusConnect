@@ -99,7 +99,7 @@ const StudyGroups = () => {
 
     React.useEffect(() => {
         setReload((curr) => !curr)
-    }, [user])
+    }, [user, navigation])
 
     const handleJoin = async(group_id) => {
         try {

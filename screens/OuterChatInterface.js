@@ -127,6 +127,7 @@ const OuterChatInterface = () => {
                 );
 
                 const data = await response.json();
+                console.log(data)
                 setData(data.chatrooms)
             }
         } catch (e) {
@@ -168,7 +169,7 @@ const OuterChatInterface = () => {
 
             </View>
 
-            <SearchFilter data={temp_dict} searchInput={searchInput} setSearchInput={setSearchInput} />
+            <SearchFilter data={data} searchInput={searchInput} setSearchInput={setSearchInput} />
 
             <View style={styles.GroupChatsButton}>
                 <Button
