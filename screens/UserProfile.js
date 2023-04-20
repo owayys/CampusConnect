@@ -19,34 +19,20 @@ import {
   responsiveScreenWidth,
   responsiveScreenFontSize,
 } from "react-native-responsive-dimensions";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const UserProfile = () => {
   const navigation = useNavigation();
-<<<<<<< Updated upstream
-=======
   const [username, setUsername] = useState("");
 
   AsyncStorage.getItem("username").then((value) => {
     setUsername(value);
     console.log(value);
   });
->>>>>>> Stashed changes
 
   const user_name = "Ahmed Luqman"
   const description = "A CS Junior, who loves playing football and chess!!!"
   const grad_year = "2024"
-  
-  const toggleEditMode = () => {
-    setInterests([]);
-  };
-  
-
-  const removeInterest = (interestToRemove) => {
-    const updatedInterests = interests.filter((interest) => interest !== interestToRemove);
-    setInterests(updatedInterests);
-  };
-  
-  
 
   const studentInterests = [
     "Coding",
@@ -72,7 +58,6 @@ const UserProfile = () => {
 
   const [newInterest, setNewInterest] = useState("");
   const [isAddingInterest, setIsAddingInterest] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleAddInterest = () => {
     if (newInterest !== "") {
@@ -94,11 +79,6 @@ const UserProfile = () => {
           {interests.slice(i, i + 3).map((interest, index) => (
             <View style={styles.interest} key={index}>
               <Text>{interest}</Text>
-              {isEditMode && (
-                <TouchableOpacity onPress={() => removeInterest(index)}>
-                  <Text>Remove</Text>
-                </TouchableOpacity>
-              )}
             </View>
           ))}
         </View>
@@ -107,26 +87,15 @@ const UserProfile = () => {
     }
     return rows;
   };
-  
-  
 
   const renderAddInterestButton = () => {
-    if (isEditMode) {
+    if (interests.length >= 6) {
       return (
         <TouchableOpacity
           style={styles.addInterestButton}
-          onPress={() => setIsAddingInterest(true)}
         >
-          <Text style={styles.addInterestButtonText}>Add interest</Text>
+          <Text style={styles.addInterestButtonText}>You can't add any more interests</Text>
         </TouchableOpacity>
-      );
-    } else if (interests.length >= 6) {
-      return (
-        <View style={styles.addInterestButtonDisabled}>
-          <Text style={styles.addInterestButtonText}>
-            You can't add more interests
-          </Text>
-        </View>
       );
     } else {
       return (
@@ -139,53 +108,10 @@ const UserProfile = () => {
       );
     }
   };
-  
 
   return (
     <View style={styles.userProfile}>
       <ScrollView>
-<<<<<<< Updated upstream
-  
-        <Image
-          style={styles.imageIcon}
-          resizeMode="cover"
-          source={require("../assets/image20.png")}
-        />
-        <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
-          {user_name}
-        </Text>
-        <Text
-          style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
-        >
-          {description}
-        </Text>
-        <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
-        <Text style={[styles.myInterests, styles.myProfileTypo]}>
-          My Interests
-        </Text>
-        <View style={styles.gradYear}>
-          <Text style={[styles.graduation2024, styles.forum1Typo]}>
-            Graduation: {grad_year}
-          </Text>
-          <Image
-            style={styles.iconoutlinecalendar}
-            resizeMode="cover"
-            source={require("../assets/iconoutlinecalendar.png")}
-          />
-        </View>
-  
-                {isEditMode ? (
-          <TouchableOpacity onPress={toggleEditMode} style={{ position: "absolute", top: 40, right: 10 }}>
-            <Text style={styles.editButton}>Done</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={toggleEditMode} style={{ position: "absolute", top: 40, right: 10 }}>
-            <Text style={styles.editButton}>Edit</Text>
-          </TouchableOpacity>
-        )}
-
-  
-=======
         <View style={styles.backButton}>
           <Button
             title="Log Out"
@@ -223,7 +149,6 @@ const UserProfile = () => {
           />
         </View>
 
->>>>>>> Stashed changes
         <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
           <View>
             {renderInterests()}
@@ -260,7 +185,6 @@ const UserProfile = () => {
       </ScrollView>
     </View>
   );
-  
 };
 
 const styles = StyleSheet.create({
@@ -295,9 +219,6 @@ const styles = StyleSheet.create({
   addInterestButtonText: {
     color: "#ffffff",
     fontWeight: "bold",
-    position: "absolute",
-    top: 600,
-    left: 90,
   },
   addInterestContainer: {
     flexDirection: "row",
