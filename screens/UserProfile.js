@@ -84,11 +84,11 @@ const UserProfile = () => {
   const renderAddInterestButton = () => {
     if (interests.length >= 6) {
       return (
-        <View style={styles.addInterestButtonDisabled}>
-          <Text style={styles.addInterestButtonText}>
-            You can't add more interests
-          </Text>
-        </View>
+        <TouchableOpacity
+          style={styles.addInterestButton}
+        >
+          <Text style={styles.addInterestButtonText}>You can't add any more interests</Text>
+        </TouchableOpacity>
       );
     } else {
       return (

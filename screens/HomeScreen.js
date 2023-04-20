@@ -452,7 +452,7 @@ const styles = StyleSheet.create({
         fontFamily: FontFamily.robotoRegular,
         // fontWeight: "500",
         //width: 157,
-        width: responsiveScreenWidth(35),
+        width: responsiveScreenWidth(70),
         color: Color.white,
     },
     rectangleGroup: {
