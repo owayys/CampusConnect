@@ -68,7 +68,7 @@ const HomeScreen = ({ route }) => {
     const getSched = async () => {
         try {
             const response = await fetch(
-                "https://campusconnect.herokuapp.com/api/sched/get",
+                "https://campusconnect.herokuapp.com/api/course/getSched",
                 {
                     method: "GET",
                     headers: new Headers({
