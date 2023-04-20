@@ -12,9 +12,9 @@ import {
     TouchableHighlight,
     KeyboardAvoidingView,
     ScrollView,
-
+    scrollViewRef
 } from "react-native";
-import { useEffect } from 'react';
+import { useEffect,useRef } from 'react';
 import socket from '../util/socket';
 import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -124,7 +124,7 @@ const InnerChatInterface = ({ route }) => {
             >
 
                 <View style={styles.chatMessages}>
-                    <ScrollView>
+                    <ScrollView ref={scrollViewRef}>
                         {msgHistory.map((data, index) => (
                             <View style={data.s_name === username ? styles.messageBubbleSender : styles.messageBubbleReceiver} key={index}>
                                 {/* {console.log(data.name.toLowerCase(), "Talking to", talking_to.toLowerCase())} */}
