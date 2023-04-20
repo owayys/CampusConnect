@@ -26,6 +26,18 @@ const UserProfile = () => {
   const user_name = "Ahmed Luqman"
   const description = "A CS Junior, who loves playing football and chess!!!"
   const grad_year = "2024"
+  
+  const toggleEditMode = () => {
+    setInterests([]);
+  };
+  
+
+  const removeInterest = (interestToRemove) => {
+    const updatedInterests = interests.filter((interest) => interest !== interestToRemove);
+    setInterests(updatedInterests);
+  };
+  
+  
 
   const studentInterests = [
     "Coding",
@@ -51,6 +63,7 @@ const UserProfile = () => {
 
   const [newInterest, setNewInterest] = useState("");
   const [isAddingInterest, setIsAddingInterest] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const handleAddInterest = () => {
     if (newInterest !== "") {
@@ -72,6 +85,11 @@ const UserProfile = () => {
           {interests.slice(i, i + 3).map((interest, index) => (
             <View style={styles.interest} key={index}>
               <Text>{interest}</Text>
+              {isEditMode && (
+                <TouchableOpacity onPress={() => removeInterest(index)}>
+                  <Text>Remove</Text>
+                </TouchableOpacity>
+              )}
             </View>
           ))}
         </View>
@@ -80,9 +98,20 @@ const UserProfile = () => {
     }
     return rows;
   };
+  
+  
 
   const renderAddInterestButton = () => {
-    if (interests.length >= 6) {
+    if (isEditMode) {
+      return (
+        <TouchableOpacity
+          style={styles.addInterestButton}
+          onPress={() => setIsAddingInterest(true)}
+        >
+          <Text style={styles.addInterestButtonText}>Add interest</Text>
+        </TouchableOpacity>
+      );
+    } else if (interests.length >= 6) {
       return (
         <View style={styles.addInterestButtonDisabled}>
           <Text style={styles.addInterestButtonText}>
@@ -101,11 +130,12 @@ const UserProfile = () => {
       );
     }
   };
+  
 
   return (
     <View style={styles.userProfile}>
       <ScrollView>
-
+  
         <Image
           style={styles.imageIcon}
           resizeMode="cover"
@@ -133,7 +163,18 @@ const UserProfile = () => {
             source={require("../assets/iconoutlinecalendar.png")}
           />
         </View>
+  
+                {isEditMode ? (
+          <TouchableOpacity onPress={toggleEditMode} style={{ position: "absolute", top: 40, right: 10 }}>
+            <Text style={styles.editButton}>Done</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity onPress={toggleEditMode} style={{ position: "absolute", top: 40, right: 10 }}>
+            <Text style={styles.editButton}>Edit</Text>
+          </TouchableOpacity>
+        )}
 
+  
         <TouchableWithoutFeedback onPress={() => setIsAddingInterest(false)}>
           <View>
             {renderInterests()}
@@ -170,6 +211,7 @@ const UserProfile = () => {
       </ScrollView>
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
