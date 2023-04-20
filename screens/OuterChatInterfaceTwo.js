@@ -130,8 +130,9 @@ const OuterChatInterface = () => {
                 );
 
                 const data = await response.json();
-                console.log(data)
-                setGroups(data.chatrooms)
+                console.log(data.chatrooms)
+                if (data.chatrooms) setGroups(data.chatrooms)
+                else setGroups([])
             }
         } catch (e) {
             console.log(e)
@@ -164,7 +165,8 @@ const OuterChatInterface = () => {
 
                 const data = await response.json();
                 console.log(data)
-                setChatrooms(data.chatrooms)
+                if (data.chatrooms) setChatrooms(data.chatrooms)
+                else setChatrooms([])
             }
         } catch (e) {
             console.log(e)
