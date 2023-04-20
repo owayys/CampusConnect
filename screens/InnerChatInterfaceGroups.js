@@ -18,11 +18,93 @@ import { Border, Color, FontFamily, FontSize } from "../GlobalStyles";
 const InnerChatInterfaceGroups = ({route}) => {
   const [message, setMessage] = useState('');
 
+
+
+
+
+
+
+
+//   useEffect(() => {
+//     AsyncStorage.getItem("username").then((value) => {
+//         setUsername(value);
+//         setMsgHistory([
+//             { name: talking_to, message: "hi!" },
+//             { name: value, message: 'hello!' },
+//             { name: talking_to, message: "kesa haiiiiiiiiiiiiiiii" },
+//             { name: value, message: "busy w haazri aaj" },
+//             { name: value, message: "kya karun karna parta" },
+//             { name: value, message: "kya karun karna parta" },
+//             { name: value, message: "kya karun karna parta" },
+//             { name: value, message: "kya karun karna parta" },
+//             { name: value, message: "kya karun karna parta" },
+//             { name: value, message: "kya karun karna parta" },
+
+//             // message: hello2
+//         ])
+//         socket.emit("joinRoom", {username: value, room: route.params.params.chatroom_id})
+//     });
+
+// }, [])
+
+// socket.off("message").on("message", (rec_message) => {
+//     console.log("ye hai message", rec_message)
+//     const newMsg = {name : rec_message.user, message: rec_message.message}
+//     setMsgHistory([...msgHistory, newMsg])
+// })
+
+
+// console.log()
+// console.log("Before", talking_to)
+// console.log()
+
+// const [newMessage, setNewMessage] = useState('');
+// const [msgHistory, setMsgHistory] = useState([]);
+
+
+// useEffect(() => {
+//     // setMsgHistory([
+//     //   { name: talking_to, message: 'hi!' },
+//     //   { name: username, message: 'hello!' },
+//     //   { name: talking_to, message: 'kesa haiiiiiiiiiiiiiiii' },
+//     //   { name: username, message: 'busy w haazri aaj' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     //   { name: username, message: 'kya karun karna parta' },
+//     // ]);
+
+//     // FETCH IN SET MSG HISTORY
+
+// }, [talking_to]);
+
+// const handleSendMessage = () => {
+//     console.log(newMessage)
+//     socket.emit("chatMessage", {user: username, message: newMessage, room: route.params.params.chatroom_id})
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleSendMessage = () => {
     // Code to send message
   }
-
-  const { course_name } = route.params
+  console.log(route.params.params.groupName)
+  
 
   return (
 
@@ -41,12 +123,13 @@ const InnerChatInterfaceGroups = ({route}) => {
                 width: '90%',
                 height:300,
             }}>
+          <View style={{position: "absolute", left: 10, top: 10}}>
+            <Text style={styles.talkingTo} >{route.params.params.groupName.toUpperCase()}</Text>
+          </View>
         </View>
 
 
-      <View style={{position: "absolute", left: 10, top: 10}}>
-        <Text style={styles.talkingTo} >{course_name}</Text>
-      </View>
+
 
 
 
@@ -115,15 +198,15 @@ const styles = StyleSheet.create({
 
   talkingTo: {
     fontFamily: FontFamily.robotoSemibold,
-    textTransform: "capitalize",
+    // textTransform: "capitalize",
     color: Color.gray_200,
     letterSpacing: 1,
     position: "absolute",
     margin: 80,
     
-    left: -20,
-    top: -15,
-    fontSize: 22,
+    left: -35,
+    top: 100,
+    fontSize: 40,
   },
 
   

@@ -66,7 +66,40 @@ const OuterChatInterface = () => {
     icon: "https://loremflickr.com/320/240",
         content: "adadadadadadadadad",
     },
-]
+] 
+
+  const groupChats = [
+    {
+      groupName : "AP",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+    {
+      groupName : "SE",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+    {
+      groupName : "NetSec",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+    {
+      groupName : "Blockchain",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+    {
+      groupName : "Topics",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+    {
+      groupName : "Something",
+      content: "wowowowoww",
+      icon: "https://loremflickr.com/320/240",
+    },
+  ]
 
 const getData = async () => {
     try {
@@ -123,7 +156,7 @@ const filterIndivChats = indivChats.filter((p) =>
          */}
         <Button
           title="Group Chats"
-          onPress={()=>{navigation.navigate('OuterChatInterFaceGroupsTwo')}}
+          onPress={()=>{navigation.navigate('OuterChatInterFaceGroupsTwo', {params: groupChats})}}
           buttonStyle={styles.newGroupButton}
         />
       </View>

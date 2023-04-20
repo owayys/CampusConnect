@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const OuterChatInterfaceGroups = ({route}) => {
 
+  console.log(route)
 
   const courses = [
     { name: 'ML', image: require('../assets/ML1.png') },
