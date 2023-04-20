@@ -39,7 +39,7 @@ const SearchFilter = ({ data, searchInput, setSearchInput }) => {
                                     <Text style={styles.time}>{item.sent}</Text>
 
                                     <Text style={styles.person_position}>
-                                        {item.name}
+                                        {item.s_name}
                                     </Text>
                                 </View>
                             </TouchableOpacity>
@@ -49,7 +49,7 @@ const SearchFilter = ({ data, searchInput, setSearchInput }) => {
                     if (item.name.toLowerCase().includes(searchInput.toLowerCase())) {
                         return (
                             <TouchableOpacity onPress={() => navigation.navigate('InnerChatInterface', {
-                                params: { name: item.name },
+                                params: { name: item },
                             })}>
                                 <View style={{ margin: 30 }}>
                                     <Text style={styles.last_message}>
@@ -65,7 +65,7 @@ const SearchFilter = ({ data, searchInput, setSearchInput }) => {
                                     <Text style={styles.time}>{item.sent}</Text>
 
                                     <Text style={styles.person_position}>
-                                        {item.name}
+                                        {item.s_name}
                                     </Text>
                                 </View>
                             </TouchableOpacity>
