@@ -278,11 +278,42 @@ import {
     StyleSheet,
     Image,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 const EventsExtended = ({ navigation, route }) => {
     const { event } = route.params;
     var dateParts = event.event_date.split("-");
     var jsDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0, 2), dateParts[2].substr(3, 2), dateParts[2].substr(6, 2), dateParts[2].substr(9, 2));
+    const [user, setUser] = React.useState()
+    AsyncStorage.getItem("userid").then((value) => {
+        setUser(value)
+    });
+
+    const handleGoing = async (e, event_id) => {
+        try {
+            const response = await fetch(
+                "https://campusconnect.herokuapp.com/api/event/going",
+                {
+                    method: "POST",
+                    headers: new Headers({
+                        accept: 'application/json',
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        event_id: event_id,
+                        s_id: user
+                    })
+                }
+            );
+
+            const data = await response.json();
+            console.log(data)
+            e.target.remove()
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -300,15 +331,12 @@ const EventsExtended = ({ navigation, route }) => {
                     <Text style={styles.eventDescription}>{event.event_time}</Text>
                 </View>
                 <View style={styles.buttonsContainer}>
-                    <TouchableOpacity style={[styles.button, styles.goingButton]}>
+                    <TouchableOpacity style={[styles.button, styles.goingButton]} onPress={(e) => handleGoing(e, event.event_id)}>
                         <Text style={styles.buttonText}>Going</Text>
                     </TouchableOpacity>
                     {/* <TouchableOpacity style={[styles.button, styles.interestedButton]}>
             <Text style={styles.buttonText}>Interested</Text>
           </TouchableOpacity> */}
-                    <TouchableOpacity style={[styles.button, styles.notGoingButton]}>
-                        <Text style={styles.buttonText}>Not Going</Text>
-                    </TouchableOpacity>
                 </View>
             </ScrollView>
         </SafeAreaView>
