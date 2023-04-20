@@ -23,6 +23,10 @@ import {
 const UserProfile = () => {
   const navigation = useNavigation();
 
+  const user_name = "Ahmed Luqman"
+  const description = "A CS Junior, who loves playing football and chess!!!"
+  const grad_year = "2024"
+
   const studentInterests = [
     "Coding",
     "Playing video games",
@@ -116,12 +120,12 @@ const UserProfile = () => {
         source={require("../assets/image20.png")}
       />
       <Text style={[styles.ahmedLuqman, styles.aCsJuniorLayout]}>
-        Ahmed Luqman
+        {user_name}
       </Text>
       <Text
         style={[styles.aCsJunior, styles.text3Typo, styles.aCsJuniorLayout]}
       >
-        A CS Junior, who loves playing football and chess!!!
+        {description}
       </Text>
       <Text style={[styles.myProfile, styles.myProfileTypo]}>My Profile</Text>
       <Text style={[styles.myInterests, styles.myProfileTypo]}>
@@ -129,7 +133,7 @@ const UserProfile = () => {
       </Text>
       <View style={styles.gradYear}>
         <Text style={[styles.graduation2024, styles.forum1Typo]}>
-          Graduation: 2024
+          Graduation: {grad_year}
         </Text>
         <Image
           style={styles.iconoutlinecalendar}
